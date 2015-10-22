@@ -1,16 +1,16 @@
 # Site settings
-title: 读立写生
+title:
 header-img: "img/facebook.jpg"
 tagline: "cn"  
-description: "陈素封|读而立·写而生"  
+description: "铁汤|不知道"
 baseurl: ""
-url: "http://cnfeat"  
+url: "http://tietang.github.io"
 
 # About/contact
 owner: 
-  name: " CnFeat"
-  email: CnFeat@gmail.com
-  bio: "写就是写的报酬"
+  name: " tietang"
+  email: wtt.2012@gmail.com
+  bio: "不知道"
 
 # Data
 gavatar: http://dreamofbook.qiniudn.com/Az..png
