@@ -1,67 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="7f9abbe9-9144-4639-b3f0-5458b74cedde" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/404.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Gruntfile.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Interview.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/LICENSE" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_includes/footer.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_includes/head.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_includes/nav.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_layouts/default.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_layouts/page.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_layouts/post.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/_posts/【学苟知本】.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/about.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/archive.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/css/backtop.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/css/bootstrap.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/css/bootstrap.min.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/css/clean-blog.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/css/clean-blog.min.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/css/syntax.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/feed.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/fonts/glyphicons-halflings-regular.eot" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/fonts/glyphicons-halflings-regular.svg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/fonts/glyphicons-halflings-regular.ttf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/fonts/glyphicons-halflings-regular.woff" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/fonts/glyphicons-halflings-regular.woff2" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/img/Back-Top_Arrow.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/img/black.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/img/blue.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/img/cnfeat.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/img/dolphin.gif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/img/facebook.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/img/favicon.ico" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/img/favicon.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/img/green.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/img/orange.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/img/red.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/img/semantic.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/img/twitter.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/img/zhihu.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/js/backtop.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/js/bootstrap.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/js/bootstrap.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/js/clean-blog.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/js/clean-blog.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/js/jquery.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/js/jquery.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/less/clean-blog.less" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/less/mixins.less" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/less/variables.less" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/milestone.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/tags.md" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_config.yml" afterPath="$PROJECT_DIR$/_config.yml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/themes/hueman/layout/common/footer.ejs" afterPath="$PROJECT_DIR$/themes/hueman/layout/common/footer.ejs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/themes/hueman/layout/common/header.ejs" afterPath="$PROJECT_DIR$/themes/hueman/layout/common/header.ejs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/themes/hueman/source/css/_partial/header.styl" afterPath="$PROJECT_DIR$/themes/hueman/source/css/_partial/header.styl" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/themes/hueman/source/css/style.styl" afterPath="$PROJECT_DIR$/themes/hueman/source/css/style.styl" />
-    </list>
+    <list default="true" id="7f9abbe9-9144-4639-b3f0-5458b74cedde" name="Default" comment="" />
     <ignored path="tietang.github.io.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/out/" />
@@ -269,7 +209,7 @@
       <created>1455868509120</created>
       <option name="number" value="Default" />
       <updated>1455868509120</updated>
-      <workItem from="1455868510542" duration="111000" />
+      <workItem from="1455868510542" duration="149000" />
     </task>
     <task id="LOCAL-00001" summary="to hexo blog">
       <created>1455868564104</created>
@@ -281,7 +221,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="111000" />
+    <option name="totallyTimeSpent" value="149000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="737" extended-state="6" />
