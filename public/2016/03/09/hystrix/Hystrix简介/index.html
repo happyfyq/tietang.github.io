@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <title>Hystrix简介|多少光年|技术博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+
+    
+    <meta name="keywords"
+          content="Java,Spring,Go,golang,技术,线程,性能,并发,可用,大数据spring-boot,spring-cloud,cloud,netflix,eureka,discovery,服务发现,微服务,zookeeper,网关,gateway,router,hystrix"/>
+
+    <meta name="description" content="Hystrix简介">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hystrix简介">
+<meta property="og:url" content="http://tietang.github.com/2016/03/09/hystrix/Hystrix简介/index.html">
+<meta property="og:site_name" content="多少光年">
+<meta property="og:description" content="Hystrix简介">
+<meta property="og:image" content="http://7xiovs.com1.z0.glb.clouddn.com/hystrix-hystrix-logo-tagline-640.png">
+<meta property="og:updated_time" content="2016-03-21T12:46:00.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hystrix简介">
+<meta name="twitter:description" content="Hystrix简介">
+    
+
+    
+
+    
+    <link rel="icon" href="/favicon.ico"/>
+    
+
+    <link rel="stylesheet" href="/vendor/font-awesome/css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="/vendor/titillium-web/styles.css" type="text/css">
+    <link rel="stylesheet" href="/vendor/source-code-pro/styles.css" type="text/css">
+
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+
+    <script src="/vendor/jquery/2.0.3/jquery.min.js" type="text/javascript"></script>
+    
+    
+        <link rel="stylesheet" href="/vendor/fancybox/jquery.fancybox.css" type="text/css">
+    
+    
+        <link rel="stylesheet" href="/vendor/scrollLoading/style.css" type="text/css">
+    
+    
+        <script type="text/javascript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-74077761-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+    
+    
+        <script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?a671e5198b87c08c17ebf22563539dd1";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+    
+
+</head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo">多少光年</a>
+                    </h1>
+                    
+                        <h2 class="subtitle-wrap">
+                            <p class="subtitle">风可以吹走尘土,但吹不走记忆</p>
+                        </h2>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">主页</a>
+                                </li>
+                            
+                                        <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/music/">music</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/技术/">技术</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/技术/FlatBuffers/">FlatBuffers</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/技术/Hexo/">Hexo</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/技术/Hystrix/">Hystrix</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/技术/工具/">工具</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/技术/领域模型/">领域模型</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/转载/">转载</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/转载/http-2-0/">http 2.0</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/那年今日/">那年今日</a></li></ul>
+                                    
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="https://github.com/tietang">Github</a>
+                                </li>
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/about/index.html">关于</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form" method="GET" action="https://www.baidu.com/s?">
+    <input name="wd" type="text" class="search-form-input" placeholder="搜索" />
+</form>
+<script>
+(function ($) {
+    $('.search-form').on('submit', function (e) {
+        var keyword = $('.search-form-input[name="wd"]').val();
+        window.location = 'https://www.baidu.com/s?wd=site:tietang.github.com ' + keyword;
+        return false;
+    });
+})(jQuery);
+</script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/技术/">技术</a><i class="icon fa fa-angle-right"></i><a class="page-title-link" href="/categories/技术/Hystrix/">Hystrix</a>
+    </h1>
+</div>
+                        <div class="main-body-content">
+                            <article id="post-hystrix/Hystrix简介" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        Hystrix简介
+        </h1>
+    
+
+            </header>
+        
+        <div class="article-subtitle">
+            <a href="/2016/03/09/hystrix/Hystrix简介/" class="article-date">
+    <time datetime="2016-03-09T01:22:47.000Z" itemprop="datePublished">2016-03-09</time>
+</a>
+            
+    <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hystrix/">hystrix</a></li></ul>
+
+        </div>
+        <div class="article-entry" itemprop="articleBody">
+            <p><img src="http://7xiovs.com1.z0.glb.clouddn.com/hystrix-hystrix-logo-tagline-640.png" alt=""></p>
+<ol>
+<li><a href="#what">What Is Hystrix?</a></li>
+<li><a href="#purpose">What Is Hystrix For?</a></li>
+<li><a href="#problem">What Problem Does Hystrix Solve?</a></li>
+<li><a href="#principles">What Design Principles Underlie Hystrix?</a></li>
+<li><a href="#how">How Does Hystrix Accomplish Its Goals?</a></li>
+</ol>
+<p><a name="what"></a></p>
+<h2 id="Hystrix是什么"><a href="#Hystrix是什么" class="headerlink" title="Hystrix是什么?"></a>Hystrix是什么?</h2><p>在分布式环境中，不可避免的有许多服务依赖，而且有时候一些服务会失败。Hystrix library通过添加延迟容忍和容错逻辑来控制分布式服务之间的相互影响。Hystrix通过服务之间访问的隔离点阻止连锁故障，并提供了失败回退机制（fallback），来改进系统服务的弹性。</p>
+<h4 id="Hystrix的历史"><a href="#Hystrix的历史" class="headerlink" title="Hystrix的历史"></a>Hystrix的历史</h4><p>Hystrix是在2011年由Netflix API 团队的弹性工程演变而来。在2012年，Hystrix日益完善和成熟，在Netflix的许多团队也开始采用。现在，在Netflix，每天有成千上万的线程隔离和数百亿的信号隔离被调用执行。这已经在可用性和弹性上产生了很大的改进。</p>
+<p>下面的链接提供了围绕Hystrix和挑战，试图解决：</p>
+<ul>
+<li><a href="http://techblog.netflix.com/2011/12/making-netflix-api-more-resilient.html" target="_blank" rel="external">&ldquo;Making Netflix API More Resilient&rdquo;</a></li>
+<li><a href="http://techblog.netflix.com/2012/02/fault-tolerance-in-high-volume.html" target="_blank" rel="external">&ldquo;Fault Tolerance in a High Volume, Distributed System&rdquo;</a></li>
+<li><a href="https://speakerdeck.com/benjchristensen/performance-and-fault-tolerance-for-the-netflix-api-august-2012" target="_blank" rel="external">&ldquo;Performance and Fault Tolerance for the Netflix API&rdquo;</a></li>
+<li><a href="http://programming.oreilly.com/2013/06/application-resilience-in-a-service-oriented-architecture.html" target="_blank" rel="external">&ldquo;Application Resilience in a Service-oriented Architecture&rdquo;</a></li>
+<li>[&ldquo;Application Resilience Engineering &amp; Operations at Netflix&rdquo;] (<a href="https://speakerdeck.com/benjchristensen/application-resilience-engineering-and-operations-at-netflix" target="_blank" rel="external">https://speakerdeck.com/benjchristensen/application-resilience-engineering-and-operations-at-netflix</a>)</li>
+</ul>
+<p><a name="purpose"></a></p>
+<h2 id="Hystrix能做什么"><a href="#Hystrix能做什么" class="headerlink" title="Hystrix能做什么?"></a>Hystrix能做什么?</h2><p>Hystrix被设计为：</p>
+<ul>
+<li>保护通过第三方客户端库服务依赖访问（通常通过网络），控制其延迟和故障</li>
+<li>在复杂的分布式系统中阻止连锁故障反应</li>
+<li>快速失败和快速恢复</li>
+<li>Fallback降级和在可能的情况下优雅地降级</li>
+<li>启用近实时监测，报警和操作控制</li>
+</ul>
+<p><a name="problem"></a></p>
+<h2 id="Hystrix解决了什么问题"><a href="#Hystrix解决了什么问题" class="headerlink" title="Hystrix解决了什么问题?"></a>Hystrix解决了什么问题?</h2><p>复杂分布式架构的应用程序有许多依赖，其中每一个在某些时候都会不可避免的发生失败。如果这个主应用没有从那些外部失败隔离，那么就会有被拖垮的风险。</p>
+<p>例如，1个应用依赖30个服务，每个服务有99.99%可用，那么预期：</p>
+<blockquote>
+<p>99.99<sup>30</sup>  =  99.7% uptime<br>10亿请求中的0.3%  = 3,000,000 次失败<br>即使所有依赖的服务都能达到 99.99% 的可用率，每月大约有2+小时不可用<br>随着服务依赖数量的变多，服务不稳定的概率会成指数性提高.</p>
+</blockquote>
+<p><strong>现实通常会更残酷。</strong></p>
+<p><strong>如果你没有针对整个系统做快速恢复</strong>，即使所有依赖只有 0.01% 的不可用率，累积起来每个月给系统带来的不可用时间也有数小时之多。</p>
+<hr>
+<p>当一切都ok的请求流看起来是这样的：</p>
+<p><img src="http://7xiovs.com1.z0.glb.clouddn.com/hystrix-soa-1-1280.png" alt=""></p>
+<p>当许多后端系统中的一个成为潜在故障时，可能会阻塞所有用户请求：</p>
+<p><img src="http://7xiovs.com1.z0.glb.clouddn.com/hystrix-soa-2-1280.png" alt=""></p>
+<p>一个高并发后端依赖成为潜在危险时，它会在几秒钟中导致所有服务器上的所有的资源耗尽。<br>在网络中或者客户端库中运行的每一个app都有可能会导致成为潜在的故障源。比失败更坏的是，这个问题app也可能会导致服务之间的延迟增加，从而备份队列，线程，和其他系统资源，导致更多系统的级联故障。</p>
+<p><img src="http://7xiovs.com1.z0.glb.clouddn.com/hystrix-soa-3-1280.png" alt=""></p>
+<p>当通过第三方客户端网络访问时，这些问题会加剧，这个第三方客户端就是一个黑盒，其实现细节是不清楚的，它能随时改变行为，每个客户端库的网络和资源配置是不同的，通常难以监控和修改。<br>如果这些网络请求通过第三方客户端发出，问题会变得更加严重，因为这些第三方客户端对于应用来说相当于『黑盒』——无法了解其实现细节，随时可能发生变更，网络/资源配置随客户端的不同而不同，同时又难以监控和修改。同时，应用依赖链中的服务可能非常耗时，或者这些可能导致问题的网络请求根本没有被我们的应用显式地调用！</p>
+<p>网络连接可能失败或者降级。服务或者服务器可能失效或者变慢。新依赖的库或者部署的服务可能改变行为或性能，亦或是依赖的客户端库本身有bug。<br>所有以上这些所描述的失败和延迟都需要被隔离和管理，才不至于因为单个服务失败而导致整个应用活系统垮掉。</p>
+<p><a name="principles"></a></p>
+<h2 id="What-Design-Principles-Underlie-Hystrix"><a href="#What-Design-Principles-Underlie-Hystrix" class="headerlink" title="What Design Principles Underlie Hystrix?"></a>What Design Principles Underlie Hystrix?</h2><p>Hystrix works by:</p>
+<ul>
+<li>防止任何单一依赖耗尽容器（如Tomcat）内的所有用户线程</li>
+<li>隔离和减低负载，对无法及时处理时快速失败，而不是排队</li>
+<li>提供失败回退（fallback）降级，无论何时都尽可能保护使用者免受破坏。</li>
+<li>采用隔离技术（如隔离壁，泳道，和熔断器模式）来限制任何一个依赖性的影响。</li>
+<li>通过最近实时metrics、监控和警告来优化以满足近实时性的要求</li>
+<li>在 Hystrix许多方面都需要只是配置属性的动态修改并能低延迟传播，提供优化以满足快速恢复的要求</li>
+<li>能保护应用不受依赖服务的整个执行过程中失败的影响，而不仅仅是网络请求</li>
+</ul>
+<p><a name="how"></a></p>
+<h2 id="How-Does-Hystrix-Accomplish-Its-Goals"><a href="#How-Does-Hystrix-Accomplish-Its-Goals" class="headerlink" title="How Does Hystrix Accomplish Its Goals?"></a>How Does Hystrix Accomplish Its Goals?</h2><p>Hystrix does this by:</p>
+<ul>
+<li><p>使用<code>HystrixCommand</code>或者<code>HystrixObservableCommand</code>包装所有的外部系统（或者依赖服务）调用，每个<code>HystrixCommand</code>或者<code>HystrixObservableCommand</code>在隔离的线程中/信号下执行（参考这个例子<a href="http://en.wikipedia.org/wiki/Command_pattern" target="_blank" rel="external">command pattern</a>）</p>
+</li>
+<li><p>超时机制，调用时间比定义的超时阀值大时超时。除了默认值，通过设置&ldquo;properties&rdquo;给每个依赖服务定义超时阀值,超时时间一般设为比99.5%平均时间略高即可.当调用超时时，直接返回或执行fallback逻辑。</p>
+</li>
+<li><p>为每个依赖维护一个小的线程池（或信号），如果线程池已满调用将被立即拒绝来代替排队方式。</p>
+</li>
+<li>测量成功，失败（抛出异常），超时和线程拒绝。</li>
+<li>如果错误比率达到设定的阀值，通过手动或者自动方式平稳的停止一个时间周期调用所有请求。</li>
+<li>当请求失败、拒绝，超时或者发生短路时，执行失败回退（fallback）逻辑。</li>
+<li>近实时监控度量，动态配置修改</li>
+</ul>
+<p>当使用 Hystrix 包装了你的所有依赖服务的请求后，下面图中所示的系统拓扑将会变成如下形式，每个依赖服务都被隔离开来，Hystrix 会严格控制其在延迟发生时对资源的占用，并在任何失效发生时，执行失败回退逻辑。</p>
+<p><img src="http://7xiovs.com1.z0.glb.clouddn.com/hystrix-soa-4-isolation-1280.png" alt=""></p>
+
+        </div>
+        <footer class="article-footer">
+            
+
+    <div class="bdsharebuttonbox">
+    <a href="#" class="bds_more" data-cmd="more">分享到：</a>
+    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间">QQ空间</a>
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博">新浪微博</a>
+    <a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博">腾讯微博</a>
+    <a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网">人人网</a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信">微信</a>
+</div>
+<script>
+window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"16"},"share":{"bdSize":16}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+<style>
+    .bdshare_popup_box {
+        border-radius: 4px;
+        border: #e1e1e1 solid 1px;
+    }
+    .bdshare-button-style0-16 a,
+    .bdshare-button-style0-16 .bds_more {
+        padding-left: 20px;
+        margin: 6px 10px 6px 0;
+    }
+    .bdshare_dialog_list a,
+    .bdshare_popup_list a,
+    .bdshare_popup_bottom a {
+        font-family: 'Microsoft Yahei';
+    }
+    .bdshare_popup_top {
+        display: none;
+    }
+    .bdshare_popup_bottom {
+        height: auto;
+        padding: 5px;
+    }
+</style>
+
+
+
+        </footer>
+    </div>
+</article>
+
+    <section id="comments">
+    
+        
+    <div class="ds-thread" data-thread-key="2016/03/09/hystrix/Hystrix简介/" data-title="Hystrix简介" data-url="http://tietang.github.com/2016/03/09/hystrix/Hystrix简介/"></div>
+    <style>
+        #ds-thread #ds-reset .ds-textarea-wrapper {
+            background: none;
+        }
+        #ds-reset .ds-avatar img {
+            box-shadow: none;
+        }
+        #ds-reset .ds-gradient-bg {
+            background: #f7f7f7;
+        }
+        #ds-thread #ds-reset li.ds-tab a {
+            border-radius: 3px;
+        }
+        #ds-thread #ds-reset .ds-post-button {
+            color: white;
+            border: none;
+            box-shadow: none;
+            background: #d32;
+            text-shadow: none;
+            font-weight: normal;
+            font-family: 'Microsoft Yahei';
+        }
+        #ds-thread #ds-reset .ds-post-button:hover {
+            color: white;
+            background: #DE594C;
+        }
+        #ds-thread #ds-reset .ds-post-button:active {
+            background: #d32;
+        }
+        #ds-smilies-tooltip ul.ds-smilies-tabs li a.ds-current {
+            color: white;
+            background: #d32;
+            box-shadow: none;
+            text-shadow: none;
+            font-weight: normal;
+        }
+    </style>
+
+    
+    </section>
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>关注我 :</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/tietang" target="_blank">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="weibo" href="http://www.weibo.com/horsehare" target="_blank">
+                        <i class="icon fa fa-weibo"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="蜂鸟" href="http://my.fengniao.com/tietang" target="_blank">
+                        <i class="icon fa fa-蜂鸟"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="500px" href="https://500px.com/wtt2012" target="_blank">
+                        <i class="icon fa fa-500px"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2016/03/17/hystrix/怎样使用Hystrix/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">下一篇</strong>
+        <p class="article-nav-title">
+        
+            怎样使用Hystrix
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/2016/03/09/hystrix/Hystrix降级模式总结/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">上一篇</strong>
+        <p class="article-nav-title">Hystrix简介</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">最新文章</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2016/03/19/hystrix/Hystrix是怎样工作的/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://7xiovs.com1.z0.glb.clouddn.com/hystrix-hystrix-logo.png)" alt="Hystrix是怎样工作的" class="thumbnail-image"></span>
+    
+    
+</a>
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/技术/">技术</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/技术/Hystrix/">Hystrix</a></p>
+                            <p class="item-title"><a href="/2016/03/19/hystrix/Hystrix是怎样工作的/" class="title">Hystrix是怎样工作的</a></p>
+                            <p class="item-date"><time datetime="2016-03-19T01:22:47.000Z" itemprop="datePublished">2016-03-19</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2016/03/17/hystrix/怎样使用Hystrix/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://7xiovs.com1.z0.glb.clouddn.com/hystrix-hystrix-logo.png)" alt="怎样使用Hystrix" class="thumbnail-image"></span>
+    
+    
+</a>
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/技术/">技术</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/技术/Hystrix/">Hystrix</a></p>
+                            <p class="item-title"><a href="/2016/03/17/hystrix/怎样使用Hystrix/" class="title">怎样使用Hystrix</a></p>
+                            <p class="item-date"><time datetime="2016-03-17T11:22:47.000Z" itemprop="datePublished">2016-03-17</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2016/03/09/hystrix/Hystrix简介/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://7xiovs.com1.z0.glb.clouddn.com/hystrix-hystrix-logo-tagline-640.png)" alt="Hystrix简介" class="thumbnail-image"></span>
+    
+    
+</a>
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/技术/">技术</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/技术/Hystrix/">Hystrix</a></p>
+                            <p class="item-title"><a href="/2016/03/09/hystrix/Hystrix简介/" class="title">Hystrix简介</a></p>
+                            <p class="item-date"><time datetime="2016-03-09T01:22:47.000Z" itemprop="datePublished">2016-03-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2016/03/09/hystrix/Hystrix降级模式总结/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://7xiovs.com1.z0.glb.clouddn.com/hystrix-hystrix-logo-tagline-640.png)" alt="Hystrix简介" class="thumbnail-image"></span>
+    
+    
+</a>
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/技术/">技术</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/技术/Hystrix/">Hystrix</a></p>
+                            <p class="item-title"><a href="/2016/03/09/hystrix/Hystrix降级模式总结/" class="title">Hystrix简介</a></p>
+                            <p class="item-date"><time datetime="2016-03-09T01:22:47.000Z" itemprop="datePublished">2016-03-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2016/03/04/技术/工具/wrk基准测试工具安装使用/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://7xiovs.com1.z0.glb.clouddn.com/DPP_0004.JPG)" alt="wrk基准测试工具安装使用" class="thumbnail-image"></span>
+    
+    
+</a>
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/技术/">技术</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/技术/工具/">工具</a></p>
+                            <p class="item-title"><a href="/2016/03/04/技术/工具/wrk基准测试工具安装使用/" class="title">wrk基准测试工具安装使用</a></p>
+                            <p class="item-date"><time datetime="2016-03-04T01:06:33.000Z" itemprop="datePublished">2016-03-04</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">分类</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/music/">music</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/">技术</a><span class="category-list-count">10</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/FlatBuffers/">FlatBuffers</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/Hexo/">Hexo</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/Hystrix/">Hystrix</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/工具/">工具</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/领域模型/">领域模型</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/转载/">转载</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/转载/http-2-0/">http 2.0</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/那年今日/">那年今日</a><span class="category-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">归档</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a><span class="archive-list-count">8</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">标签</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Circuit-Breaker/">Circuit Breaker</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DDD/">DDD</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/FlatBuffers/">FlatBuffers</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http-2-0/">http 2.0</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hystrix/">hystrix</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wrk/">wrk</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/基准测试/">基准测试</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/序列化/">序列化</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/春天/">春天</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/梅花/">梅花</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/领域模型/">领域模型</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">标签云</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/Circuit-Breaker/" style="font-size: 10px;">Circuit Breaker</a> <a href="/tags/DDD/" style="font-size: 10px;">DDD</a> <a href="/tags/FlatBuffers/" style="font-size: 15px;">FlatBuffers</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/http-2-0/" style="font-size: 10px;">http 2.0</a> <a href="/tags/hystrix/" style="font-size: 20px;">hystrix</a> <a href="/tags/wrk/" style="font-size: 10px;">wrk</a> <a href="/tags/基准测试/" style="font-size: 10px;">基准测试</a> <a href="/tags/序列化/" style="font-size: 15px;">序列化</a> <a href="/tags/春天/" style="font-size: 10px;">春天</a> <a href="/tags/梅花/" style="font-size: 10px;">梅花</a> <a href="/tags/领域模型/" style="font-size: 10px;">领域模型</a>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">链接</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://hexo.io">Hexo</a>
+                    </li>
+                
+                    <li>
+                        <a href="https://github.com/tietang/">Github</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://my.fengniao.com/tietang">蜂鸟</a>
+                    </li>
+                
+                    <li>
+                        <a href="https://500px.com/wtt2012">500px</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2016 铁汤</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>.
+                    <!--Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a>-->
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:'tietang'};
+    (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0]
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+    </script>
+
+
+
+    
+        <script src="/vendor/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+    
+
+    
+        <script src="/vendor/scrollLoading/jquery.scrollLoading.js" type="text/javascript"></script>
+        <script src="/vendor/scrollLoading/main.js" type="text/javascript"></script>
+    
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js" type="text/javascript"></script>
+
+    </div>
+</body>
+</html>
