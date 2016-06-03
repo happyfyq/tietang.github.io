@@ -12,19 +12,26 @@
           content="Java,Spring,Go,golang,技术,线程,性能,并发,可用,大数据spring-boot,spring-cloud,cloud,netflix,eureka,discovery,服务发现,微服务,zookeeper,网关,gateway,router,FlatBuffers,序列化"/>
 
     <meta name="description" content="FlatBuffers 使用指南FlatBuffers序列化性能是protobuf的2倍，但size也是protobuf的2倍
-编译源码1$ git clone https://github.com/google/flatbuffers.git&amp;#10;#&amp;#20999;&amp;#25442;&amp;#21040;&amp;#26368;&amp;#26032;release&amp;#29256;&amp;#26412;&amp;#10;$ gi">
+编译源码123$ git clone https://github.com/google/flatbuffers.git#切换到最新release版本$ git checkout v1.2.0
+安装cmakehttp://www.cmake.org.
+1234for ma">
 <meta property="og:type" content="article">
 <meta property="og:title" content="FlatBuffers 使用指南">
 <meta property="og:url" content="http://tietang.github.com/2016/02/19/技术/FlatBuffers/FlatBuffers使用指南/index.html">
 <meta property="og:site_name" content="多少光年">
 <meta property="og:description" content="FlatBuffers 使用指南FlatBuffers序列化性能是protobuf的2倍，但size也是protobuf的2倍
-编译源码1$ git clone https://github.com/google/flatbuffers.git&amp;#10;#&amp;#20999;&amp;#25442;&amp;#21040;&amp;#26368;&amp;#26032;release&amp;#29256;&amp;#26412;&amp;#10;$ gi">
+编译源码123$ git clone https://github.com/google/flatbuffers.git#切换到最新release版本$ git checkout v1.2.0
+安装cmakehttp://www.cmake.org.
+1234for ma">
 <meta property="og:image" content="http://7xiovs.com1.z0.glb.clouddn.com/IMG_20160218_122224.JPG">
 <meta property="og:updated_time" content="2016-02-19T13:42:17.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="FlatBuffers 使用指南">
 <meta name="twitter:description" content="FlatBuffers 使用指南FlatBuffers序列化性能是protobuf的2倍，但size也是protobuf的2倍
-编译源码1$ git clone https://github.com/google/flatbuffers.git&amp;#10;#&amp;#20999;&amp;#25442;&amp;#21040;&amp;#26368;&amp;#26032;release&amp;#29256;&amp;#26412;&amp;#10;$ gi">
+编译源码123$ git clone https://github.com/google/flatbuffers.git#切换到最新release版本$ git checkout v1.2.0
+安装cmakehttp://www.cmake.org.
+1234for ma">
+<meta name="twitter:image" content="http://7xiovs.com1.z0.glb.clouddn.com/IMG_20160218_122224.JPG">
     
 
     
@@ -33,19 +40,19 @@
     <link rel="icon" href="/favicon.ico"/>
     
 
-    <link rel="stylesheet" href="/vendor/font-awesome/css/font-awesome.min.css" type="text/css">
-    <link rel="stylesheet" href="/vendor/titillium-web/styles.css" type="text/css">
-    <link rel="stylesheet" href="/vendor/source-code-pro/styles.css" type="text/css">
+    <link rel="stylesheet" href="/vendor/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/vendor/titillium-web/styles.css">
+    <link rel="stylesheet" href="/vendor/source-code-pro/styles.css">
 
-    <link rel="stylesheet" href="/css/style.css" type="text/css">
+    <link rel="stylesheet" href="/css/style.css">
 
-    <script src="/vendor/jquery/2.0.3/jquery.min.js" type="text/javascript"></script>
+    <script src="/vendor/jquery/2.0.3/jquery.min.js"></script>
     
     
-        <link rel="stylesheet" href="/vendor/fancybox/jquery.fancybox.css" type="text/css">
+        <link rel="stylesheet" href="/vendor/fancybox/jquery.fancybox.css">
     
     
-        <link rel="stylesheet" href="/vendor/scrollLoading/style.css" type="text/css">
+        <link rel="stylesheet" href="/vendor/scrollLoading/style.css">
     
     
         <script type="text/javascript">
@@ -168,13 +175,13 @@ var _hmt = _hmt || [];
         </div>
         <div class="article-entry" itemprop="articleBody">
             <h1 id="FlatBuffers-使用指南"><a href="#FlatBuffers-使用指南" class="headerlink" title="FlatBuffers 使用指南"></a>FlatBuffers 使用指南</h1><p>FlatBuffers序列化性能是protobuf的2倍，但size也是protobuf的2倍</p>
-<h2 id="编译源码"><a href="#编译源码" class="headerlink" title="编译源码"></a>编译源码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git clone https://github.com/google/flatbuffers.git&#10;#&#20999;&#25442;&#21040;&#26368;&#26032;release&#29256;&#26412;&#10;$ git checkout v1.2.0</span><br></pre></td></tr></table></figure>
+<h2 id="编译源码"><a href="#编译源码" class="headerlink" title="编译源码"></a>编译源码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ git clone https://github.com/google/flatbuffers.git</span><br><span class="line">#切换到最新release版本</span><br><span class="line">$ git checkout v1.2.0</span><br></pre></td></tr></table></figure>
 <h3 id="安装cmake"><a href="#安装cmake" class="headerlink" title="安装cmake"></a>安装cmake</h3><p><a href="http://www.cmake.org" target="_blank" rel="external">http://www.cmake.org</a>.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">for mac osx&#10;$ brew install cmake&#10;for centOS&#10;$ sudo yum install cmake</span><br></pre></td></tr></table></figure>
-<h3 id="用cmake构建project"><a href="#用cmake构建project" class="headerlink" title="用cmake构建project"></a>用cmake构建project</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cmake -G &#34;Unix Makefiles&#34;&#10;cmake -G &#34;Visual Studio 10&#34;&#10;cmake -G &#34;Xcode&#34;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">for mac osx</span><br><span class="line">$ brew install cmake</span><br><span class="line">for centOS</span><br><span class="line">$ sudo yum install cmake</span><br></pre></td></tr></table></figure>
+<h3 id="用cmake构建project"><a href="#用cmake构建project" class="headerlink" title="用cmake构建project"></a>用cmake构建project</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cmake -G &quot;Unix Makefiles&quot;</span><br><span class="line">cmake -G &quot;Visual Studio 10&quot;</span><br><span class="line">cmake -G &quot;Xcode&quot;</span><br></pre></td></tr></table></figure>
 <p>在*nix系统，mac osx系统也建议使用 <code>cmake -G &quot;Unix Makefiles&quot;</code>，生成<code>Makefile</code>,之后<code>make &amp; make install</code><br>编译生成<code>flatc</code>并安装到系统。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ cmake -G &#34;Unix Makefiles&#34;&#10;$ make&#10;$ make insall</span><br></pre></td></tr></table></figure>
-<h2 id="使用schema编译器flatc来生成基础代码"><a href="#使用schema编译器flatc来生成基础代码" class="headerlink" title="使用schema编译器flatc来生成基础代码"></a>使用schema编译器flatc来生成基础代码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ cd samples&#10;#&#22312;&#30446;&#24405;src&#20013;&#29983;&#25104;java&#20195;&#30721;&#10;$flatc -j -o src monster.fbs</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ cmake -G &quot;Unix Makefiles&quot;</span><br><span class="line">$ make</span><br><span class="line">$ make insall</span><br></pre></td></tr></table></figure>
+<h2 id="使用schema编译器flatc来生成基础代码"><a href="#使用schema编译器flatc来生成基础代码" class="headerlink" title="使用schema编译器flatc来生成基础代码"></a>使用schema编译器flatc来生成基础代码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ cd samples</span><br><span class="line">#在目录src中生成java代码</span><br><span class="line">$flatc -j -o src monster.fbs</span><br></pre></td></tr></table></figure>
 <h3 id="编程语言参数"><a href="#编程语言参数" class="headerlink" title="编程语言参数:"></a>编程语言参数:</h3><ul>
 <li>–cpp, -c : Generate a C++ header for all definitions in this file (as filename_generated.h).</li>
 <li>–java, -j : Generate Java code.</li>
@@ -188,7 +195,7 @@ var _hmt = _hmt || [];
 <li>-o PATH 指定源码输出目录</li>
 <li>-I PATH 有include语句时，指定include目录</li>
 </ul>
-<h1 id="完整的参数"><a href="#完整的参数" class="headerlink" title="完整的参数"></a>完整的参数</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">usage: flatc [OPTION]... FILE... [-- FILE...]&#10;  -b              Generate wire format binaries for any data definitions.&#10;  -t              Generate text output for any data definitions.&#10;  -c              Generate C++ headers for tables/structs.&#10;  -g              Generate Go files for tables/structs.&#10;  -j              Generate Java classes for tables/structs.&#10;  -s              Generate JavaScript code for tables/structs.&#10;  -n              Generate C# classes for tables/structs.&#10;  -p              Generate Python files for tables/structs.&#10;  -o PATH         Prefix PATH to all generated files.&#10;  -I PATH         Search for includes in the specified path.&#10;  -M              Print make rules for generated files.&#10;  --strict-json   Strict JSON: field names must be / will be quoted,&#10;                  no trailing commas in tables/vectors.&#10;  --defaults-json Output fields whose value is the default when&#10;                  writing JSON&#10;  --no-prefix     Don&#39;t prefix enum values with the enum type in C++.&#10;  --scoped-enums  Use C++11 style scoped and strongly typed enums.&#10;                  also implies --no-prefix.&#10;  --gen-includes  (deprecated), this is the default behavior.&#10;                  If the original behavior is required (no include&#10;                  statements) use --no-includes.&#10;  --no-includes   Don&#39;t generate include statements for included&#10;                  schemas the generated file depends on (C++).&#10;  --gen-mutable   Generate accessors that can mutate buffers in-place.&#10;  --gen-onefile   Generate single output file for C#&#10;  --raw-binary    Allow binaries without file_indentifier to be read.&#10;                  This may crash flatc given a mismatched schema.&#10;  --proto         Input is a .proto, translate to .fbs.&#10;  --schema        Serialize schemas instead of JSON (use with -b)&#10;FILEs may depend on declarations in earlier files.&#10;FILEs after the -- must be binary flatbuffer format files.&#10;Output files are named using the base file name of the input,&#10;and written to the current directory or the path given by -o.&#10;example: flatc -c -b schema1.fbs schema2.fbs data.json</span><br></pre></td></tr></table></figure>
+<h1 id="完整的参数"><a href="#完整的参数" class="headerlink" title="完整的参数"></a>完整的参数</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">usage: flatc [OPTION]... FILE... [-- FILE...]</span><br><span class="line">  -b              Generate wire format binaries for any data definitions.</span><br><span class="line">  -t              Generate text output for any data definitions.</span><br><span class="line">  -c              Generate C++ headers for tables/structs.</span><br><span class="line">  -g              Generate Go files for tables/structs.</span><br><span class="line">  -j              Generate Java classes for tables/structs.</span><br><span class="line">  -s              Generate JavaScript code for tables/structs.</span><br><span class="line">  -n              Generate C# classes for tables/structs.</span><br><span class="line">  -p              Generate Python files for tables/structs.</span><br><span class="line">  -o PATH         Prefix PATH to all generated files.</span><br><span class="line">  -I PATH         Search for includes in the specified path.</span><br><span class="line">  -M              Print make rules for generated files.</span><br><span class="line">  --strict-json   Strict JSON: field names must be / will be quoted,</span><br><span class="line">                  no trailing commas in tables/vectors.</span><br><span class="line">  --defaults-json Output fields whose value is the default when</span><br><span class="line">                  writing JSON</span><br><span class="line">  --no-prefix     Don&apos;t prefix enum values with the enum type in C++.</span><br><span class="line">  --scoped-enums  Use C++11 style scoped and strongly typed enums.</span><br><span class="line">                  also implies --no-prefix.</span><br><span class="line">  --gen-includes  (deprecated), this is the default behavior.</span><br><span class="line">                  If the original behavior is required (no include</span><br><span class="line">                  statements) use --no-includes.</span><br><span class="line">  --no-includes   Don&apos;t generate include statements for included</span><br><span class="line">                  schemas the generated file depends on (C++).</span><br><span class="line">  --gen-mutable   Generate accessors that can mutate buffers in-place.</span><br><span class="line">  --gen-onefile   Generate single output file for C#</span><br><span class="line">  --raw-binary    Allow binaries without file_indentifier to be read.</span><br><span class="line">                  This may crash flatc given a mismatched schema.</span><br><span class="line">  --proto         Input is a .proto, translate to .fbs.</span><br><span class="line">  --schema        Serialize schemas instead of JSON (use with -b)</span><br><span class="line">FILEs may depend on declarations in earlier files.</span><br><span class="line">FILEs after the -- must be binary flatbuffer format files.</span><br><span class="line">Output files are named using the base file name of the input,</span><br><span class="line">and written to the current directory or the path given by -o.</span><br><span class="line">example: flatc -c -b schema1.fbs schema2.fbs data.json</span><br></pre></td></tr></table></figure>
 <h2 id="写schema-IDL文件"><a href="#写schema-IDL文件" class="headerlink" title="写schema IDL文件"></a>写schema IDL文件</h2><p>参考：<a href="http://google.github.io/flatbuffers/flatbuffers_guide_writing_schema.html" target="_blank" rel="external">http://google.github.io/flatbuffers/flatbuffers_guide_writing_schema.html</a></p>
 
         </div>
@@ -563,17 +570,17 @@ window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMin
 
 
     
-        <script src="/vendor/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+        <script src="/vendor/fancybox/jquery.fancybox.pack.js"></script>
     
 
     
-        <script src="/vendor/scrollLoading/jquery.scrollLoading.js" type="text/javascript"></script>
-        <script src="/vendor/scrollLoading/main.js" type="text/javascript"></script>
+        <script src="/vendor/scrollLoading/jquery.scrollLoading.js"></script>
+        <script src="/vendor/scrollLoading/main.js"></script>
     
 
 
 <!-- Custom Scripts -->
-<script src="/js/main.js" type="text/javascript"></script>
+<script src="/js/main.js"></script>
 
     </div>
 </body>
