@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="7f9abbe9-9144-4639-b3f0-5458b74cedde" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.deploy_git" afterPath="$PROJECT_DIR$/.deploy_git" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-    </list>
+    <list default="true" id="7f9abbe9-9144-4639-b3f0-5458b74cedde" name="Default" comment="" />
     <ignored path="tietang.github.io.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/out/" />
@@ -587,7 +584,7 @@
       <workItem from="1455868510542" duration="7472000" />
       <workItem from="1455930588197" duration="5430000" />
       <workItem from="1464917037255" duration="2028000" />
-      <workItem from="1464921486105" duration="1392000" />
+      <workItem from="1464921486105" duration="2348000" />
     </task>
     <task id="LOCAL-00001" summary="to hexo blog">
       <created>1455868564104</created>
@@ -663,7 +660,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="16322000" />
+    <option name="totallyTimeSpent" value="17278000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="737" extended-state="6" />
