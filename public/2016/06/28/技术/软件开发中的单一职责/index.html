@@ -22,7 +22,7 @@
 单一职责原则是这样定义的：单一的功能，并且完全封装起来。
 我们做后端Java开发的，应该最熟悉的就是标准的3层架构了，尤其是使用Spring.io体系的：Controller，Service，Dao/Repository。为什么要分层？就是为了保证单一职责，数据">
 <meta property="og:image" content="http://7xiovs.com1.z0.glb.clouddn.com/my-pic-P60607-090345.jpg">
-<meta property="og:updated_time" content="2016-06-29T09:21:35.000Z">
+<meta property="og:updated_time" content="2016-06-29T09:24:33.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="软件开发中的单一职责">
 <meta name="twitter:description" content="软件开发中的单一职责最近在实践微服务化过程中，对其“单一职责”原则深有体会。那么只有微服务化才可以单一职责，才可以解耦吗？答案是否定的。
@@ -199,7 +199,7 @@ var _hmt = _hmt || [];
 <p>多module拆分后也是为将来服务化埋下伏笔，同时在物理文件系统比较清晰了，那在依赖管理上也要掌握好保持清晰的依赖逻辑，把握好单一职责原则。</p>
 <h2 id="微服务-可部署单元"><a href="#微服务-可部署单元" class="headerlink" title="微服务/可部署单元"></a>微服务/可部署单元</h2><p>微服务，从运行时隔离，但业务量发展到一定时候，从单体或者多module工程拆分或演化出来，可独立打包可独立部署并复合单一原则的application，当然了微服务所体现的价值不仅仅是隔离和独立部署，还有很多这里可以参考<a href="http://www.infoq.com/cn/news/2015/04/single-app-micro-service" target="_blank" rel="external">单体应用与微服务优缺点辨析</a>。单一职责在微服务中的价值是最重要的，包含了app层面和开发app的团队层面，微服务的大部分优点都可以围绕单一职责来张开。</p>
 <h2 id="团队"><a href="#团队" class="headerlink" title="团队"></a>团队</h2><p>先应用《韩非子·扬权》中的一段文字：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">夫物者有所宜，材者有所施，各处其宜，故上下无为。使鸡司夜，令狸执鼠，皆用其能，上乃无事。上有所长，事乃不方。矜而好能，下之所欺：辩惠好生，下因其材。上下易用，国故不治。</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">夫物者有所宜，材者有所施，各处其宜，故上下无为。 </span><br><span class="line">使鸡司夜，令狸执鼠，皆用其能，上乃无事。</span><br><span class="line">上有所长，事乃不方。 </span><br><span class="line">矜而好能，下之所欺：辩惠好生，下因其材。</span><br><span class="line">上下易用，国故不治。</span><br></pre></td></tr></table></figure>
 <p><strong>参考：</strong></p>
 <ul>
 <li>原文：<a href="http://www.shici8.com/bookview_3501.html" target="_blank" rel="external">http://www.shici8.com/bookview_3501.html</a></li>
