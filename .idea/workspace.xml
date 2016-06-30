@@ -1,7 +1,69 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="7f9abbe9-9144-4639-b3f0-5458b74cedde" name="Default" comment="" />
+    <list default="true" id="7f9abbe9-9144-4639-b3f0-5458b74cedde" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.deploy_git" afterPath="$PROJECT_DIR$/.deploy_git" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db.json" afterPath="$PROJECT_DIR$/db.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/2016/02/19/技术/FlatBuffers/FlatBuffers使用指南/index.html" afterPath="$PROJECT_DIR$/public/2016/02/19/技术/FlatBuffers/FlatBuffers使用指南/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/2016/02/19/技术/FlatBuffers/FlatBuffers简介/index.html" afterPath="$PROJECT_DIR$/public/2016/02/19/技术/FlatBuffers/FlatBuffers简介/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/2016/02/19/春天花会开/index.html" afterPath="$PROJECT_DIR$/public/2016/02/19/春天花会开/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/2016/02/21/技术/Hexo/Hexo命令速记/index.html" afterPath="$PROJECT_DIR$/public/2016/02/21/技术/Hexo/Hexo命令速记/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/2016/02/21/技术/领域模型/领域模型的价值/index.html" afterPath="$PROJECT_DIR$/public/2016/02/21/技术/领域模型/领域模型的价值/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/2016/02/22/music/Matthew-Lien-Bleeding-Wolves/index.html" afterPath="$PROJECT_DIR$/public/2016/02/22/music/Matthew-Lien-Bleeding-Wolves/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/2016/02/22/转载/http2.0/装载：HTTP2-0的奇妙日常/index.html" afterPath="$PROJECT_DIR$/public/2016/02/22/转载/http2.0/装载：HTTP2-0的奇妙日常/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/2016/02/25/hystrix/Hystrix参数详解/index.html" afterPath="$PROJECT_DIR$/public/2016/02/25/hystrix/Hystrix参数详解/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/2016/03/04/技术/工具/wrk基准测试工具安装使用/index.html" afterPath="$PROJECT_DIR$/public/2016/03/04/技术/工具/wrk基准测试工具安装使用/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/2016/03/09/hystrix/Hystrix简介/index.html" afterPath="$PROJECT_DIR$/public/2016/03/09/hystrix/Hystrix简介/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/2016/03/09/hystrix/Hystrix降级模式总结/index.html" afterPath="$PROJECT_DIR$/public/2016/03/09/hystrix/Hystrix降级模式总结/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/2016/03/17/hystrix/怎样使用Hystrix/index.html" afterPath="$PROJECT_DIR$/public/2016/03/17/hystrix/怎样使用Hystrix/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/2016/06/02/微服务/微服务之微/index.html" afterPath="$PROJECT_DIR$/public/2016/06/02/微服务/微服务之微/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/2016/06/16/技术/负载均衡之加权轮询算法/index.html" afterPath="$PROJECT_DIR$/public/2016/06/16/技术/负载均衡之加权轮询算法/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/2016/06/28/技术/软件开发中的单一职责/index.html" afterPath="$PROJECT_DIR$/public/2016/06/28/技术/软件开发中的单一职责/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/about/index.html" afterPath="$PROJECT_DIR$/public/about/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/archives/2016/02/index.html" afterPath="$PROJECT_DIR$/public/archives/2016/02/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/archives/2016/03/index.html" afterPath="$PROJECT_DIR$/public/archives/2016/03/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/archives/2016/06/index.html" afterPath="$PROJECT_DIR$/public/archives/2016/06/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/archives/2016/index.html" afterPath="$PROJECT_DIR$/public/archives/2016/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/archives/2016/page/2/index.html" afterPath="$PROJECT_DIR$/public/archives/2016/page/2/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/archives/index.html" afterPath="$PROJECT_DIR$/public/archives/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/archives/page/2/index.html" afterPath="$PROJECT_DIR$/public/archives/page/2/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/categories/music/index.html" afterPath="$PROJECT_DIR$/public/categories/music/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/categories/微服务/index.html" afterPath="$PROJECT_DIR$/public/categories/微服务/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/categories/技术/FlatBuffers/index.html" afterPath="$PROJECT_DIR$/public/categories/技术/FlatBuffers/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/categories/技术/Hexo/index.html" afterPath="$PROJECT_DIR$/public/categories/技术/Hexo/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/categories/技术/Hystrix/index.html" afterPath="$PROJECT_DIR$/public/categories/技术/Hystrix/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/categories/技术/index.html" afterPath="$PROJECT_DIR$/public/categories/技术/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/categories/技术/page/2/index.html" afterPath="$PROJECT_DIR$/public/categories/技术/page/2/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/categories/技术/工具/index.html" afterPath="$PROJECT_DIR$/public/categories/技术/工具/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/categories/技术/杂谈/index.html" afterPath="$PROJECT_DIR$/public/categories/技术/杂谈/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/categories/技术/算法/index.html" afterPath="$PROJECT_DIR$/public/categories/技术/算法/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/categories/技术/领域模型/index.html" afterPath="$PROJECT_DIR$/public/categories/技术/领域模型/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/categories/转载/http-2-0/index.html" afterPath="$PROJECT_DIR$/public/categories/转载/http-2-0/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/categories/转载/index.html" afterPath="$PROJECT_DIR$/public/categories/转载/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/categories/那年今日/index.html" afterPath="$PROJECT_DIR$/public/categories/那年今日/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/index.html" afterPath="$PROJECT_DIR$/public/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/page/2/index.html" afterPath="$PROJECT_DIR$/public/page/2/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/tags/Circuit-Breaker/index.html" afterPath="$PROJECT_DIR$/public/tags/Circuit-Breaker/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/tags/DDD/index.html" afterPath="$PROJECT_DIR$/public/tags/DDD/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/tags/FlatBuffers/index.html" afterPath="$PROJECT_DIR$/public/tags/FlatBuffers/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/tags/Hexo/index.html" afterPath="$PROJECT_DIR$/public/tags/Hexo/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/tags/http-2-0/index.html" afterPath="$PROJECT_DIR$/public/tags/http-2-0/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/tags/hystrix/index.html" afterPath="$PROJECT_DIR$/public/tags/hystrix/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/tags/wrk/index.html" afterPath="$PROJECT_DIR$/public/tags/wrk/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/tags/加权轮询/index.html" afterPath="$PROJECT_DIR$/public/tags/加权轮询/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/tags/单一职责/index.html" afterPath="$PROJECT_DIR$/public/tags/单一职责/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/tags/基准测试/index.html" afterPath="$PROJECT_DIR$/public/tags/基准测试/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/tags/序列化/index.html" afterPath="$PROJECT_DIR$/public/tags/序列化/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/tags/微服务/index.html" afterPath="$PROJECT_DIR$/public/tags/微服务/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/tags/春天/index.html" afterPath="$PROJECT_DIR$/public/tags/春天/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/tags/梅花/index.html" afterPath="$PROJECT_DIR$/public/tags/梅花/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/tags/算法/index.html" afterPath="$PROJECT_DIR$/public/tags/算法/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/tags/负载均衡/index.html" afterPath="$PROJECT_DIR$/public/tags/负载均衡/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/tags/轮询/index.html" afterPath="$PROJECT_DIR$/public/tags/轮询/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/tags/软件开发/index.html" afterPath="$PROJECT_DIR$/public/tags/软件开发/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/tags/领域模型/index.html" afterPath="$PROJECT_DIR$/public/tags/领域模型/index.html" />
+    </list>
     <ignored path="tietang.github.io.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/out/" />
@@ -22,11 +84,42 @@
     <favorites_list name="tietang.github.io" />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file leaf-file-name="_config.yml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/_config.yml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="252">
+              <caret line="68" column="18" selection-start-line="68" selection-start-column="18" selection-end-line="68" selection-end-column="18" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/themes/hueman/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="_config.yml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/themes/hueman/_config.yml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="172">
+              <caret line="68" column="10" selection-start-line="68" selection-start-column="10" selection-end-line="68" selection-end-column="10" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="Git.Settings">
     <option name="ROOT_SYNC" value="SYNC" />
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/themes/hueman" />
     <option name="RECENT_COMMON_BRANCH" value="master" />
   </component>
   <component name="GradleLocalSettings">
@@ -59,10 +152,10 @@
         <option value="$PROJECT_DIR$/themes/hueman/layout/common/header.ejs" />
         <option value="$PROJECT_DIR$/public/index.html" />
         <option value="$PROJECT_DIR$/themes/hueman/layout/common/head.ejs" />
-        <option value="$PROJECT_DIR$/themes/hueman/_config.yml" />
         <option value="$PROJECT_DIR$/scaffolds/post.md" />
         <option value="$PROJECT_DIR$/source/_posts/微服务/微服务之微.md" />
         <option value="$PROJECT_DIR$/public/CNAME" />
+        <option value="$PROJECT_DIR$/themes/hueman/_config.yml" />
       </list>
     </option>
   </component>
@@ -102,6 +195,9 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -130,7 +226,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="source" />
+              <option name="myItemId" value="themes" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -144,51 +240,16 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="source" />
+              <option name="myItemId" value="themes" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="images" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tietang.github.io" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tietang.github.io" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="public" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tietang.github.io" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tietang.github.io" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="public" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="images" />
+              <option name="myItemId" value="hueman" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="Scratches" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -585,6 +646,7 @@
       <workItem from="1455930588197" duration="5430000" />
       <workItem from="1464917037255" duration="2028000" />
       <workItem from="1464921486105" duration="2348000" />
+      <workItem from="1467272128845" duration="1205000" />
     </task>
     <task id="LOCAL-00001" summary="to hexo blog">
       <created>1455868564104</created>
@@ -660,11 +722,11 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="17278000" />
+    <option name="totallyTimeSpent" value="18483000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="737" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -672,12 +734,13 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32901135" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="LuaJ" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32901135" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -690,7 +753,6 @@
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32901135" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="VcsContentAnnotationSettings">
@@ -705,36 +767,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/themes/hueman/_config.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="504">
-          <caret line="24" column="24" selection-start-line="24" selection-start-column="24" selection-end-line="24" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/themes/hueman/languages/zh-CN.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="504">
-          <caret line="24" column="3" selection-start-line="24" selection-start-column="3" selection-end-line="24" selection-end-column="3" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/themes/hueman/layout/index.ejs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="8" selection-start-line="0" selection-start-column="8" selection-end-line="0" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/themes/hueman/layout/layout.ejs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -774,21 +806,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/css/style.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/db.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -953,13 +970,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/themes/hueman/layout/index.ejs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="8" selection-start-line="0" selection-start-column="8" selection-end-line="0" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/themes/hueman/layout/layout.ejs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1008,13 +1018,6 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/themes/hueman/_config.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="504">
-          <caret line="24" column="24" selection-start-line="24" selection-start-column="24" selection-end-line="24" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/themes/hueman/languages/zh-CN.yml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="273">
@@ -1027,14 +1030,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="357">
           <caret line="17" column="1" selection-start-line="17" selection-start-column="1" selection-end-line="17" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/_config.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="438">
-          <caret line="73" column="18" selection-start-line="73" selection-start-column="18" selection-end-line="73" selection-end-column="18" />
         </state>
       </provider>
     </entry>
@@ -1042,7 +1037,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1050,6 +1044,93 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="12" selection-start-line="0" selection-start-column="12" selection-end-line="0" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/themes/hueman/layout/index.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="8" selection-start-line="0" selection-start-column="8" selection-end-line="0" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/themes/hueman/source/css/_extend.styl">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/vendor/font-awesome/css/font-awesome.min.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="3" column="25726" selection-start-line="3" selection-start-column="25726" selection-end-line="3" selection-end-column="25726" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/themes/yilia/source/css/_partial/instagram.styl">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="127">
+          <caret line="8" column="16" selection-start-line="8" selection-start-column="16" selection-end-line="8" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.deploy_git/css/style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-4272">
+          <caret line="585" column="23" selection-start-line="585" selection-start-column="23" selection-end-line="585" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/themes/hueman/source/css/_partial/sidebar.styl">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2204">
+          <caret line="24" column="9" selection-start-line="24" selection-start-column="9" selection-end-line="24" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/css/style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="147">
+          <caret line="7" column="9" selection-start-line="7" selection-start-column="9" selection-end-line="7" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/db.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3318">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_config.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="68" column="18" selection-start-line="68" selection-start-column="18" selection-end-line="68" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/themes/hueman/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/themes/hueman/_config.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="172">
+          <caret line="68" column="10" selection-start-line="68" selection-start-column="10" selection-end-line="68" selection-end-column="10" />
           <folding />
         </state>
       </provider>
