@@ -1,6 +1,6 @@
 ---
 title: wrk基准测试工具安装使用
-thumbnail: 'http://7xiovs.com1.z0.glb.clouddn.com/DPP_0004.JPG'
+thumbnail: 'http://7xiovs.com1.z0.glb.clouddn.com/my-pic-P60608-195617.jpg?imageView2/1/w/800/h/600/q/75|watermark/2/text/Qnkg6ZOB5rGk/font/5a6L5L2T/fontsize/500/fill/I0VGRUZFRg==/dissolve/100/gravity/SouthEast/dx/30/dy/30'
 date: 2016-03-04 09:06:33
 categories:
 	- 技术
