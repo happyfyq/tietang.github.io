@@ -1,5 +1,5 @@
 ---
-title: Hystrix简介
+title: Hystrix降级模式总结
 thumbnail: 'http://7xiovs.com1.z0.glb.clouddn.com/hystrix-hystrix-logo-tagline-640.png'
 date: 2016-03-09 09:22:47
 categories:
@@ -8,7 +8,7 @@ categories:
 tags:
 	- hystrix
 keywords: hystrix
-description: Hystrix简介
+description: Hystrix降级
 ---
 
 ## 失败回退降级模式

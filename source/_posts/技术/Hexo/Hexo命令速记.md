@@ -31,6 +31,7 @@ hexo server -i 192.168.1.1 #自定义 IP
 hexo clean #清除缓存 网页正常情况下可以忽略此条命令
 hexo g #生成静态网页
 hexo d #开始部署
+hexo d -g #部署前先生成今天网页
 ```
 
 ## 监视文件变动
