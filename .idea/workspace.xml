@@ -2,7 +2,244 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7f9abbe9-9144-4639-b3f0-5458b74cedde" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/source/_posts/hystrix/怎样使用Hystrix.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/source副本/_posts/hystrix/Hystrix参数详解.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/source副本/_posts/hystrix/Hystrix是怎样工作的.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/source副本/_posts/hystrix/Hystrix简介.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/source副本/_posts/hystrix/Hystrix降级模式总结.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/source副本/_posts/hystrix/images/cascading-failure-preventing-640.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/source副本/_posts/hystrix/images/cascading-failure-preventing.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/source副本/_posts/hystrix/images/circuit-breaker-1280.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/source副本/_posts/hystrix/images/circuit-breaker-640.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/source副本/_posts/hystrix/images/circuit-breaker-original.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/source副本/_posts/hystrix/images/circuit-identity-jitter-640.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/source副本/_posts/hystrix/images/circuit-identity-jitter.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/source副本/_posts/hystrix/images/collapser-1280.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/source副本/_posts/hystrix/images/collapser-640.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/source副本/_posts/hystrix/images/collapser-flow-1280.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/source副本/_posts/hystrix/images/collapser-flow-640.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/source副本/_posts/hystrix/images/collapser-flow-original.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/source副本/_posts/hystrix/images/collapser-original.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/source副本/_posts/hystrix/images/dashboard-annoted-circuit-640.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/source副本/_posts/hystrix/images/dashboard-annoted-circuit-original.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/source副本/_posts/hystrix/images/dashboard-direct-vs-turbine-640.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/source副本/_posts/hystrix/images/dashboard-direct-vs-turbine.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/source副本/_posts/hystrix/images/dashboard-example-1280.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/source副本/_posts/hystrix/images/dashboard-example-640.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/source副本/_posts/hystrix/images/dashboard-example-open-circuit-640.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/source副本/_posts/hystrix/images/dashboard-example-original.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/source副本/_posts/hystrix/images/dashboard-home-640.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/source副本/_posts/hystrix/images/dashboard-home.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/source副本/_posts/hystrix/images/fallback-640.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/source副本/_posts/hystrix/images/fallback-original.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/source副本/_posts/hystrix/images/fallback-via-command-1280.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/source副本/_posts/hystrix/images/fallback-via-command-640.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/source副本/_posts/hystrix/images/fallback-via-command-original.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/source副本/_posts/hystrix/images/hystrix-command-flow-chart-640.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/source副本/_posts/hystrix/images/hystrix-command-flow-chart.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/source副本/_posts/hystrix/images/hystrix-dashboard-netflix-api-example-620.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/source副本/_posts/hystrix/images/hystrix-dashboard-netflix-api-example-iPad-620.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/source副本/_posts/hystrix/images/hystrix-dashboard-netflix-api-example-iPad.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/source副本/_posts/hystrix/images/hystrix-dashboard-netflix-api-example.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/source副本/_posts/hystrix/images/hystrix-dashboard-single-row-640.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/source副本/_posts/hystrix/images/hystrix-dashboard-single-row.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/source副本/_posts/hystrix/images/hystrix-examples-webapp-home.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/source副本/_posts/hystrix/images/hystrix-flow-chart-1280.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/source副本/_posts/hystrix/images/hystrix-flow-chart-640.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/source副本/_posts/hystrix/images/hystrix-flow-chart-original.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/source副本/_posts/hystrix/images/hystrix-logo-small.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/source副本/_posts/hystrix/images/hystrix-logo-tagline-640.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/source副本/_posts/hystrix/images/hystrix-logo-tagline-850.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/source副本/_posts/hystrix/images/hystrix-logo-tagline-github-516.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/source副本/_posts/hystrix/images/hystrix-logo-tagline-github-640.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/source副本/_posts/hystrix/images/hystrix-logo-tagline-tiny.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/source副本/_posts/hystrix/images/hystrix-logo-tagline.graffle" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/source副本/_posts/hystrix/images/hystrix-logo-tagline.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/source副本/_posts/hystrix/images/hystrix-logo-tiny.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/source副本/_posts/hystrix/images/hystrix-logo.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/source副本/_posts/hystrix/images/hystrix-return-flow-640.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/source副本/_posts/hystrix/images/hystrix-return-flow.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/source副本/_posts/hystrix/images/hystrix.graffle" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/source副本/_posts/hystrix/images/isolation-options-1280.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/source副本/_posts/hystrix/images/isolation-options-640.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/source副本/_posts/hystrix/images/isolation-options-original.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/source副本/_posts/hystrix/images/library-migration-to-hystrix-1280.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/source副本/_posts/hystrix/images/library-migration-to-hystrix-640.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/source副本/_posts/hystrix/images/library-migration-to-hystrix-original.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/source副本/_posts/hystrix/images/library-migration-to-hystrix-with-640.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/source副本/_posts/hystrix/images/library-migration-to-hystrix-without-640.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/source副本/_posts/hystrix/images/ops-ab-640.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/source副本/_posts/hystrix/images/ops-ab.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/source副本/_posts/hystrix/images/ops-cinematch-1-640.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/source副本/_posts/hystrix/images/ops-cinematch-1.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/source副本/_posts/hystrix/images/ops-cinematch-2-640.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/source副本/_posts/hystrix/images/ops-cinematch-2.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/source副本/_posts/hystrix/images/ops-complete-system-640.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/source副本/_posts/hystrix/images/ops-complete-system.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/source副本/_posts/hystrix/images/ops-getbookmarks-640.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/source副本/_posts/hystrix/images/ops-getbookmarks.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/source副本/_posts/hystrix/images/ops-social-640.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/source副本/_posts/hystrix/images/ops-social-original.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/source副本/_posts/hystrix/images/primary-secondary-example-640.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/source副本/_posts/hystrix/images/primary-secondary-example-original.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/source副本/_posts/hystrix/images/request-cache-1280.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/source副本/_posts/hystrix/images/request-cache-640.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/source副本/_posts/hystrix/images/request-cache-original.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/source副本/_posts/hystrix/images/request-example-with-latency-1280.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/source副本/_posts/hystrix/images/request-example-with-latency-640.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/source副本/_posts/hystrix/images/request-example-with-latency-original.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/source副本/_posts/hystrix/images/rolling-stats-1280.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/source副本/_posts/hystrix/images/rolling-stats-640.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/source副本/_posts/hystrix/images/rolling-stats-original.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/source副本/_posts/hystrix/images/soa-1-1280.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/source副本/_posts/hystrix/images/soa-1-640.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/source副本/_posts/hystrix/images/soa-1-original.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/source副本/_posts/hystrix/images/soa-2-1280.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/source副本/_posts/hystrix/images/soa-2-640.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/source副本/_posts/hystrix/images/soa-2-original.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/source副本/_posts/hystrix/images/soa-3-1280.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/source副本/_posts/hystrix/images/soa-3-640.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/source副本/_posts/hystrix/images/soa-3-original.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/source副本/_posts/hystrix/images/soa-4-isolation-1280.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/source副本/_posts/hystrix/images/soa-4-isolation-640.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/source副本/_posts/hystrix/images/soa-4-isolation-original.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/source副本/_posts/hystrix/images/soa-5-isolation-focused-1280.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/source副本/_posts/hystrix/images/soa-5-isolation-focused-640.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/source副本/_posts/hystrix/images/soa-5-isolation-focused-original.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/source副本/_posts/hystrix/images/thread-configuration-1280.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/source副本/_posts/hystrix/images/thread-configuration-640.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/source副本/_posts/hystrix/images/thread-configuration-original.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/source副本/_posts/hystrix/images/thread-cost-60rps-640.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/source副本/_posts/hystrix/images/thread-cost-60rps-original.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/source副本/_posts/hystrix/images/transitive-commands-640.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/source副本/_posts/hystrix/images/transitive-commands.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/source副本/_posts/music/Matthew-Lien-Bleeding-Wolves.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/source副本/_posts/技术/FlatBuffers/FlatBuffers使用指南.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/source副本/_posts/技术/FlatBuffers/FlatBuffers简介.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/source副本/_posts/技术/Hexo/Hexo命令速记.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/source副本/_posts/技术/工具/wrk基准测试工具安装使用.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/source副本/_posts/技术/领域模型/领域模型的价值.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/source副本/_posts/春天花会开.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/source副本/_posts/转载/http2.0/装载：HTTP2-0的奇妙日常.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/source副本/about/index.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/source副本/images/185638fo3y9el8ie2ohese.jpg" afterPath="" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/source副本/_posts/hystrix/怎样使用Hystrix.md" afterPath="$PROJECT_DIR$/source/_posts/hystrix/怎样使用Hystrix.md.todo" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.deploy_git" afterPath="$PROJECT_DIR$/.deploy_git" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.deploy_git/2016/02/19/技术/FlatBuffers/FlatBuffers使用指南/index.html" afterPath="$PROJECT_DIR$/.deploy_git/2016/02/19/技术/FlatBuffers/FlatBuffers使用指南/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.deploy_git/2016/02/19/技术/FlatBuffers/FlatBuffers简介/index.html" afterPath="$PROJECT_DIR$/.deploy_git/2016/02/19/技术/FlatBuffers/FlatBuffers简介/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.deploy_git/2016/02/19/春天花会开/index.html" afterPath="$PROJECT_DIR$/.deploy_git/2016/02/19/春天花会开/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.deploy_git/2016/02/21/技术/Hexo/Hexo命令速记/index.html" afterPath="$PROJECT_DIR$/.deploy_git/2016/02/21/技术/Hexo/Hexo命令速记/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.deploy_git/2016/02/21/技术/领域模型/领域模型的价值/index.html" afterPath="$PROJECT_DIR$/.deploy_git/2016/02/21/技术/领域模型/领域模型的价值/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.deploy_git/2016/02/22/music/Matthew-Lien-Bleeding-Wolves/index.html" afterPath="$PROJECT_DIR$/.deploy_git/2016/02/22/music/Matthew-Lien-Bleeding-Wolves/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.deploy_git/2016/02/22/转载/http2.0/装载：HTTP2-0的奇妙日常/index.html" afterPath="$PROJECT_DIR$/.deploy_git/2016/02/22/转载/http2.0/装载：HTTP2-0的奇妙日常/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.deploy_git/2016/02/25/hystrix/Hystrix参数详解/index.html" afterPath="$PROJECT_DIR$/.deploy_git/2016/02/25/hystrix/Hystrix参数详解/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.deploy_git/2016/03/04/技术/工具/wrk基准测试工具安装使用/index.html" afterPath="$PROJECT_DIR$/.deploy_git/2016/03/04/技术/工具/wrk基准测试工具安装使用/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.deploy_git/2016/03/09/hystrix/Hystrix简介/index.html" afterPath="$PROJECT_DIR$/.deploy_git/2016/03/09/hystrix/Hystrix简介/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.deploy_git/2016/03/09/hystrix/Hystrix降级模式总结/index.html" afterPath="$PROJECT_DIR$/.deploy_git/2016/03/09/hystrix/Hystrix降级模式总结/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.deploy_git/2016/06/02/微服务/微服务之微/index.html" afterPath="$PROJECT_DIR$/.deploy_git/2016/06/02/微服务/微服务之微/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.deploy_git/2016/06/16/技术/负载均衡之加权轮询算法/index.html" afterPath="$PROJECT_DIR$/.deploy_git/2016/06/16/技术/负载均衡之加权轮询算法/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.deploy_git/2016/06/28/技术/软件开发中的单一职责/index.html" afterPath="$PROJECT_DIR$/.deploy_git/2016/06/28/技术/软件开发中的单一职责/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.deploy_git/about/index.html" afterPath="$PROJECT_DIR$/.deploy_git/about/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.deploy_git/archives/2016/02/index.html" afterPath="$PROJECT_DIR$/.deploy_git/archives/2016/02/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.deploy_git/archives/2016/03/index.html" afterPath="$PROJECT_DIR$/.deploy_git/archives/2016/03/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.deploy_git/archives/2016/06/index.html" afterPath="$PROJECT_DIR$/.deploy_git/archives/2016/06/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.deploy_git/archives/2016/index.html" afterPath="$PROJECT_DIR$/.deploy_git/archives/2016/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.deploy_git/archives/2016/page/2/index.html" afterPath="$PROJECT_DIR$/.deploy_git/archives/2016/page/2/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.deploy_git/archives/index.html" afterPath="$PROJECT_DIR$/.deploy_git/archives/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.deploy_git/archives/page/2/index.html" afterPath="$PROJECT_DIR$/.deploy_git/archives/page/2/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.deploy_git/categories/music/index.html" afterPath="$PROJECT_DIR$/.deploy_git/categories/music/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.deploy_git/categories/微服务/index.html" afterPath="$PROJECT_DIR$/.deploy_git/categories/微服务/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.deploy_git/categories/技术/FlatBuffers/index.html" afterPath="$PROJECT_DIR$/.deploy_git/categories/技术/FlatBuffers/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.deploy_git/categories/技术/Hexo/index.html" afterPath="$PROJECT_DIR$/.deploy_git/categories/技术/Hexo/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.deploy_git/categories/技术/Hystrix/index.html" afterPath="$PROJECT_DIR$/.deploy_git/categories/技术/Hystrix/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.deploy_git/categories/技术/index.html" afterPath="$PROJECT_DIR$/.deploy_git/categories/技术/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.deploy_git/categories/技术/工具/index.html" afterPath="$PROJECT_DIR$/.deploy_git/categories/技术/工具/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.deploy_git/categories/技术/杂谈/index.html" afterPath="$PROJECT_DIR$/.deploy_git/categories/技术/杂谈/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.deploy_git/categories/技术/算法/index.html" afterPath="$PROJECT_DIR$/.deploy_git/categories/技术/算法/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.deploy_git/categories/技术/领域模型/index.html" afterPath="$PROJECT_DIR$/.deploy_git/categories/技术/领域模型/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.deploy_git/categories/转载/http-2-0/index.html" afterPath="$PROJECT_DIR$/.deploy_git/categories/转载/http-2-0/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.deploy_git/categories/转载/index.html" afterPath="$PROJECT_DIR$/.deploy_git/categories/转载/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.deploy_git/categories/那年今日/index.html" afterPath="$PROJECT_DIR$/.deploy_git/categories/那年今日/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.deploy_git/index.html" afterPath="$PROJECT_DIR$/.deploy_git/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.deploy_git/page/2/index.html" afterPath="$PROJECT_DIR$/.deploy_git/page/2/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.deploy_git/tags/Circuit-Breaker/index.html" afterPath="$PROJECT_DIR$/.deploy_git/tags/Circuit-Breaker/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.deploy_git/tags/DDD/index.html" afterPath="$PROJECT_DIR$/.deploy_git/tags/DDD/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.deploy_git/tags/FlatBuffers/index.html" afterPath="$PROJECT_DIR$/.deploy_git/tags/FlatBuffers/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.deploy_git/tags/Hexo/index.html" afterPath="$PROJECT_DIR$/.deploy_git/tags/Hexo/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.deploy_git/tags/http-2-0/index.html" afterPath="$PROJECT_DIR$/.deploy_git/tags/http-2-0/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.deploy_git/tags/hystrix/index.html" afterPath="$PROJECT_DIR$/.deploy_git/tags/hystrix/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.deploy_git/tags/wrk/index.html" afterPath="$PROJECT_DIR$/.deploy_git/tags/wrk/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.deploy_git/tags/加权轮询/index.html" afterPath="$PROJECT_DIR$/.deploy_git/tags/加权轮询/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.deploy_git/tags/单一职责/index.html" afterPath="$PROJECT_DIR$/.deploy_git/tags/单一职责/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.deploy_git/tags/基准测试/index.html" afterPath="$PROJECT_DIR$/.deploy_git/tags/基准测试/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.deploy_git/tags/序列化/index.html" afterPath="$PROJECT_DIR$/.deploy_git/tags/序列化/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.deploy_git/tags/微服务/index.html" afterPath="$PROJECT_DIR$/.deploy_git/tags/微服务/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.deploy_git/tags/春天/index.html" afterPath="$PROJECT_DIR$/.deploy_git/tags/春天/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.deploy_git/tags/梅花/index.html" afterPath="$PROJECT_DIR$/.deploy_git/tags/梅花/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.deploy_git/tags/算法/index.html" afterPath="$PROJECT_DIR$/.deploy_git/tags/算法/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.deploy_git/tags/负载均衡/index.html" afterPath="$PROJECT_DIR$/.deploy_git/tags/负载均衡/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.deploy_git/tags/轮询/index.html" afterPath="$PROJECT_DIR$/.deploy_git/tags/轮询/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.deploy_git/tags/软件开发/index.html" afterPath="$PROJECT_DIR$/.deploy_git/tags/软件开发/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.deploy_git/tags/领域模型/index.html" afterPath="$PROJECT_DIR$/.deploy_git/tags/领域模型/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db.json" afterPath="$PROJECT_DIR$/db.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/2016/02/19/技术/FlatBuffers/FlatBuffers使用指南/index.html" afterPath="$PROJECT_DIR$/public/2016/02/19/技术/FlatBuffers/FlatBuffers使用指南/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/2016/02/19/技术/FlatBuffers/FlatBuffers简介/index.html" afterPath="$PROJECT_DIR$/public/2016/02/19/技术/FlatBuffers/FlatBuffers简介/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/2016/02/19/春天花会开/index.html" afterPath="$PROJECT_DIR$/public/2016/02/19/春天花会开/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/2016/02/21/技术/Hexo/Hexo命令速记/index.html" afterPath="$PROJECT_DIR$/public/2016/02/21/技术/Hexo/Hexo命令速记/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/2016/02/21/技术/领域模型/领域模型的价值/index.html" afterPath="$PROJECT_DIR$/public/2016/02/21/技术/领域模型/领域模型的价值/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/2016/02/22/music/Matthew-Lien-Bleeding-Wolves/index.html" afterPath="$PROJECT_DIR$/public/2016/02/22/music/Matthew-Lien-Bleeding-Wolves/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/2016/02/22/转载/http2.0/装载：HTTP2-0的奇妙日常/index.html" afterPath="$PROJECT_DIR$/public/2016/02/22/转载/http2.0/装载：HTTP2-0的奇妙日常/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/2016/02/25/hystrix/Hystrix参数详解/index.html" afterPath="$PROJECT_DIR$/public/2016/02/25/hystrix/Hystrix参数详解/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/2016/03/04/技术/工具/wrk基准测试工具安装使用/index.html" afterPath="$PROJECT_DIR$/public/2016/03/04/技术/工具/wrk基准测试工具安装使用/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/2016/03/09/hystrix/Hystrix简介/index.html" afterPath="$PROJECT_DIR$/public/2016/03/09/hystrix/Hystrix简介/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/2016/03/09/hystrix/Hystrix降级模式总结/index.html" afterPath="$PROJECT_DIR$/public/2016/03/09/hystrix/Hystrix降级模式总结/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/2016/06/02/微服务/微服务之微/index.html" afterPath="$PROJECT_DIR$/public/2016/06/02/微服务/微服务之微/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/2016/06/16/技术/负载均衡之加权轮询算法/index.html" afterPath="$PROJECT_DIR$/public/2016/06/16/技术/负载均衡之加权轮询算法/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/2016/06/28/技术/软件开发中的单一职责/index.html" afterPath="$PROJECT_DIR$/public/2016/06/28/技术/软件开发中的单一职责/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/about/index.html" afterPath="$PROJECT_DIR$/public/about/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/archives/2016/02/index.html" afterPath="$PROJECT_DIR$/public/archives/2016/02/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/archives/2016/03/index.html" afterPath="$PROJECT_DIR$/public/archives/2016/03/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/archives/2016/06/index.html" afterPath="$PROJECT_DIR$/public/archives/2016/06/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/archives/2016/index.html" afterPath="$PROJECT_DIR$/public/archives/2016/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/archives/2016/page/2/index.html" afterPath="$PROJECT_DIR$/public/archives/2016/page/2/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/archives/index.html" afterPath="$PROJECT_DIR$/public/archives/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/archives/page/2/index.html" afterPath="$PROJECT_DIR$/public/archives/page/2/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/categories/music/index.html" afterPath="$PROJECT_DIR$/public/categories/music/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/categories/微服务/index.html" afterPath="$PROJECT_DIR$/public/categories/微服务/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/categories/技术/FlatBuffers/index.html" afterPath="$PROJECT_DIR$/public/categories/技术/FlatBuffers/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/categories/技术/Hexo/index.html" afterPath="$PROJECT_DIR$/public/categories/技术/Hexo/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/categories/技术/Hystrix/index.html" afterPath="$PROJECT_DIR$/public/categories/技术/Hystrix/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/categories/技术/index.html" afterPath="$PROJECT_DIR$/public/categories/技术/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/categories/技术/工具/index.html" afterPath="$PROJECT_DIR$/public/categories/技术/工具/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/categories/技术/杂谈/index.html" afterPath="$PROJECT_DIR$/public/categories/技术/杂谈/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/categories/技术/算法/index.html" afterPath="$PROJECT_DIR$/public/categories/技术/算法/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/categories/技术/领域模型/index.html" afterPath="$PROJECT_DIR$/public/categories/技术/领域模型/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/categories/转载/http-2-0/index.html" afterPath="$PROJECT_DIR$/public/categories/转载/http-2-0/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/categories/转载/index.html" afterPath="$PROJECT_DIR$/public/categories/转载/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/categories/那年今日/index.html" afterPath="$PROJECT_DIR$/public/categories/那年今日/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/index.html" afterPath="$PROJECT_DIR$/public/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/page/2/index.html" afterPath="$PROJECT_DIR$/public/page/2/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/tags/Circuit-Breaker/index.html" afterPath="$PROJECT_DIR$/public/tags/Circuit-Breaker/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/tags/DDD/index.html" afterPath="$PROJECT_DIR$/public/tags/DDD/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/tags/FlatBuffers/index.html" afterPath="$PROJECT_DIR$/public/tags/FlatBuffers/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/tags/Hexo/index.html" afterPath="$PROJECT_DIR$/public/tags/Hexo/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/tags/http-2-0/index.html" afterPath="$PROJECT_DIR$/public/tags/http-2-0/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/tags/hystrix/index.html" afterPath="$PROJECT_DIR$/public/tags/hystrix/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/tags/wrk/index.html" afterPath="$PROJECT_DIR$/public/tags/wrk/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/tags/加权轮询/index.html" afterPath="$PROJECT_DIR$/public/tags/加权轮询/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/tags/单一职责/index.html" afterPath="$PROJECT_DIR$/public/tags/单一职责/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/tags/基准测试/index.html" afterPath="$PROJECT_DIR$/public/tags/基准测试/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/tags/序列化/index.html" afterPath="$PROJECT_DIR$/public/tags/序列化/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/tags/微服务/index.html" afterPath="$PROJECT_DIR$/public/tags/微服务/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/tags/春天/index.html" afterPath="$PROJECT_DIR$/public/tags/春天/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/tags/梅花/index.html" afterPath="$PROJECT_DIR$/public/tags/梅花/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/tags/算法/index.html" afterPath="$PROJECT_DIR$/public/tags/算法/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/tags/负载均衡/index.html" afterPath="$PROJECT_DIR$/public/tags/负载均衡/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/tags/轮询/index.html" afterPath="$PROJECT_DIR$/public/tags/轮询/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/tags/软件开发/index.html" afterPath="$PROJECT_DIR$/public/tags/软件开发/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/tags/领域模型/index.html" afterPath="$PROJECT_DIR$/public/tags/领域模型/index.html" />
     </list>
     <ignored path="tietang.github.io.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -15,7 +252,6 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
   </component>
@@ -24,11 +260,11 @@
     <favorites_list name="tietang.github.io" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file leaf-file-name="_config.yml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/_config.yml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="252">
+            <state relative-caret-position="0">
               <caret line="68" column="18" selection-start-line="68" selection-start-column="18" selection-end-line="68" selection-end-column="18" />
               <folding />
             </state>
@@ -48,8 +284,8 @@
       <file leaf-file-name="_config.yml" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/themes/hueman/_config.yml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="172">
-              <caret line="68" column="10" selection-start-line="68" selection-start-column="10" selection-end-line="68" selection-end-column="10" />
+            <state relative-caret-position="158">
+              <caret line="61" column="15" selection-start-line="61" selection-start-column="15" selection-end-line="61" selection-end-column="15" />
               <folding />
             </state>
           </provider>
@@ -105,6 +341,9 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
+  <component name="NodeModulesDirectoryManager">
+    <handled-path value="$PROJECT_DIR$/node_modules" />
+  </component>
   <component name="ProjectFrameBounds">
     <option name="y" value="23" />
     <option name="width" value="1280" />
@@ -135,9 +374,9 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="Scope" />
       <pane id="PackagesPane" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -166,7 +405,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="themes" />
+              <option name="myItemId" value="source" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -180,11 +419,33 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="themes" />
+              <option name="myItemId" value="source" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="hueman" />
+              <option name="myItemId" value="_posts" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tietang.github.io" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tietang.github.io" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="source" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="_posts" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="hystrix" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -315,6 +576,9 @@
       <option name="PARAMETERS" value="" />
       <module name="" />
       <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="Cold Fusion runner description" factoryName="Cold Fusion" custom_browser="" web_path="">
       <method />
     </configuration>
     <configuration default="true" type="CucumberJavaRunConfigurationType" factoryName="Cucumber java">
@@ -587,6 +851,7 @@
       <workItem from="1464917037255" duration="2028000" />
       <workItem from="1464921486105" duration="2348000" />
       <workItem from="1467272128845" duration="1570000" />
+      <workItem from="1473299224033" duration="497000" />
     </task>
     <task id="LOCAL-00001" summary="to hexo blog">
       <created>1455868564104</created>
@@ -669,11 +934,11 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="18848000" />
+    <option name="totallyTimeSpent" value="19345000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="737" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -681,13 +946,12 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32901135" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32792208" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="LuaJ" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32901135" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -700,7 +964,16 @@
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32901135" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
+  </component>
+  <component name="Vcs.Log.UiProperties">
+    <option name="RECENTLY_FILTERED_USER_GROUPS">
+      <collection />
+    </option>
+    <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+      <collection />
+    </option>
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
@@ -714,27 +987,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/themes/hueman/layout/layout.ejs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/themes/hueman/layout/common/head.ejs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="525">
-          <caret line="25" column="69" selection-start-line="25" selection-start-column="69" selection-end-line="25" selection-end-column="69" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/themes/hueman/layout/archive.ejs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/themes/hueman/layout/common/article.ejs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -928,7 +1180,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="504">
           <caret line="24" column="3" selection-start-line="24" selection-start-column="3" selection-end-line="24" selection-end-column="3" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -969,7 +1220,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="273">
           <caret line="13" column="16" selection-start-line="13" selection-start-column="16" selection-end-line="13" selection-end-column="16" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -998,7 +1248,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="8" selection-start-line="0" selection-start-column="8" selection-end-line="0" selection-end-column="8" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1006,7 +1255,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1014,7 +1262,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
           <caret line="3" column="25726" selection-start-line="3" selection-start-column="25726" selection-end-line="3" selection-end-column="25726" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1022,7 +1269,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="127">
           <caret line="8" column="16" selection-start-line="8" selection-start-column="16" selection-end-line="8" selection-end-column="16" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1030,7 +1276,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-4272">
           <caret line="585" column="23" selection-start-line="585" selection-start-column="23" selection-end-line="585" selection-end-column="23" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1038,7 +1283,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-2204">
           <caret line="24" column="9" selection-start-line="24" selection-start-column="9" selection-end-line="24" selection-end-column="9" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1046,7 +1290,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="147">
           <caret line="7" column="9" selection-start-line="7" selection-start-column="9" selection-end-line="7" selection-end-column="9" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1054,13 +1297,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-3318">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/_config.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
+        <state relative-caret-position="0">
           <caret line="68" column="18" selection-start-line="68" selection-start-column="18" selection-end-line="68" selection-end-column="18" />
           <folding />
         </state>
@@ -1074,10 +1316,34 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/source/_posts/hystrix/Hystrix是怎样工作的.md.todo">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/source/_posts/hystrix/Hystrix简介.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-195">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/source/_posts/hystrix/怎样使用Hystrix.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1365">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/themes/hueman/_config.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="172">
-          <caret line="68" column="10" selection-start-line="68" selection-start-column="10" selection-end-line="68" selection-end-column="10" />
+        <state relative-caret-position="158">
+          <caret line="61" column="15" selection-start-line="61" selection-start-column="15" selection-end-line="61" selection-end-column="15" />
           <folding />
         </state>
       </provider>
