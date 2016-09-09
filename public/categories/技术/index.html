@@ -92,7 +92,7 @@ var _hmt = _hmt || [];
                                     <a class="main-nav-list-link" href="/">主页</a>
                                 </li>
                             
-                                        <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/music/">music</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/微服务/">微服务</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/技术/">技术</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/技术/FlatBuffers/">FlatBuffers</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/技术/Hexo/">Hexo</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/技术/Hystrix/">Hystrix</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/技术/工具/">工具</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/技术/杂谈/">杂谈</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/技术/算法/">算法</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/技术/领域模型/">领域模型</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/转载/">转载</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/转载/http-2-0/">http 2.0</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/那年今日/">那年今日</a></li></ul>
+                                        <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/music/">music</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/微服务/">微服务</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/技术/">技术</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/技术/FlatBuffers/">FlatBuffers</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/技术/Hexo/">Hexo</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/技术/Hystrix/">Hystrix</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/技术/工具/">工具</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/技术/微服务/">微服务</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/技术/微服务/Feign/">Feign</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/技术/杂谈/">杂谈</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/技术/算法/">算法</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/技术/领域模型/">领域模型</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/转载/">转载</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/转载/http-2-0/">http 2.0</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/那年今日/">那年今日</a></li></ul>
                                     
                                 <li class="main-nav-list-item" >
                                     <a class="main-nav-list-link" href="https://github.com/tietang">Github</a>
@@ -157,6 +157,56 @@ var _hmt = _hmt || [];
         <article class="article article-summary">
     <div class="article-summary-inner">
         
+        <a href="/2016/09/06/微服务/Feign使用性能优化/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://7xiovs.com1.z0.glb.clouddn.com/P60724-115835.jpg)" alt="Feign正确的使用方法和性能优化注意事项" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="ds-thread-count" data-thread-key="2016/09/06/微服务/Feign使用性能优化/">0</span>
+    
+</span>
+
+    
+</a>
+        
+        <div class="article-meta">
+            <p class="category">
+            <a class="article-category-link" href="/categories/技术/">技术</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/技术/微服务/">微服务</a>
+            </p>
+            <p class="date"><time datetime="2016-09-06T11:22:47.000Z" itemprop="datePublished">2016-09-06</time></p>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/2016/09/06/微服务/Feign使用性能优化/">Feign正确的使用方法和性能优化注意事项</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            Feign正确的使用方法和性能优化注意事项1. feign自定义Configuration和root 容器有效隔离。
+用@Configuration注解
+不能在主@ComponentScan (or @SpringBootApplication)范围内，从其包名上分离
+注意避免包扫描重叠，最好的方法是明确的指定包名
+
+2. Spring Cloud Netflix 提供了默认的Bean类型:
+De
+        </p>
+    </div>
+</article>
+    
+
+    
+    
+    
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
         <a href="/2016/09/02/hystrix/RestTemplate遇上Hystrix/" class="thumbnail">
     
     
@@ -194,10 +244,14 @@ var _hmt = _hmt || [];
     </div>
 </article>
     
+        </div>
+    
 
     
     
     
+    
+        <div class="article-row">
     
         <article class="article article-summary">
     <div class="article-summary-inner">
@@ -240,14 +294,10 @@ var _hmt = _hmt || [];
     </div>
 </article>
     
-        </div>
-    
 
     
     
     
-    
-        <div class="article-row">
     
         <article class="article article-summary">
     <div class="article-summary-inner">
@@ -318,10 +368,14 @@ var _hmt = _hmt || [];
     </div>
 </article>
     
+        </div>
+    
 
     
     
     
+    
+        <div class="article-row">
     
         <article class="article article-summary">
     <div class="article-summary-inner">
@@ -371,14 +425,10 @@ Hystrix是什么?在分布式环境中，不可避免的有许多服务依赖，
     </div>
 </article>
     
-        </div>
-    
 
     
     
     
-    
-        <div class="article-row">
     
         <article class="article article-summary">
     <div class="article-summary-inner">
@@ -426,10 +476,14 @@ Hystrix是什么?在分布式环境中，不可避免的有许多服务依赖，
     </div>
 </article>
     
+        </div>
+    
 
     
     
     
+    
+        <div class="article-row">
     
         <article class="article article-summary">
     <div class="article-summary-inner">
@@ -474,14 +528,10 @@ LDFLAGS  +=  -L/
     </div>
 </article>
     
-        </div>
-    
 
     
     
     
-    
-        <div class="article-row">
     
         <article class="article article-summary">
     <div class="article-summary-inner">
@@ -526,10 +576,14 @@ t
     </div>
 </article>
     
+        </div>
+    
 
     
     
     
+    
+        <div class="article-row">
     
         <article class="article article-summary">
     <div class="article-summary-inner">
@@ -571,14 +625,10 @@ t
     </div>
 </article>
     
-        </div>
-    
 
     
     
     
-    
-        <div class="article-row">
     
         <article class="article article-summary">
     <div class="article-summary-inner">
@@ -623,53 +673,6 @@ t
 
 传统数据库为中心业务逻辑在数据库上，结合系统代码来保证业务逻辑的实现。以数据库为中心的开发如何的OO﹐如何多的设计模式﹐架构体系如何优美﹐它始终离不开数据库。
 OO|面向对象表现点则是直接在对象本身上﹐在于对象之间真正的交互过程﹐结果也是保留在对象的属性和对象与对象的关系中逻辑直接存在于对象
-        </p>
-    </div>
-</article>
-    
-
-    
-    
-    
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/2016/02/19/技术/FlatBuffers/FlatBuffers使用指南/" class="thumbnail">
-    
-    
-        <span style="background-image:url(http://7xiovs.com1.z0.glb.clouddn.com/IMG_20160218_122224.JPG)" alt="FlatBuffers 使用指南" class="thumbnail-image"></span>
-    
-    
-        
-<span class="comment-counter">
-    <i class="fa fa-comments-o"></i>
-    
-        <span class="ds-thread-count" data-thread-key="2016/02/19/技术/FlatBuffers/FlatBuffers使用指南/">0</span>
-    
-</span>
-
-    
-</a>
-        
-        <div class="article-meta">
-            <p class="category">
-            <a class="article-category-link" href="/categories/技术/">技术</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/技术/FlatBuffers/">FlatBuffers</a>
-            </p>
-            <p class="date"><time datetime="2016-02-19T12:20:42.000Z" itemprop="datePublished">2016-02-19</time></p>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/2016/02/19/技术/FlatBuffers/FlatBuffers使用指南/">FlatBuffers 使用指南</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            FlatBuffers 使用指南FlatBuffers序列化性能是protobuf的2倍，但size也是protobuf的2倍
-编译源码123$ git clone https://github.com/google/flatbuffers.git#切换到最新release版本$ git checkout v1.2.0
-安装cmakehttp://www.cmake.org.
-1234for ma
         </p>
     </div>
 </article>
@@ -739,6 +742,25 @@ OO|面向对象表现点则是直接在对象本身上﹐在于对象之间真�
         <h3 class="widget-title">最新文章</h3>
         <div class="widget">
             <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2016/09/06/微服务/Feign使用性能优化/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://7xiovs.com1.z0.glb.clouddn.com/P60724-115835.jpg)" alt="Feign正确的使用方法和性能优化注意事项" class="thumbnail-image"></span>
+    
+    
+</a>
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/技术/">技术</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/技术/微服务/">微服务</a></p>
+                            <p class="item-title"><a href="/2016/09/06/微服务/Feign使用性能优化/" class="title">Feign正确的使用方法和性能优化注意事项</a></p>
+                            <p class="item-date"><time datetime="2016-09-06T11:22:47.000Z" itemprop="datePublished">2016-09-06</time></p>
+                        </div>
+                    </li>
                 
                     <li>
                         
@@ -816,25 +838,6 @@ OO|面向对象表现点则是直接在对象本身上﹐在于对象之间真�
                         </div>
                     </li>
                 
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2016/03/09/hystrix/Hystrix降级模式总结/" class="thumbnail">
-    
-    
-        <span style="background-image:url(http://7xiovs.com1.z0.glb.clouddn.com/hystrix-hystrix-logo-tagline-640.png)" alt="Hystrix降级模式总结" class="thumbnail-image"></span>
-    
-    
-</a>
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/技术/">技术</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/技术/Hystrix/">Hystrix</a></p>
-                            <p class="item-title"><a href="/2016/03/09/hystrix/Hystrix降级模式总结/" class="title">Hystrix降级模式总结</a></p>
-                            <p class="item-date"><time datetime="2016-03-09T01:22:47.000Z" itemprop="datePublished">2016-03-09</time></p>
-                        </div>
-                    </li>
-                
             </ul>
         </div>
     </div>
@@ -844,7 +847,7 @@ OO|面向对象表现点则是直接在对象本身上﹐在于对象之间真�
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">分类</h3>
         <div class="widget">
-            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/music/">music</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/微服务/">微服务</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/">技术</a><span class="category-list-count">11</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/FlatBuffers/">FlatBuffers</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/Hexo/">Hexo</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/Hystrix/">Hystrix</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/工具/">工具</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/杂谈/">杂谈</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/算法/">算法</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/领域模型/">领域模型</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/转载/">转载</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/转载/http-2-0/">http 2.0</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/那年今日/">那年今日</a><span class="category-list-count">1</span></li></ul>
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/music/">music</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/微服务/">微服务</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/">技术</a><span class="category-list-count">12</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/FlatBuffers/">FlatBuffers</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/Hexo/">Hexo</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/Hystrix/">Hystrix</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/工具/">工具</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/微服务/">微服务</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/微服务/Feign/">Feign</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/杂谈/">杂谈</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/算法/">算法</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/领域模型/">领域模型</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/转载/">转载</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/转载/http-2-0/">http 2.0</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/那年今日/">那年今日</a><span class="category-list-count">1</span></li></ul>
         </div>
     </div>
 
@@ -854,7 +857,7 @@ OO|面向对象表现点则是直接在对象本身上﹐在于对象之间真�
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">归档</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a><span class="archive-list-count">8</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a><span class="archive-list-count">8</span></li></ul>
         </div>
     </div>
 
@@ -864,7 +867,7 @@ OO|面向对象表现点则是直接在对象本身上﹐在于对象之间真�
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">标签</h3>
         <div class="widget">
-            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Circuit-Breaker/">Circuit Breaker</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DDD/">DDD</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/FlatBuffers/">FlatBuffers</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http-2-0/">http 2.0</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hystrix/">hystrix</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wrk/">wrk</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/加权轮询/">加权轮询</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/单一职责/">单一职责</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/基准测试/">基准测试</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/序列化/">序列化</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/微服务/">微服务</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/春天/">春天</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/梅花/">梅花</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/负载均衡/">负载均衡</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/轮询/">轮询</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/软件开发/">软件开发</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/领域模型/">领域模型</a><span class="tag-list-count">1</span></li></ul>
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Circuit-Breaker/">Circuit Breaker</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DDD/">DDD</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Feign/">Feign</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/FlatBuffers/">FlatBuffers</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Cloud/">Spring Cloud</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http-2-0/">http 2.0</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hystrix/">hystrix</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wrk/">wrk</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/加权轮询/">加权轮询</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/单一职责/">单一职责</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/基准测试/">基准测试</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/序列化/">序列化</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/微服务/">微服务</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/春天/">春天</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/梅花/">梅花</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/负载均衡/">负载均衡</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/轮询/">轮询</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/软件开发/">软件开发</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/领域模型/">领域模型</a><span class="tag-list-count">1</span></li></ul>
         </div>
     </div>
 
@@ -874,7 +877,7 @@ OO|面向对象表现点则是直接在对象本身上﹐在于对象之间真�
     <div class="widget-wrap widget-float">
         <h3 class="widget-title">标签云</h3>
         <div class="widget tagcloud">
-            <a href="/tags/Circuit-Breaker/" style="font-size: 15px;">Circuit Breaker</a> <a href="/tags/DDD/" style="font-size: 10px;">DDD</a> <a href="/tags/FlatBuffers/" style="font-size: 15px;">FlatBuffers</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/http-2-0/" style="font-size: 10px;">http 2.0</a> <a href="/tags/hystrix/" style="font-size: 20px;">hystrix</a> <a href="/tags/wrk/" style="font-size: 10px;">wrk</a> <a href="/tags/加权轮询/" style="font-size: 10px;">加权轮询</a> <a href="/tags/单一职责/" style="font-size: 10px;">单一职责</a> <a href="/tags/基准测试/" style="font-size: 10px;">基准测试</a> <a href="/tags/序列化/" style="font-size: 15px;">序列化</a> <a href="/tags/微服务/" style="font-size: 15px;">微服务</a> <a href="/tags/春天/" style="font-size: 10px;">春天</a> <a href="/tags/梅花/" style="font-size: 10px;">梅花</a> <a href="/tags/算法/" style="font-size: 10px;">算法</a> <a href="/tags/负载均衡/" style="font-size: 10px;">负载均衡</a> <a href="/tags/轮询/" style="font-size: 10px;">轮询</a> <a href="/tags/软件开发/" style="font-size: 10px;">软件开发</a> <a href="/tags/领域模型/" style="font-size: 10px;">领域模型</a>
+            <a href="/tags/Circuit-Breaker/" style="font-size: 13.33px;">Circuit Breaker</a> <a href="/tags/DDD/" style="font-size: 10px;">DDD</a> <a href="/tags/Feign/" style="font-size: 10px;">Feign</a> <a href="/tags/FlatBuffers/" style="font-size: 13.33px;">FlatBuffers</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Spring-Cloud/" style="font-size: 10px;">Spring Cloud</a> <a href="/tags/http-2-0/" style="font-size: 10px;">http 2.0</a> <a href="/tags/hystrix/" style="font-size: 20px;">hystrix</a> <a href="/tags/wrk/" style="font-size: 10px;">wrk</a> <a href="/tags/加权轮询/" style="font-size: 10px;">加权轮询</a> <a href="/tags/单一职责/" style="font-size: 10px;">单一职责</a> <a href="/tags/基准测试/" style="font-size: 10px;">基准测试</a> <a href="/tags/序列化/" style="font-size: 13.33px;">序列化</a> <a href="/tags/微服务/" style="font-size: 16.67px;">微服务</a> <a href="/tags/春天/" style="font-size: 10px;">春天</a> <a href="/tags/梅花/" style="font-size: 10px;">梅花</a> <a href="/tags/算法/" style="font-size: 10px;">算法</a> <a href="/tags/负载均衡/" style="font-size: 10px;">负载均衡</a> <a href="/tags/轮询/" style="font-size: 10px;">轮询</a> <a href="/tags/软件开发/" style="font-size: 10px;">软件开发</a> <a href="/tags/领域模型/" style="font-size: 10px;">领域模型</a>
         </div>
     </div>
 

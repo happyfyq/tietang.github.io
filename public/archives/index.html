@@ -92,7 +92,7 @@ var _hmt = _hmt || [];
                                     <a class="main-nav-list-link" href="/">主页</a>
                                 </li>
                             
-                                        <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/music/">music</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/微服务/">微服务</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/技术/">技术</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/技术/FlatBuffers/">FlatBuffers</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/技术/Hexo/">Hexo</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/技术/Hystrix/">Hystrix</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/技术/工具/">工具</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/技术/杂谈/">杂谈</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/技术/算法/">算法</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/技术/领域模型/">领域模型</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/转载/">转载</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/转载/http-2-0/">http 2.0</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/那年今日/">那年今日</a></li></ul>
+                                        <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/music/">music</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/微服务/">微服务</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/技术/">技术</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/技术/FlatBuffers/">FlatBuffers</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/技术/Hexo/">Hexo</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/技术/Hystrix/">Hystrix</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/技术/工具/">工具</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/技术/微服务/">微服务</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/技术/微服务/Feign/">Feign</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/技术/杂谈/">杂谈</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/技术/算法/">算法</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/技术/领域模型/">领域模型</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/转载/">转载</a><ul class="main-nav-list-child"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/转载/http-2-0/">http 2.0</a></li></ul></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/那年今日/">那年今日</a></li></ul>
                                     
                                 <li class="main-nav-list-item" >
                                     <a class="main-nav-list-link" href="https://github.com/tietang">Github</a>
@@ -157,6 +157,56 @@ var _hmt = _hmt || [];
         <article class="article article-summary">
     <div class="article-summary-inner">
         
+        <a href="/2016/09/06/微服务/Feign使用性能优化/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://7xiovs.com1.z0.glb.clouddn.com/P60724-115835.jpg)" alt="Feign正确的使用方法和性能优化注意事项" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="ds-thread-count" data-thread-key="2016/09/06/微服务/Feign使用性能优化/">0</span>
+    
+</span>
+
+    
+</a>
+        
+        <div class="article-meta">
+            <p class="category">
+            <a class="article-category-link" href="/categories/技术/">技术</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/技术/微服务/">微服务</a>
+            </p>
+            <p class="date"><time datetime="2016-09-06T11:22:47.000Z" itemprop="datePublished">2016-09-06</time></p>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/2016/09/06/微服务/Feign使用性能优化/">Feign正确的使用方法和性能优化注意事项</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            Feign正确的使用方法和性能优化注意事项1. feign自定义Configuration和root 容器有效隔离。
+用@Configuration注解
+不能在主@ComponentScan (or @SpringBootApplication)范围内，从其包名上分离
+注意避免包扫描重叠，最好的方法是明确的指定包名
+
+2. Spring Cloud Netflix 提供了默认的Bean类型:
+De
+        </p>
+    </div>
+</article>
+    
+
+    
+    
+    
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
         <a href="/2016/09/02/hystrix/RestTemplate遇上Hystrix/" class="thumbnail">
     
     
@@ -194,10 +244,14 @@ var _hmt = _hmt || [];
     </div>
 </article>
     
+        </div>
+    
 
     
     
     
+    
+        <div class="article-row">
     
         <article class="article article-summary">
     <div class="article-summary-inner">
@@ -240,14 +294,10 @@ var _hmt = _hmt || [];
     </div>
 </article>
     
-        </div>
-    
 
     
     
     
-    
-        <div class="article-row">
     
         <article class="article article-summary">
     <div class="article-summary-inner">
@@ -318,10 +368,14 @@ var _hmt = _hmt || [];
     </div>
 </article>
     
+        </div>
+    
 
     
     
     
+    
+        <div class="article-row">
     
         <article class="article article-summary">
     <div class="article-summary-inner">
@@ -359,61 +413,6 @@ var _hmt = _hmt || [];
         <p class="article-excerpt">
              单一职责
 
-        </p>
-    </div>
-</article>
-    
-        </div>
-    
-
-    
-    
-    
-    
-        <div class="article-row">
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/2016/03/09/hystrix/Hystrix降级模式总结/" class="thumbnail">
-    
-    
-        <span style="background-image:url(http://7xiovs.com1.z0.glb.clouddn.com/hystrix-hystrix-logo-tagline-640.png)" alt="Hystrix降级模式总结" class="thumbnail-image"></span>
-    
-    
-        
-<span class="comment-counter">
-    <i class="fa fa-comments-o"></i>
-    
-        <span class="ds-thread-count" data-thread-key="2016/03/09/hystrix/Hystrix降级模式总结/">0</span>
-    
-</span>
-
-    
-</a>
-        
-        <div class="article-meta">
-            <p class="category">
-            <a class="article-category-link" href="/categories/技术/">技术</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/技术/Hystrix/">Hystrix</a>
-            </p>
-            <p class="date"><time datetime="2016-03-09T01:22:47.000Z" itemprop="datePublished">2016-03-09</time></p>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/2016/03/09/hystrix/Hystrix降级模式总结/">Hystrix降级模式总结</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            失败回退降级模式失败回退需要实现HystrixCommand.getFallback方法或者HystrixObservableCommand. HystrixObservableCommand()方法。
-
-快速失败Fail Fast
-如果业务异常，就抛出一个异常
-
-
-静默失败Fail Silent
-失败时返回一个空response或者移除业务功能，例如返回null，空字符串，空map，空list等
         </p>
     </div>
 </article>
@@ -483,6 +482,57 @@ Hystrix是什么?在分布式环境中，不可避免的有许多服务依赖，
         <article class="article article-summary">
     <div class="article-summary-inner">
         
+        <a href="/2016/03/09/hystrix/Hystrix降级模式总结/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://7xiovs.com1.z0.glb.clouddn.com/hystrix-hystrix-logo-tagline-640.png)" alt="Hystrix降级模式总结" class="thumbnail-image"></span>
+    
+    
+        
+<span class="comment-counter">
+    <i class="fa fa-comments-o"></i>
+    
+        <span class="ds-thread-count" data-thread-key="2016/03/09/hystrix/Hystrix降级模式总结/">0</span>
+    
+</span>
+
+    
+</a>
+        
+        <div class="article-meta">
+            <p class="category">
+            <a class="article-category-link" href="/categories/技术/">技术</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/技术/Hystrix/">Hystrix</a>
+            </p>
+            <p class="date"><time datetime="2016-03-09T01:22:47.000Z" itemprop="datePublished">2016-03-09</time></p>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/2016/03/09/hystrix/Hystrix降级模式总结/">Hystrix降级模式总结</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            失败回退降级模式失败回退需要实现HystrixCommand.getFallback方法或者HystrixObservableCommand. HystrixObservableCommand()方法。
+
+快速失败Fail Fast
+如果业务异常，就抛出一个异常
+
+
+静默失败Fail Silent
+失败时返回一个空response或者移除业务功能，例如返回null，空字符串，空map，空list等
+        </p>
+    </div>
+</article>
+    
+
+    
+    
+    
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
         <a href="/2016/03/04/技术/工具/wrk基准测试工具安装使用/" class="thumbnail">
     
     
@@ -523,10 +573,14 @@ LDFLAGS  +=  -L/
     </div>
 </article>
     
+        </div>
+    
 
     
     
     
+    
+        <div class="article-row">
     
         <article class="article article-summary">
     <div class="article-summary-inner">
@@ -571,14 +625,10 @@ t
     </div>
 </article>
     
-        </div>
-    
 
     
     
     
-    
-        <div class="article-row">
     
         <article class="article article-summary">
     <div class="article-summary-inner">
@@ -617,51 +667,6 @@ t
             
 
 
-        </p>
-    </div>
-</article>
-    
-
-    
-    
-    
-    
-        <article class="article article-summary">
-    <div class="article-summary-inner">
-        
-        <a href="/2016/02/22/转载/http2.0/装载：HTTP2-0的奇妙日常/" class="thumbnail">
-    
-    
-        <span style="background-image:url(http://7xiovs.com1.z0.glb.clouddn.com/DPP_0004.JPG)" alt="装载：HTTP2.0的奇妙日常" class="thumbnail-image"></span>
-    
-    
-        
-<span class="comment-counter">
-    <i class="fa fa-comments-o"></i>
-    
-        <span class="ds-thread-count" data-thread-key="2016/02/22/转载/http2.0/装载：HTTP2-0的奇妙日常/">0</span>
-    
-</span>
-
-    
-</a>
-        
-        <div class="article-meta">
-            <p class="category">
-            <a class="article-category-link" href="/categories/转载/">转载</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/转载/http-2-0/">http 2.0</a>
-            </p>
-            <p class="date"><time datetime="2016-02-22T01:57:03.000Z" itemprop="datePublished">2016-02-22</time></p>
-        </div>
-        
-    
-        <h1 class="article-title" itemprop="name">
-        <a href="/2016/02/22/转载/http2.0/装载：HTTP2-0的奇妙日常/">装载：HTTP2.0的奇妙日常</a>
-        </h1>
-    
-
-        <p class="article-excerpt">
-            转载自AlloyTeam：http://www.alloyteam.com/2015/03/http2-0-di-qi-miao-ri-chang/
-“多年没见，你的女神后来什么样了”晨伯总是这么八卦我的女神，而不是我。    “我给你一个表情，你自己体会一下”    “你先写个小页面给我看看吧，我指导一下你吧。”晨伯一幅很吊的样子。但是这样的小case当然难不了我，虽然多年没碰web，但是我当年
         </p>
     </div>
 </article>
@@ -730,6 +735,25 @@ t
         <h3 class="widget-title">最新文章</h3>
         <div class="widget">
             <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2016/09/06/微服务/Feign使用性能优化/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://7xiovs.com1.z0.glb.clouddn.com/P60724-115835.jpg)" alt="Feign正确的使用方法和性能优化注意事项" class="thumbnail-image"></span>
+    
+    
+</a>
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/技术/">技术</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/技术/微服务/">微服务</a></p>
+                            <p class="item-title"><a href="/2016/09/06/微服务/Feign使用性能优化/" class="title">Feign正确的使用方法和性能优化注意事项</a></p>
+                            <p class="item-date"><time datetime="2016-09-06T11:22:47.000Z" itemprop="datePublished">2016-09-06</time></p>
+                        </div>
+                    </li>
                 
                     <li>
                         
@@ -807,25 +831,6 @@ t
                         </div>
                     </li>
                 
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2016/03/09/hystrix/Hystrix降级模式总结/" class="thumbnail">
-    
-    
-        <span style="background-image:url(http://7xiovs.com1.z0.glb.clouddn.com/hystrix-hystrix-logo-tagline-640.png)" alt="Hystrix降级模式总结" class="thumbnail-image"></span>
-    
-    
-</a>
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/技术/">技术</a><i class="icon fa fa-angle-right"></i><a class="article-category-link" href="/categories/技术/Hystrix/">Hystrix</a></p>
-                            <p class="item-title"><a href="/2016/03/09/hystrix/Hystrix降级模式总结/" class="title">Hystrix降级模式总结</a></p>
-                            <p class="item-date"><time datetime="2016-03-09T01:22:47.000Z" itemprop="datePublished">2016-03-09</time></p>
-                        </div>
-                    </li>
-                
             </ul>
         </div>
     </div>
@@ -835,7 +840,7 @@ t
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">分类</h3>
         <div class="widget">
-            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/music/">music</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/微服务/">微服务</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/">技术</a><span class="category-list-count">11</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/FlatBuffers/">FlatBuffers</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/Hexo/">Hexo</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/Hystrix/">Hystrix</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/工具/">工具</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/杂谈/">杂谈</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/算法/">算法</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/领域模型/">领域模型</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/转载/">转载</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/转载/http-2-0/">http 2.0</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/那年今日/">那年今日</a><span class="category-list-count">1</span></li></ul>
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/music/">music</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/微服务/">微服务</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/">技术</a><span class="category-list-count">12</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/FlatBuffers/">FlatBuffers</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/Hexo/">Hexo</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/Hystrix/">Hystrix</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/工具/">工具</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/微服务/">微服务</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术/微服务/Feign/">Feign</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/杂谈/">杂谈</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/算法/">算法</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术/领域模型/">领域模型</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/转载/">转载</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/转载/http-2-0/">http 2.0</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/那年今日/">那年今日</a><span class="category-list-count">1</span></li></ul>
         </div>
     </div>
 
@@ -845,7 +850,7 @@ t
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">归档</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a><span class="archive-list-count">8</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a><span class="archive-list-count">8</span></li></ul>
         </div>
     </div>
 
@@ -855,7 +860,7 @@ t
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">标签</h3>
         <div class="widget">
-            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Circuit-Breaker/">Circuit Breaker</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DDD/">DDD</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/FlatBuffers/">FlatBuffers</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http-2-0/">http 2.0</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hystrix/">hystrix</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wrk/">wrk</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/加权轮询/">加权轮询</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/单一职责/">单一职责</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/基准测试/">基准测试</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/序列化/">序列化</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/微服务/">微服务</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/春天/">春天</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/梅花/">梅花</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/负载均衡/">负载均衡</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/轮询/">轮询</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/软件开发/">软件开发</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/领域模型/">领域模型</a><span class="tag-list-count">1</span></li></ul>
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Circuit-Breaker/">Circuit Breaker</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DDD/">DDD</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Feign/">Feign</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/FlatBuffers/">FlatBuffers</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Cloud/">Spring Cloud</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http-2-0/">http 2.0</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hystrix/">hystrix</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wrk/">wrk</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/加权轮询/">加权轮询</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/单一职责/">单一职责</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/基准测试/">基准测试</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/序列化/">序列化</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/微服务/">微服务</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/春天/">春天</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/梅花/">梅花</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/算法/">算法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/负载均衡/">负载均衡</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/轮询/">轮询</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/软件开发/">软件开发</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/领域模型/">领域模型</a><span class="tag-list-count">1</span></li></ul>
         </div>
     </div>
 
@@ -865,7 +870,7 @@ t
     <div class="widget-wrap widget-float">
         <h3 class="widget-title">标签云</h3>
         <div class="widget tagcloud">
-            <a href="/tags/Circuit-Breaker/" style="font-size: 15px;">Circuit Breaker</a> <a href="/tags/DDD/" style="font-size: 10px;">DDD</a> <a href="/tags/FlatBuffers/" style="font-size: 15px;">FlatBuffers</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/http-2-0/" style="font-size: 10px;">http 2.0</a> <a href="/tags/hystrix/" style="font-size: 20px;">hystrix</a> <a href="/tags/wrk/" style="font-size: 10px;">wrk</a> <a href="/tags/加权轮询/" style="font-size: 10px;">加权轮询</a> <a href="/tags/单一职责/" style="font-size: 10px;">单一职责</a> <a href="/tags/基准测试/" style="font-size: 10px;">基准测试</a> <a href="/tags/序列化/" style="font-size: 15px;">序列化</a> <a href="/tags/微服务/" style="font-size: 15px;">微服务</a> <a href="/tags/春天/" style="font-size: 10px;">春天</a> <a href="/tags/梅花/" style="font-size: 10px;">梅花</a> <a href="/tags/算法/" style="font-size: 10px;">算法</a> <a href="/tags/负载均衡/" style="font-size: 10px;">负载均衡</a> <a href="/tags/轮询/" style="font-size: 10px;">轮询</a> <a href="/tags/软件开发/" style="font-size: 10px;">软件开发</a> <a href="/tags/领域模型/" style="font-size: 10px;">领域模型</a>
+            <a href="/tags/Circuit-Breaker/" style="font-size: 13.33px;">Circuit Breaker</a> <a href="/tags/DDD/" style="font-size: 10px;">DDD</a> <a href="/tags/Feign/" style="font-size: 10px;">Feign</a> <a href="/tags/FlatBuffers/" style="font-size: 13.33px;">FlatBuffers</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Spring-Cloud/" style="font-size: 10px;">Spring Cloud</a> <a href="/tags/http-2-0/" style="font-size: 10px;">http 2.0</a> <a href="/tags/hystrix/" style="font-size: 20px;">hystrix</a> <a href="/tags/wrk/" style="font-size: 10px;">wrk</a> <a href="/tags/加权轮询/" style="font-size: 10px;">加权轮询</a> <a href="/tags/单一职责/" style="font-size: 10px;">单一职责</a> <a href="/tags/基准测试/" style="font-size: 10px;">基准测试</a> <a href="/tags/序列化/" style="font-size: 13.33px;">序列化</a> <a href="/tags/微服务/" style="font-size: 16.67px;">微服务</a> <a href="/tags/春天/" style="font-size: 10px;">春天</a> <a href="/tags/梅花/" style="font-size: 10px;">梅花</a> <a href="/tags/算法/" style="font-size: 10px;">算法</a> <a href="/tags/负载均衡/" style="font-size: 10px;">负载均衡</a> <a href="/tags/轮询/" style="font-size: 10px;">轮询</a> <a href="/tags/软件开发/" style="font-size: 10px;">软件开发</a> <a href="/tags/领域模型/" style="font-size: 10px;">领域模型</a>
         </div>
     </div>
 
