@@ -3,7 +3,6 @@ title: Feign正确的使用方法和性能优化注意事项
 thumbnail: 'http://7xiovs.com1.z0.glb.clouddn.com/P60724-115835.jpg'
 date: 2016-09-06 19:22:47
 categories:
-	- 技术
 	- 微服务
 	- Feign
 tags:

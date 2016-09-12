@@ -2,67 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7f9abbe9-9144-4639-b3f0-5458b74cedde" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/source/_posts/微服务/Feign使用性能优化.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.deploy_git" afterPath="$PROJECT_DIR$/.deploy_git" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db.json" afterPath="$PROJECT_DIR$/db.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/2016/02/19/技术/FlatBuffers/FlatBuffers使用指南/index.html" afterPath="$PROJECT_DIR$/public/2016/02/19/技术/FlatBuffers/FlatBuffers使用指南/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/2016/02/19/技术/FlatBuffers/FlatBuffers简介/index.html" afterPath="$PROJECT_DIR$/public/2016/02/19/技术/FlatBuffers/FlatBuffers简介/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/2016/02/19/春天花会开/index.html" afterPath="$PROJECT_DIR$/public/2016/02/19/春天花会开/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/2016/02/21/技术/Hexo/Hexo命令速记/index.html" afterPath="$PROJECT_DIR$/public/2016/02/21/技术/Hexo/Hexo命令速记/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/2016/02/21/技术/领域模型/领域模型的价值/index.html" afterPath="$PROJECT_DIR$/public/2016/02/21/技术/领域模型/领域模型的价值/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/2016/02/22/music/Matthew-Lien-Bleeding-Wolves/index.html" afterPath="$PROJECT_DIR$/public/2016/02/22/music/Matthew-Lien-Bleeding-Wolves/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/2016/02/22/转载/http2.0/装载：HTTP2-0的奇妙日常/index.html" afterPath="$PROJECT_DIR$/public/2016/02/22/转载/http2.0/装载：HTTP2-0的奇妙日常/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/2016/02/25/hystrix/Hystrix参数详解/index.html" afterPath="$PROJECT_DIR$/public/2016/02/25/hystrix/Hystrix参数详解/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/2016/03/04/技术/工具/wrk基准测试工具安装使用/index.html" afterPath="$PROJECT_DIR$/public/2016/03/04/技术/工具/wrk基准测试工具安装使用/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/2016/03/09/hystrix/Hystrix简介/index.html" afterPath="$PROJECT_DIR$/public/2016/03/09/hystrix/Hystrix简介/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/2016/03/09/hystrix/Hystrix降级模式总结/index.html" afterPath="$PROJECT_DIR$/public/2016/03/09/hystrix/Hystrix降级模式总结/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/2016/06/02/微服务/微服务之微/index.html" afterPath="$PROJECT_DIR$/public/2016/06/02/微服务/微服务之微/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/2016/06/16/技术/负载均衡之加权轮询算法/index.html" afterPath="$PROJECT_DIR$/public/2016/06/16/技术/负载均衡之加权轮询算法/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/2016/06/28/技术/软件开发中的单一职责/index.html" afterPath="$PROJECT_DIR$/public/2016/06/28/技术/软件开发中的单一职责/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/about/index.html" afterPath="$PROJECT_DIR$/public/about/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/archives/2016/02/index.html" afterPath="$PROJECT_DIR$/public/archives/2016/02/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/archives/2016/03/index.html" afterPath="$PROJECT_DIR$/public/archives/2016/03/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/archives/2016/06/index.html" afterPath="$PROJECT_DIR$/public/archives/2016/06/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/archives/2016/index.html" afterPath="$PROJECT_DIR$/public/archives/2016/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/archives/2016/page/2/index.html" afterPath="$PROJECT_DIR$/public/archives/2016/page/2/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/archives/index.html" afterPath="$PROJECT_DIR$/public/archives/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/archives/page/2/index.html" afterPath="$PROJECT_DIR$/public/archives/page/2/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/categories/music/index.html" afterPath="$PROJECT_DIR$/public/categories/music/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/categories/微服务/index.html" afterPath="$PROJECT_DIR$/public/categories/微服务/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/categories/技术/FlatBuffers/index.html" afterPath="$PROJECT_DIR$/public/categories/技术/FlatBuffers/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/categories/技术/Hexo/index.html" afterPath="$PROJECT_DIR$/public/categories/技术/Hexo/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/categories/技术/Hystrix/index.html" afterPath="$PROJECT_DIR$/public/categories/技术/Hystrix/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/categories/技术/index.html" afterPath="$PROJECT_DIR$/public/categories/技术/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/categories/技术/page/2/index.html" afterPath="$PROJECT_DIR$/public/categories/技术/page/2/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/categories/技术/工具/index.html" afterPath="$PROJECT_DIR$/public/categories/技术/工具/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/categories/技术/杂谈/index.html" afterPath="$PROJECT_DIR$/public/categories/技术/杂谈/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/categories/技术/算法/index.html" afterPath="$PROJECT_DIR$/public/categories/技术/算法/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/categories/技术/领域模型/index.html" afterPath="$PROJECT_DIR$/public/categories/技术/领域模型/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/categories/转载/http-2-0/index.html" afterPath="$PROJECT_DIR$/public/categories/转载/http-2-0/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/categories/转载/index.html" afterPath="$PROJECT_DIR$/public/categories/转载/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/categories/那年今日/index.html" afterPath="$PROJECT_DIR$/public/categories/那年今日/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/index.html" afterPath="$PROJECT_DIR$/public/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/page/2/index.html" afterPath="$PROJECT_DIR$/public/page/2/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/tags/Circuit-Breaker/index.html" afterPath="$PROJECT_DIR$/public/tags/Circuit-Breaker/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/tags/DDD/index.html" afterPath="$PROJECT_DIR$/public/tags/DDD/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/tags/FlatBuffers/index.html" afterPath="$PROJECT_DIR$/public/tags/FlatBuffers/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/tags/Hexo/index.html" afterPath="$PROJECT_DIR$/public/tags/Hexo/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/tags/http-2-0/index.html" afterPath="$PROJECT_DIR$/public/tags/http-2-0/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/tags/hystrix/index.html" afterPath="$PROJECT_DIR$/public/tags/hystrix/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/tags/wrk/index.html" afterPath="$PROJECT_DIR$/public/tags/wrk/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/tags/加权轮询/index.html" afterPath="$PROJECT_DIR$/public/tags/加权轮询/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/tags/单一职责/index.html" afterPath="$PROJECT_DIR$/public/tags/单一职责/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/tags/基准测试/index.html" afterPath="$PROJECT_DIR$/public/tags/基准测试/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/tags/序列化/index.html" afterPath="$PROJECT_DIR$/public/tags/序列化/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/tags/微服务/index.html" afterPath="$PROJECT_DIR$/public/tags/微服务/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/tags/春天/index.html" afterPath="$PROJECT_DIR$/public/tags/春天/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/tags/梅花/index.html" afterPath="$PROJECT_DIR$/public/tags/梅花/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/tags/算法/index.html" afterPath="$PROJECT_DIR$/public/tags/算法/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/tags/负载均衡/index.html" afterPath="$PROJECT_DIR$/public/tags/负载均衡/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/tags/轮询/index.html" afterPath="$PROJECT_DIR$/public/tags/轮询/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/tags/软件开发/index.html" afterPath="$PROJECT_DIR$/public/tags/软件开发/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/tags/领域模型/index.html" afterPath="$PROJECT_DIR$/public/tags/领域模型/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/source/_posts/微服务/Feign使用性能优化.md" afterPath="$PROJECT_DIR$/source/_posts/微服务/Feign使用性能优化.md" />
     </list>
     <ignored path="tietang.github.io.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -83,32 +25,12 @@
     <favorites_list name="tietang.github.io" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="_config.yml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/_config.yml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1470">
-              <caret line="70" column="11" selection-start-line="70" selection-start-column="11" selection-end-line="70" selection-end-column="11" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="_config.yml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/themes/hueman/_config.yml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="410">
-              <caret line="73" column="0" selection-start-line="73" selection-start-column="0" selection-end-line="73" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
+    <leaf>
       <file leaf-file-name="Feign使用性能优化.md" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/source/_posts/微服务/Feign使用性能优化.md">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="189">
-              <caret line="9" column="11" selection-start-line="9" selection-start-column="11" selection-end-line="9" selection-end-column="11" />
+            <state relative-caret-position="147">
+              <caret line="7" column="5" selection-start-line="7" selection-start-column="5" selection-end-line="7" selection-end-column="5" />
               <folding />
             </state>
           </provider>
@@ -117,6 +39,8 @@
     </leaf>
   </component>
   <component name="Git.Settings">
+    <option name="UPDATE_CHANGES_POLICY" value="SHELVE" />
+    <option name="UPDATE_TYPE" value="MERGE" />
     <option name="ROOT_SYNC" value="SYNC" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RECENT_COMMON_BRANCH" value="master" />
@@ -198,8 +122,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -297,6 +219,8 @@
         </subPane>
       </pane>
       <pane id="Scope" />
+      <pane id="Scratches" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -701,7 +625,8 @@
       <workItem from="1464921486105" duration="2348000" />
       <workItem from="1467272128845" duration="1570000" />
       <workItem from="1473299224033" duration="3419000" />
-      <workItem from="1473414395879" duration="44000" />
+      <workItem from="1473414395879" duration="593000" />
+      <workItem from="1473646303942" duration="72000" />
     </task>
     <task id="LOCAL-00001" summary="to hexo blog">
       <created>1455868564104</created>
@@ -794,11 +719,18 @@
       <option name="project" value="LOCAL" />
       <updated>1473303866378</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="to hexo blog">
+      <created>1473414449392</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1473414449392</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="22311000" />
+    <option name="totallyTimeSpent" value="22932000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="737" extended-state="6" />
@@ -809,8 +741,8 @@
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32792208" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32954547" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32792208" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1179,26 +1111,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/_config.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1470">
-          <caret line="70" column="11" selection-start-line="70" selection-start-column="11" selection-end-line="70" selection-end-column="11" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/themes/hueman/_config.yml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="410">
           <caret line="73" column="0" selection-start-line="73" selection-start-column="0" selection-end-line="73" selection-end-column="0" />
-          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_config.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="142">
+          <caret line="70" column="11" selection-start-line="70" selection-start-column="11" selection-end-line="70" selection-end-column="11" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/source/_posts/微服务/Feign使用性能优化.md">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="9" column="11" selection-start-line="9" selection-start-column="11" selection-end-line="9" selection-end-column="11" />
+        <state relative-caret-position="147">
+          <caret line="7" column="5" selection-start-line="7" selection-start-column="5" selection-end-line="7" selection-end-column="5" />
           <folding />
         </state>
       </provider>
