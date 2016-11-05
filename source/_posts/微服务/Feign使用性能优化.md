@@ -4,7 +4,6 @@ thumbnail: 'http://7xiovs.com1.z0.glb.clouddn.com/P60724-115835.jpg'
 date: 2016-09-06 19:22:47
 categories:
 	- 微服务
-	- Feign
 tags:
 	- Feign
 	- 微服务
