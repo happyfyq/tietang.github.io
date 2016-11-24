@@ -7,8 +7,8 @@ title: 多少光年
 subtitle: 风可以吹走尘土,但吹不走记忆
 description:
 author: 铁汤
-language: zh-CN
-timezone: GMT+8
+language: zh-Hans
+timezone:
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
@@ -63,7 +63,7 @@ pagination_dir: page
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: hueman # landscape
+theme: next # landscape
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
