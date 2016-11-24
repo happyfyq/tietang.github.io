@@ -23,7 +23,7 @@ description:
 
 下面的代码是集成了HystrixCommand的例子：
 
-```
+```java
 @Override
     public ClientHttpResponse intercept(
             final HttpRequest request, final byte[] body,
@@ -41,7 +41,7 @@ description:
 
 下面是集成了HystrixCommand和Ribbon的例子
 
-```
+```java
 @Override
     public ClientHttpResponse intercept(
             final HttpRequest request, final byte[] body,
@@ -66,7 +66,7 @@ description:
 
 Hystrix的执行在线程隔离模型下是支持异步的，因此也扩展一个RestTemplate异步执行。如下代码所示，通过调用`queue()`方法返回一个Future。
 
-```
+```java
 Future<String> fs = new CommandHelloWorld("World").queue();
 String s = fs.get(); 
 ```
@@ -74,19 +74,19 @@ String s = fs.get();
 
 从：
 
-```
+```java
 <T>  T getForObject(String url, Class<T> responseType, Object... uriVariables) throws RestClientException;
 ```
 
 到：
 
-```
+```java
 <T> Future<T> getForObject(String url, Class<T> responseType, Object... uriVariables) throws RestClientException;
 ```
 
 然后在原生的RestTemplate做一层代理，在代理层集成Hystrix和Ribbon，无论是JDK动态代理还是硬编码实现代理都变得容易，然后就可以这样来调用了：
 
-```
+```java
 HystrixAsyncRestOperations asyncRestTemplate =null;
 //先依次调用
 Future<String> future1 = asyncRestTemplate.getForObject("http://tietang.wang/", String.class);

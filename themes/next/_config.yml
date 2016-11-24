@@ -3,7 +3,7 @@
 # ---------------------------------------------------------------
 
 # Put your favicon.ico into `hexo-site/source/` directory.
-favicon: /favicon.ico
+favicon: favicon.ico
 
 # Set default keywords (Use a comma to separate)
 keywords: "微服务,hystrix,铁汤"
@@ -131,7 +131,8 @@ social:
   #LinkLabel: Link
   Github: https://github.com/tietang/
   蜂鸟: http://my.fengniao.com/tietang
-  500px: https://500px.com/wtt2012
+  500px: https://500px.com/tietang
+  简书: http://www.jianshu.com/users/ae2ad10f3a37/latest_articles
 
 # Social Links Icons
 # Icon Mapping:
@@ -147,6 +148,7 @@ social_icons:
   Weibo: weibo
   蜂鸟: camera
   500px: 500px
+  简书: book
 
 
 # Sidebar Avatar
