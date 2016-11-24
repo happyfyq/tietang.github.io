@@ -43,7 +43,7 @@ description:
 	
 不要在如下代码中getObject方法内new 对象，外部会频繁调用getObject方法。
 	
-```
+```java
 	ObjectFactory<HttpMessageConverters> messageConvertersObjectFactory = new ObjectFactory<HttpMessageConverters>() {
 	@Override
 	public HttpMessageConverters getObject() throws BeansException {
@@ -61,7 +61,7 @@ description:
 
 ### 7. Feign配置
 
-```
+```properties
 #Hystrix支持，如果为true，hystrix库必须在classpath中
 feign.hystrix.enabled=false
  
@@ -95,7 +95,7 @@ logging.level.project.user.UserClient: DEBUG
 
 例子：
 
-```
+```java
 	@FeignClient(name = "hello", fallback = HystrixClientFallback.class)
 	public interface HystrixClient {
 	    @RequestMapping(method = RequestMethod.GET, value = "/hello")
@@ -137,7 +137,7 @@ logging.level.project.user.UserClient: DEBUG
 
 **有一个 Controller**
 
-```
+```java
 @RestController
 @RequestMapping("/v1/card")
 public class IndexApi {
@@ -156,7 +156,7 @@ public class IndexApi {
 
 **有一个Feign Client**
 
-```
+```java
 @FeignClient(
         name = "card",
         url = "http://localhost:7913",
@@ -176,9 +176,9 @@ if @RequestMapping is used on class, when invoke http /v1/card/balance, like thi
 
 如果 @RequestMapping注解被用在FeignClient类上，当像如下代码请求/v1/card/balance时，注意有Accept header：
 
-```
-Content-Type:application/json
-Accept:application/json
+```yaml
+Content-Type: application/json
+Accept: application/json
 
 POST http://localhost:7913/v1/card/balance
 ```
@@ -196,7 +196,7 @@ POST http://localhost:7913/v1/card/balance
 
 **或者像下面不在Feign Client上使用@RequestMapping注解,请求也是ok，无论是否包含Accept:**
 
-```
+```java
 
 @FeignClient(
         name = "card",
