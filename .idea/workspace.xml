@@ -2,164 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7f9abbe9-9144-4639-b3f0-5458b74cedde" name="Default" comment="to hexo blog">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/readme.md" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/2016/02/19/技术/FlatBuffers/FlatBuffers使用指南/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/2016/02/19/技术/FlatBuffers/FlatBuffers简介/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/2016/02/19/春天花会开/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/2016/02/21/技术/Hexo/Hexo命令速记/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/2016/02/21/技术/领域模型/领域模型的价值/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/2016/02/22/music/Matthew-Lien-Bleeding-Wolves/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/2016/02/22/转载/http2.0/装载：HTTP2-0的奇妙日常/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/2016/02/25/hystrix/Hystrix参数详解/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/2016/03/04/技术/工具/wrk基准测试工具安装使用/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/2016/03/09/hystrix/Hystrix简介/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/2016/03/09/hystrix/Hystrix降级模式总结/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/2016/03/17/hystrix/怎样使用Hystrix/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/2016/06/02/微服务/微服务之微/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/2016/06/16/技术/负载均衡之加权轮询算法/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/2016/06/28/技术/软件开发中的单一职责/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/2016/09/02/hystrix/RestTemplate遇上Hystrix/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/2016/09/06/微服务/Feign使用性能优化/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/2016/09/08/微服务/微服务下分布式事务问题/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/2016/09/08/微服务/微服务之API网关设计/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/2016/09/08/微服务/微服务之Eureka服务发现/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/2016/09/08/微服务/微服务之spring-cloud分布式外部化和中心化配置管理/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/2016/09/08/微服务/微服务实施spring-cloud中踩过的坑/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/2016/09/08/微服务/微服务拆分实践/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/2016/09/10/微服务/微服务优缺点论述/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/about/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/archives/2016/02/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/archives/2016/03/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/archives/2016/06/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/archives/2016/09/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/archives/2016/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/archives/2016/page/2/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/archives/2016/page/3/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/archives/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/archives/page/2/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/archives/page/3/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/categories/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/categories/music/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/categories/微服务/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/categories/技术/FlatBuffers/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/categories/技术/Hexo/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/categories/技术/Hystrix/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/categories/技术/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/categories/技术/page/2/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/categories/技术/工具/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/categories/技术/杂谈/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/categories/技术/算法/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/categories/技术/领域模型/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/categories/转载/http-2-0/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/categories/转载/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/categories/那年今日/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/css/fonts/FontAwesome.otf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/css/fonts/fontawesome-webfont.eot" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/css/fonts/fontawesome-webfont.svg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/css/fonts/fontawesome-webfont.ttf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/css/fonts/fontawesome-webfont.woff" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/css/images/banner.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/css/images/logo-header.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/css/images/opacity-10.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/css/images/s-left.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/css/images/thumb-default-small.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/css/images/thumb-default.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/css/main.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/css/style.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/fancybox/blank.gif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/fancybox/fancybox_loading.gif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/fancybox/fancybox_loading@2x.gif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/fancybox/fancybox_overlay.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/fancybox/fancybox_sprite.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/fancybox/fancybox_sprite@2x.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/fancybox/helpers/fancybox_buttons.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/fancybox/helpers/jquery.fancybox-buttons.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/fancybox/helpers/jquery.fancybox-buttons.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/fancybox/helpers/jquery.fancybox-media.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/fancybox/helpers/jquery.fancybox-thumbs.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/fancybox/helpers/jquery.fancybox-thumbs.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/fancybox/jquery.fancybox.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/fancybox/jquery.fancybox.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/fancybox/jquery.fancybox.pack.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/js/main.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/js/script.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/lib/fastclick/README.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/lib/jquery_lazyload/CONTRIBUTING.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/lib/jquery_lazyload/README.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/page/2/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/page/3/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/tags/API-Gateway/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/tags/Circuit-Breaker/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/tags/DDD/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/tags/Eureka/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/tags/Feign/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/tags/FlatBuffers/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/tags/Hexo/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/tags/Spring-Boot/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/tags/Spring-Cloud/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/tags/http-2-0/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/tags/hystrix/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/tags/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/tags/wrk/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/tags/分布式事务/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/tags/分布式配置管理/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/tags/加权轮询/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/tags/单一职责/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/tags/基准测试/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/tags/序列化/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/tags/微服务/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/tags/春天/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/tags/服务发现/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/tags/梅花/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/tags/算法/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/tags/网关/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/tags/负载均衡/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/tags/轮询/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/tags/软件开发/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/tags/领域模型/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/vendor/fancybox/blank.gif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/vendor/fancybox/fancybox_loading.gif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/vendor/fancybox/fancybox_loading@2x.gif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/vendor/fancybox/fancybox_overlay.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/vendor/fancybox/fancybox_sprite.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/vendor/fancybox/fancybox_sprite@2x.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/vendor/fancybox/helpers/fancybox_buttons.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/vendor/fancybox/helpers/jquery.fancybox-buttons.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/vendor/fancybox/helpers/jquery.fancybox-buttons.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/vendor/fancybox/helpers/jquery.fancybox-media.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/vendor/fancybox/helpers/jquery.fancybox-thumbs.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/vendor/fancybox/helpers/jquery.fancybox-thumbs.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/vendor/fancybox/jquery.fancybox.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/vendor/fancybox/jquery.fancybox.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/vendor/fancybox/jquery.fancybox.pack.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/vendor/font-awesome/css/font-awesome.min.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/vendor/font-awesome/fonts/FontAwesome.otf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/vendor/font-awesome/fonts/fontawesome-webfont.eot" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/vendor/font-awesome/fonts/fontawesome-webfont.svg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/vendor/font-awesome/fonts/fontawesome-webfont.ttf" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/vendor/font-awesome/fonts/fontawesome-webfont.woff" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/vendor/font-awesome/fonts/fontawesome-webfont.woff2" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/vendor/jquery/2.0.3/jquery.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/vendor/scrollLoading/images/preloader.gif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/vendor/scrollLoading/images/preloader@2x.gif" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/vendor/scrollLoading/jquery.scrollLoading.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/vendor/scrollLoading/main.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/vendor/scrollLoading/style.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/vendor/source-code-pro/fonts/mrl8jkM18OlOQN8JLgasD9V_2ngZ8dMf8fLgjYEouxg.woff2" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/vendor/source-code-pro/fonts/mrl8jkM18OlOQN8JLgasDy2Q8seG17bfDXYR_jUsrzg.woff2" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/vendor/source-code-pro/styles.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/vendor/titillium-web/fonts/7XUFZ5tgS-tD6QamInJTcSo_WB_cotcEMUw1LsIE8mM.woff2" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/vendor/titillium-web/fonts/7XUFZ5tgS-tD6QamInJTcZSnX671uNZIV63UdXh3Mg0.woff2" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/vendor/titillium-web/fonts/anMUvcNT0H1YN4FII8wpr4-67659ICLY8bMrYhtePPA.woff2" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/vendor/titillium-web/fonts/anMUvcNT0H1YN4FII8wpr46gJz9aNFrmnwBdd69aqzY.woff2" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/vendor/titillium-web/fonts/anMUvcNT0H1YN4FII8wpr9INifKjd1RJ3NxxEi9Cy2w.woff2" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/vendor/titillium-web/fonts/anMUvcNT0H1YN4FII8wpr_SNRT0fZ5CX-AqRkMYgJJo.woff2" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/vendor/titillium-web/styles.css" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db.json" afterPath="$PROJECT_DIR$/db.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
     </list>
     <ignored path="tietang.github.io.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -182,22 +26,22 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="_config.yml" pinned="false" current-in-tab="false">
+      <file leaf-file-name="_config.yml" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/_config.yml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="84">
-              <caret line="73" column="16" lean-forward="false" selection-start-line="73" selection-start-column="16" selection-end-line="73" selection-end-column="16" />
+            <state relative-caret-position="63">
+              <caret line="72" column="14" lean-forward="false" selection-start-line="72" selection-start-column="14" selection-end-line="72" selection-end-column="14" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="readme.md" pinned="false" current-in-tab="true">
+      <file leaf-file-name="readme.md" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/readme.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
               <first_editor relative-caret-position="168">
-                <caret line="8" column="11" lean-forward="false" selection-start-line="8" selection-start-column="11" selection-end-line="8" selection-end-column="11" />
+                <caret line="8" column="11" lean-forward="true" selection-start-line="8" selection-start-column="11" selection-end-line="8" selection-end-column="11" />
                 <folding />
               </first_editor>
               <second_editor />
@@ -650,7 +494,7 @@
       <workItem from="1473414395879" duration="593000" />
       <workItem from="1473646303942" duration="176000" />
       <workItem from="1478658419386" duration="128000" />
-      <workItem from="1479976140220" duration="967000" />
+      <workItem from="1479976140220" duration="1148000" />
     </task>
     <task id="LOCAL-00001" summary="to hexo blog">
       <created>1455868564104</created>
@@ -761,11 +605,11 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="24131000" />
+    <option name="totallyTimeSpent" value="24312000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-305" y="-896" width="1280" height="737" extended-state="0" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -774,7 +618,7 @@
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32954547" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.58928573" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.58928573" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25487012" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1143,22 +987,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/_config.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="84">
-          <caret line="73" column="16" lean-forward="false" selection-start-line="73" selection-start-column="16" selection-end-line="73" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/readme.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
           <first_editor relative-caret-position="168">
-            <caret line="8" column="11" lean-forward="false" selection-start-line="8" selection-start-column="11" selection-end-line="8" selection-end-column="11" />
+            <caret line="8" column="11" lean-forward="true" selection-start-line="8" selection-start-column="11" selection-end-line="8" selection-end-column="11" />
             <folding />
           </first_editor>
           <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_config.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="63">
+          <caret line="72" column="14" lean-forward="false" selection-start-line="72" selection-start-column="14" selection-end-line="72" selection-end-column="14" />
+          <folding />
         </state>
       </provider>
     </entry>
