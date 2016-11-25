@@ -265,6 +265,587 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://tietang.github.com/2016/09/06/微服务/Feign使用性能优化/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="铁汤">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="多少光年">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="多少光年" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/09/06/微服务/Feign使用性能优化/" itemprop="url">
+                  Feign正确的使用方法和性能优化注意事项
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-09-06T19:22:47+08:00">
+                2016-09-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/微服务/" itemprop="url" rel="index">
+                    <span itemprop="name">微服务</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2016/09/06/微服务/Feign使用性能优化/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/06/微服务/Feign使用性能优化/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/09/06/微服务/Feign使用性能优化/" class="leancloud_visitors" data-flag-title="Feign正确的使用方法和性能优化注意事项">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="Feign正确的使用方法和性能优化注意事项"><a href="#Feign正确的使用方法和性能优化注意事项" class="headerlink" title="Feign正确的使用方法和性能优化注意事项"></a>Feign正确的使用方法和性能优化注意事项</h2><h3 id="1-feign自定义Configuration和root-容器有效隔离。"><a href="#1-feign自定义Configuration和root-容器有效隔离。" class="headerlink" title="1. feign自定义Configuration和root 容器有效隔离。"></a>1. feign自定义Configuration和root 容器有效隔离。</h3><ul>
+<li>用@Configuration注解</li>
+<li>不能在主@ComponentScan (or @SpringBootApplication)范围内，从其包名上分离</li>
+<li>注意避免包扫描重叠，最好的方法是明确的指定包名</li>
+</ul>
+<h3 id="2-Spring-Cloud-Netflix-提供了默认的Bean类型"><a href="#2-Spring-Cloud-Netflix-提供了默认的Bean类型" class="headerlink" title="2. Spring Cloud Netflix 提供了默认的Bean类型:"></a>2. Spring Cloud Netflix 提供了默认的Bean类型:</h3><ul>
+<li>Decoder feignDecoder: ResponseEntityDecoder (which wraps a SpringDecoder)</li>
+<li>Encoder feignEncoder: SpringEncoder</li>
+<li>Logger feignLogger: Slf4jLogger</li>
+<li>Contract feignContract: SpringMvcContract</li>
+<li>Feign.Builder feignBuilder: HystrixFeign.Builder</li>
+</ul>
+<h3 id="3-Spring-Cloud-Netflix没有提供默认值，但仍然可以在feign上下文配置中创建："><a href="#3-Spring-Cloud-Netflix没有提供默认值，但仍然可以在feign上下文配置中创建：" class="headerlink" title="3. Spring Cloud Netflix没有提供默认值，但仍然可以在feign上下文配置中创建："></a>3. Spring Cloud Netflix没有提供默认值，但仍然可以在feign上下文配置中创建：</h3><ul>
+<li>Logger.Level</li>
+<li>Retryer</li>
+<li>ErrorDecoder</li>
+<li>Request.Options</li>
+<li>Collection<requestinterceptor></requestinterceptor></li>
+</ul>
+<h3 id="4-自定义feign的消息编码解码器："><a href="#4-自定义feign的消息编码解码器：" class="headerlink" title="4. 自定义feign的消息编码解码器："></a>4. 自定义feign的消息编码解码器：</h3><p>不要在如下代码中getObject方法内new 对象，外部会频繁调用getObject方法。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">ObjectFactory&lt;HttpMessageConverters&gt; messageConvertersObjectFactory = <span class="keyword">new</span> ObjectFactory&lt;HttpMessageConverters&gt;() &#123;</div><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">public</span> HttpMessageConverters <span class="title">getObject</span><span class="params">()</span> <span class="keyword">throws</span> BeansException </span>&#123;</div><div class="line">	<span class="keyword">return</span> httpMessageConverters;</div><div class="line">&#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h3 id="5-注意测试环境和生产环境，注意正确使用feign日志级别。"><a href="#5-注意测试环境和生产环境，注意正确使用feign日志级别。" class="headerlink" title="5. 注意测试环境和生产环境，注意正确使用feign日志级别。"></a>5. 注意测试环境和生产环境，注意正确使用feign日志级别。</h3><h3 id="6-apacheHttpclient或者其他client的正确配置："><a href="#6-apacheHttpclient或者其他client的正确配置：" class="headerlink" title="6. apacheHttpclient或者其他client的正确配置："></a>6. apacheHttpclient或者其他client的正确配置：</h3><ul>
+<li>apacheHttpclient自定义配置放在spring root context，不要在FeignContext，否则不会起作用。</li>
+<li>apacheHttpclient 连接池配置合理地连接和其他参数</li>
+</ul>
+<h3 id="7-Feign配置"><a href="#7-Feign配置" class="headerlink" title="7. Feign配置"></a>7. Feign配置</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">#Hystrix支持，如果为true，hystrix库必须在classpath中</div><div class="line">feign.hystrix.enabled=false</div><div class="line"> </div><div class="line">#请求和响应GZIP压缩支持</div><div class="line">feign.compression.request.enabled=true</div><div class="line">feign.compression.response.enabled=true</div><div class="line">#支持压缩的mime types</div><div class="line">feign.compression.request.enabled=true</div><div class="line">feign.compression.request.mime-types=text/xml,application/xml,application/json</div><div class="line">feign.compression.request.min-request-size=2048</div><div class="line"></div><div class="line"># 日志支持</div><div class="line">logging.level.project.user.UserClient: DEBUG</div></pre></td></tr></table></figure>
+<h3 id="8-Logger-Level支持"><a href="#8-Logger-Level支持" class="headerlink" title="8. Logger.Level支持"></a>8. Logger.Level支持</h3><p>必须为每一个Feign Client配置来告诉Feign如何输出日志，可选：</p>
+<ul>
+<li><strong>NONE</strong>, No logging (<strong>DEFAULT</strong>).</li>
+<li><strong>BASIC</strong>,  Log only the request method and URL and the response status code and execution time.</li>
+<li><strong>HEADERS</strong>, Log the basic information along with request and response headers.</li>
+<li><strong>FULL</strong>, Log the headers, body, and metadata for both requests and responses.</li>
+</ul>
+<h3 id="9-FeignClient-fallback-正确的使用方法"><a href="#9-FeignClient-fallback-正确的使用方法" class="headerlink" title="9. FeignClient.fallback 正确的使用方法"></a>9. FeignClient.fallback 正确的使用方法</h3><p> 配置的fallback class也必须在FeignClient Configuration中实例化，否则会报<br><code>java.lang.IllegalStateException: No fallback instance of type class</code>异常。</p>
+<p>例子：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@FeignClient</span>(name = <span class="string">"hello"</span>, fallback = HystrixClientFallback.class)</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">HystrixClient</span> </span>&#123;</div><div class="line">    <span class="meta">@RequestMapping</span>(method = RequestMethod.GET, value = <span class="string">"/hello"</span>)</div><div class="line">    <span class="function">Hello <span class="title">iFailSometimes</span><span class="params">()</span></span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HystrixClientFallback</span> <span class="keyword">implements</span> <span class="title">HystrixClient</span> </span>&#123;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> Hello <span class="title">iFailSometimes</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Hello(<span class="string">"fallback"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="meta">@Configuration</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FooConfiguration</span> </span>&#123;</div><div class="line">    <span class="meta">@Bean</span></div><div class="line">	<span class="meta">@Scope</span>(<span class="string">"prototype"</span>)</div><div class="line">	<span class="keyword">public</span> Feign.<span class="function">Builder <span class="title">feignBuilder</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">return</span> Feign.builder();</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="meta">@Bean</span></div><div class="line">	<span class="function"><span class="keyword">public</span> HystrixClientFallback <span class="title">fb</span><span class="params">()</span></span>&#123;</div><div class="line">		<span class="keyword">return</span> <span class="keyword">new</span> HystrixClientFallback();</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="10-使用Feign-Client-和-RequestMapping时，注意事项"><a href="#10-使用Feign-Client-和-RequestMapping时，注意事项" class="headerlink" title="10. 使用Feign Client 和@RequestMapping时，注意事项"></a>10. 使用Feign Client 和@RequestMapping时，注意事项</h3><p>当前工程中有和Feign Client中一样的Endpoint时，Feign Client的类上不能用@RequestMapping注解否则，当前工程该endpoint http请求且使用accpet时会报404.</p>
+<p>下面的例子：</p>
+<p><strong>有一个 Controller</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@RestController</span></div><div class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/v1/card"</span>)</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">IndexApi</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="meta">@PostMapping</span>(<span class="string">"balance"</span>)</div><div class="line">    <span class="meta">@ResponseBody</span></div><div class="line">    <span class="function"><span class="keyword">public</span> Info <span class="title">index</span><span class="params">()</span> </span>&#123;</div><div class="line">        Info.Builder builder = <span class="keyword">new</span> Info.Builder();</div><div class="line">        builder.withDetail(<span class="string">"x"</span>, <span class="number">2</span>);</div><div class="line">        builder.withDetail(<span class="string">"y"</span>, <span class="number">2</span>);</div><div class="line">        <span class="keyword">return</span> builder.build();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>有一个Feign Client</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@FeignClient</span>(</div><div class="line">        name = <span class="string">"card"</span>,</div><div class="line">        url = <span class="string">"http://localhost:7913"</span>,</div><div class="line">        fallback = CardFeignClientFallback.class,</div><div class="line">        configuration = FeignClientConfiguration.class</div><div class="line">)</div><div class="line"><span class="meta">@RequestMapping</span>(value = <span class="string">"/v1/card"</span>)</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">CardFeignClient</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="meta">@RequestMapping</span>(value = <span class="string">"/balance"</span>, method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)</div><div class="line">    <span class="function">Info <span class="title">info</span><span class="params">()</span></span>;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>if @RequestMapping is used on class, when invoke http /v1/card/balance, like this :</p>
+<p>如果 @RequestMapping注解被用在FeignClient类上，当像如下代码请求/v1/card/balance时，注意有Accept header：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="attr">Content-Type:</span> application/json</div><div class="line"><span class="attr">Accept:</span> application/json</div><div class="line"></div><div class="line">POST http://localhost:<span class="number">7913</span>/v1/card/balance</div></pre></td></tr></table></figure>
+<p>那么会返回 404。</p>
+<p><strong>如果不包含Accept header时请求，则是OK：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Content-Type:application/json</div><div class="line">POST http://localhost:7913/v1/card/balance</div></pre></td></tr></table></figure>
+<p><strong>或者像下面不在Feign Client上使用@RequestMapping注解,请求也是ok，无论是否包含Accept:</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="meta">@FeignClient</span>(</div><div class="line">        name = <span class="string">"card"</span>,</div><div class="line">        url = <span class="string">"http://localhost:7913"</span>,</div><div class="line">        fallback = CardFeignClientFallback.class,</div><div class="line">        configuration = FeignClientConfiguration.class</div><div class="line">)</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">CardFeignClient</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="meta">@RequestMapping</span>(value = <span class="string">"/v1/card/balance"</span>, method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)</div><div class="line">    <span class="function">Info <span class="title">info</span><span class="params">()</span></span>;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://tietang.github.com/2016/09/02/hystrix/RestTemplate遇上Hystrix/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="铁汤">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="多少光年">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="多少光年" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/09/02/hystrix/RestTemplate遇上Hystrix/" itemprop="url">
+                  RestTemplate遇上Hystrix
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-09-02T09:20:00+08:00">
+                2016-09-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术/Hystrix/" itemprop="url" rel="index">
+                    <span itemprop="name">Hystrix</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2016/09/02/hystrix/RestTemplate遇上Hystrix/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/02/hystrix/RestTemplate遇上Hystrix/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/09/02/hystrix/RestTemplate遇上Hystrix/" class="leancloud_visitors" data-flag-title="RestTemplate遇上Hystrix">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="RestTemplate遇上Hystrix"><a href="#RestTemplate遇上Hystrix" class="headerlink" title="RestTemplate遇上Hystrix"></a>RestTemplate遇上Hystrix</h1><h2 id="RestTemplate集成Hystrix和Robbin"><a href="#RestTemplate集成Hystrix和Robbin" class="headerlink" title="RestTemplate集成Hystrix和Robbin"></a>RestTemplate集成Hystrix和Robbin</h2><p>查看RestTemplate源代码，可以看到RestTemplate继承了InterceptingHttpAccessor类，InterceptingHttpAccessor类通过ClientHttpRequestInterceptor接口提供了扩展功能。</p>
+<p>实现intercept方法，在该方法中封装HystrixCommand和Ribbon逻辑即可。</p>
+<p>下面的代码是集成了HystrixCommand的例子：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> ClientHttpResponse <span class="title">intercept</span><span class="params">(</span></span></div><div class="line">            <span class="keyword">final</span> HttpRequest request, <span class="keyword">final</span> <span class="keyword">byte</span>[] body,</div><div class="line">            <span class="keyword">final</span> ClientHttpRequestExecution execution) <span class="keyword">throws</span> IOException &#123;</div><div class="line">        <span class="keyword">final</span> URI originalUri = request.getURI();</div><div class="line">        String serviceName = mapCommandKey(originalUri);</div><div class="line"></div><div class="line">        log.info(<span class="string">"&#123;&#125; :&#123;&#125; &#123;&#125; "</span>, serviceName, request.getMethod().name(), originalUri.toString());</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> RestTemplateHystrixCommnad(serviceName, () -&gt; &#123;</div><div class="line">            <span class="keyword">return</span> execution.execute(request, body);</div><div class="line">        &#125;, hystrixFallback).execute();</div><div class="line"></div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<p>下面是集成了HystrixCommand和Ribbon的例子</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> ClientHttpResponse <span class="title">intercept</span><span class="params">(</span></span></div><div class="line">            <span class="keyword">final</span> HttpRequest request, <span class="keyword">final</span> <span class="keyword">byte</span>[] body,</div><div class="line">            <span class="keyword">final</span> ClientHttpRequestExecution execution) <span class="keyword">throws</span> IOException &#123;</div><div class="line">        <span class="keyword">final</span> URI originalUri = request.getURI();</div><div class="line">        String serviceName = mapCommandKey(originalUri);</div><div class="line"></div><div class="line">        log.info(<span class="string">"&#123;&#125; :&#123;&#125; &#123;&#125; "</span>, serviceName, request.getMethod().name(), originalUri.toString());</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> RestTemplateHystrixCommnad(serviceName, () -&gt; &#123;</div><div class="line">            <span class="keyword">return</span> <span class="keyword">this</span>.loadBalancer.execute(serviceName, instance -&gt; &#123;</div><div class="line">                HttpRequest serviceRequest = <span class="keyword">new</span> HystrixLoadBalancerInterceptor.ServiceRequestWrapper(</div><div class="line">                        request,</div><div class="line">                        instance);</div><div class="line">                <span class="keyword">return</span> execution.execute(serviceRequest, body);</div><div class="line"></div><div class="line">            &#125;);</div><div class="line">        &#125;, hystrixFallback).execute();</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<p>2）RestTemplate支持Hystrix异步特性</p>
+<p>Hystrix的执行在线程隔离模型下是支持异步的，因此也扩展一个RestTemplate异步执行。如下代码所示，通过调用<code>queue()</code>方法返回一个Future。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Future&lt;String&gt; fs = <span class="keyword">new</span> CommandHelloWorld(<span class="string">"World"</span>).queue();</div><div class="line">String s = fs.get();</div></pre></td></tr></table></figure>
+<p>这样可以修改RestOperations接口方法为异步方法：</p>
+<p>从：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;T&gt;  <span class="function">T <span class="title">getForObject</span><span class="params">(String url, Class&lt;T&gt; responseType, Object... uriVariables)</span> <span class="keyword">throws</span> RestClientException</span>;</div></pre></td></tr></table></figure>
+<p>到：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;T&gt; <span class="function">Future&lt;T&gt; <span class="title">getForObject</span><span class="params">(String url, Class&lt;T&gt; responseType, Object... uriVariables)</span> <span class="keyword">throws</span> RestClientException</span>;</div></pre></td></tr></table></figure>
+<p>然后在原生的RestTemplate做一层代理，在代理层集成Hystrix和Ribbon，无论是JDK动态代理还是硬编码实现代理都变得容易，然后就可以这样来调用了：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">HystrixAsyncRestOperations asyncRestTemplate =<span class="keyword">null</span>;</div><div class="line"><span class="comment">//先依次调用</span></div><div class="line">Future&lt;String&gt; future1 = asyncRestTemplate.getForObject(<span class="string">"http://tietang.wang/"</span>, String.class);</div><div class="line">Future&lt;String&gt; future2 = asyncRestTemplate.getForObject(<span class="string">"http://tietang.wang/2016/03/17/hystrix/%E6%80%8E%E6%A0%B7%E4%BD%BF%E7%94%A8Hystrix/"</span>, String.class);</div><div class="line"><span class="comment">//再依次获取调用结果</span></div><div class="line">String html1 = future1.get();</div><div class="line">String html2 = future2.get(<span class="number">100</span>, TimeUnit.MILLISECONDS);<span class="comment">//异步超时，建议</span></div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://tietang.github.com/2016/06/28/技术/软件开发中的单一职责/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="铁汤">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="多少光年">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="多少光年" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/06/28/技术/软件开发中的单一职责/" itemprop="url">
+                  软件开发中的单一职责
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-06-28T09:06:33+08:00">
+                2016-06-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术/杂谈/" itemprop="url" rel="index">
+                    <span itemprop="name">杂谈</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2016/06/28/技术/软件开发中的单一职责/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/28/技术/软件开发中的单一职责/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/06/28/技术/软件开发中的单一职责/" class="leancloud_visitors" data-flag-title="软件开发中的单一职责">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="软件开发中的单一职责"><a href="#软件开发中的单一职责" class="headerlink" title="软件开发中的单一职责"></a>软件开发中的单一职责</h1><p>最近在实践微服务化过程中，对其“单一职责”原则深有体会。<br>那么只有微服务化才可以单一职责，才可以解耦吗？答案是否定的。</p>
+<p>单一职责原则是这样定义的：单一的功能，并且完全封装起来。</p>
+<p>我们做后端Java开发的，应该最熟悉的就是标准的3层架构了，尤其是使用Spring.io体系的：Controller，Service，Dao/Repository。为什么要分层？就是为了保证单一职责，数据模型的事情交给Controller，业务逻辑的事情交给Service，和数据打交道的事情就交给Dao/Repository。有时候或者有些人会分层分的更多，4层，5层，我自己也这样干过，说白了也是为了保证单一职责，3层不能满足单一职责了，耦合度高了，就分。</p>
+<p>我们都知道一个webapp在经过一定时间的开发后，就惨不忍睹，即便是有标准的分层，页面或模板文件一大堆，最初的很清晰的3层标准架构也变味了，Controller，Service，Dao/Repository各层之间、Service之间、Dao/Repository之间互相调用，一团乱麻。这个时候没改一行代码都有可能一个老鼠害了一锅汤，bug就如同蚂蚁洞。</p>
+<h3 id="这些问题最后就造成："><a href="#这些问题最后就造成：" class="headerlink" title="这些问题最后就造成："></a>这些问题最后就造成：</h3><ul>
+<li>可扩展性灵活性差，出现性能问题</li>
+<li>业务变更和开发困难，维护成本很高，交付时间长</li>
+<li>回归测试量很大</li>
+<li>…</li>
+</ul>
+<p>为了解决这些问题，就需要时时刻刻清楚的记住“<strong>单一职责</strong>”，<strong>单一职责</strong>可以用到软件开发的任何地方。</p>
+<p>应该说职责分离来解耦是最常用最有效的架构方法，这能够很大限度的简化一切。</p>
+<h3 id="下面就从软件开发、设计、架构，以及重构-演进-进化，从小到大几个方面来说说单一职责："><a href="#下面就从软件开发、设计、架构，以及重构-演进-进化，从小到大几个方面来说说单一职责：" class="headerlink" title="下面就从软件开发、设计、架构，以及重构/演进/进化，从小到大几个方面来说说单一职责："></a>下面就从软件开发、设计、架构，以及重构/演进/进化，从小到大几个方面来说说<strong>单一职责</strong>：</h3><h2 id="类方法-函数"><a href="#类方法-函数" class="headerlink" title="类方法/函数"></a>类方法/函数</h2><p>这应该是最小的能体现<strong>单一职责</strong>的程序单元了。最熟悉的最典型的莫过于Helper/Utils类方法了，但这种类方法的特征很明显，也很容易遵循单一职责，99%以上的开发人员都可以做到。但不仅仅这样的类方法要遵循单一职责原则，每一个类方法都应该遵循<strong>单一职责</strong>原则，尤其是一些处理业务逻辑的类方法更要遵循<strong>单一职责</strong>原则，处理业务的类方法通常要配合类的单一职责原则进行，下节中讨论。</p>
+<p>因此，这也是为什么很多TL要求类方法代码行数保持在20行左右，其实就是为了保证单一职责，20行左右是一个<strong>经验粗略数字</strong>，当然，10行或者30行来完成类方法也是可以的。大部分单一职责的类方法用20行左右的代码就够了，如果超过20行就要考虑是否保证了单一职责了。那我们在<strong>迭代重构</strong>的过程中就要考虑拆分这样的类方法来保证单一职责。</p>
+<p>类方法的单一职责是最单纯的，很具体的，不惨杂任何额外信息，只关心输入、输出、和职责；一定要明确地定义类方法的职责，保证在迭代中不被错误的扩张，调用方错误的使用。</p>
+<h2 id="类-函数文件"><a href="#类-函数文件" class="headerlink" title="类/函数文件"></a>类/函数文件</h2><p>要用面向对象的设计方法，<strong>单一职责原则</strong>来定义类。开发人员一定要很好地理解“单一职责原则”，具有面向对象的抽象思维能力。</p>
+<p>当在迭代中一个类过于庞大或者快速膨胀，说明已经有坏味道了，这时候就需要考虑用单一职责原则或者面向对象的分析方法来重构和重新定义类了，通常就是要抽象和拆分类，否则将来会变成一个方法容器。</p>
+<p>把类比作一个人，她的职责就是完成自己职责范围内的事情，如果她什么事情都管，就叫多管闲事，可以想象她多管闲事的后果了，会搅得鸡犬不宁。同样，类也是，类如果多管闲事，那会搅得真个应用不稳定，漏洞百出，还很难修复。所以说定义一个类，要明确这个类的职责。使用面向对象的分析和设计方法，能很好地准确定义一个类的职责范围，通常就要用到封装、继承、多态和抽象等设计方法。</p>
+<h2 id="包结构-文件夹"><a href="#包结构-文件夹" class="headerlink" title="包结构/文件夹"></a>包结构/文件夹</h2><p>分层就是最常用的架构方法之一，分层具体体现在分包和分类，就是分门别类的意思。俗话说，物以类聚，人以群分。</p>
+<p>包结构在单一职责原则上是类的补充，职责范围进一步扩大。如果把一个类叫做一个人，那么包就是一个最小单位的团队，职责就是负责一类特定事情。<br>如何分包呢？那就要用到分类学的知识了，要以什么特征来分，可能不仅仅只有一种特征，比如，先用公司域名来做基础包名，这里叫一级包名；然后再用一个特定的有意义的标识作为二级子包名；之后按分层（web,dao,service等等）方法做三级包名，也可以先按照业务再按分层。例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">域名：tietang.wang</div><div class="line">有个项目叫：social</div><div class="line">那么我可以这样分：</div><div class="line">wang.tietang</div><div class="line">	- social</div><div class="line">		- web</div><div class="line">		- service</div><div class="line">		- dao</div><div class="line">		- commons</div><div class="line"></div><div class="line">也可以这样：</div><div class="line"></div><div class="line">wang.tietang</div><div class="line">	- commons</div><div class="line">	- user</div><div class="line">		- web</div><div class="line">		- service</div><div class="line">		- dao</div><div class="line">	- relation</div><div class="line">		- web</div><div class="line">		- service</div><div class="line">		- dao</div></pre></td></tr></table></figure>
+<h2 id="多工程-module"><a href="#多工程-module" class="headerlink" title="多工程/module"></a>多工程/module</h2><p>通常以多maven module或者gradle 多module形式存在，来保证单一职责。<br>当业务量还没有达到服务拆分的火候，又需要规整项目结构，通常在一个app发展的太庞大时或者在工程建设初期采取，从文件系统上隔离，通过module依赖来集成。需要注意的是这样的架构或拆分不是随意的，要以单一职责原则来拆分，更具体一点就是要根据业务，技术框架功能等特性来拆分。</p>
+<p>比如，按技术组件拆分，通常会有一些技术组件，可以把她放到commons module，如果有多种类型的技术组件，就拆分为commons module的子module；也可以直接将这些技术组件拆分为独立的工程，存在于独立的git/svn仓库，独立管理，专人负责；其他哪些module需要就依赖她。那拆分的这些技术组件的每一个应该遵循单一职责原则，例如数据分片的框架，NIO基础网络框架等等。</p>
+<p>比如，按业务拆分，例如有用户，订单，商品，支付，那么就按照这些业务拆分为子module，每一个子module就只负责自己的业务逻辑，也遵循单一职责。</p>
+<p>那每个module的职责范围又比类和包更大，这个时候职责也更模糊，有时候很难把握，对于技术组件可能相对清晰，业务module就要熟悉业务，明确业务边界。</p>
+<p>多module拆分后也是为将来服务化埋下伏笔，同时在物理文件系统比较清晰了，那在依赖管理上也要掌握好保持清晰的依赖逻辑，把握好单一职责原则。</p>
+<h2 id="微服务-可部署单元"><a href="#微服务-可部署单元" class="headerlink" title="微服务/可部署单元"></a>微服务/可部署单元</h2><p>微服务，从运行时隔离，但业务量发展到一定时候，从单体或者多module工程拆分或演化出来，可独立打包可独立部署并复合单一原则的application，当然了微服务所体现的价值不仅仅是隔离和独立部署，还有很多这里可以参考<a href="http://www.infoq.com/cn/news/2015/04/single-app-micro-service" target="_blank" rel="external">单体应用与微服务优缺点辨析</a>。单一职责在微服务中的价值是最重要的，包含了app层面和开发app的团队层面，微服务的大部分优点都可以围绕单一职责来张开。</p>
+<h2 id="团队"><a href="#团队" class="headerlink" title="团队"></a>团队</h2><p>先引用《韩非子·扬权》中的一段文字：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">夫物者有所宜，材者有所施，各处其宜，故上下无为。 </div><div class="line">使鸡司夜，令狸执鼠，皆用其能，上乃无事。</div><div class="line">上有所长，事乃不方。 </div><div class="line">矜而好能，下之所欺：辩惠好生，下因其材。</div><div class="line">上下易用，国故不治。</div></pre></td></tr></table></figure>
+<p><strong>参考：</strong></p>
+<ul>
+<li>原文：<a href="http://www.shici8.com/bookview_3501.html" target="_blank" rel="external">http://www.shici8.com/bookview_3501.html</a></li>
+<li>译文：<a href="http://www.shici8.com/article_8539.html" target="_blank" rel="external">http://www.shici8.com/article_8539.html</a></li>
+</ul>
+<p>各得其所，各司其职。所以，团队也要遵循单一职责原则，这样才能很好地管理团队成员的时间，提高效率。一个人专注做一件事情的效率远高于同时关注多件事情的。同样一个人一直管理和维护同一份代码要比多人同时维护多份代码的效率高很多。每一个人都有自己的个性，他有自己的擅长，让每一个人专注自己擅长的事情，那肯定事半功倍，整个团队绩效肯定也很突出。</p>
+<p>总之，引用古文名句说明了所有：</p>
+<ul>
+<li>物以类聚，人以群分。</li>
+<li>天下之事，分合交替，分久必合，合久必分！</li>
+<li>使鸡司夜，令狸执鼠，皆用其能，上乃无事。</li>
+</ul>
+<h3 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h3><p> <a href="http://www.jianshu.com/p/f9d15827465d" target="_blank" rel="external">http://www.jianshu.com/p/f9d15827465d</a></p>
+<p> <a href="https://zh.wikipedia.org/wiki/单一功能原则" target="_blank" rel="external">https://zh.wikipedia.org/wiki/单一功能原则</a></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
   <link itemprop="mainEntityOfPage" href="http://tietang.github.com/2016/06/16/技术/负载均衡之加权轮询算法/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -360,6 +941,15 @@
           
 
           
+          
+             <span id="/2016/06/16/技术/负载均衡之加权轮询算法/" class="leancloud_visitors" data-flag-title="负载均衡之加权轮询算法">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
           
 
           
@@ -664,6 +1254,15 @@
 
           
           
+             <span id="/2016/06/02/微服务/微服务之微/" class="leancloud_visitors" data-flag-title="微服务之微">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
 
           
 
@@ -685,163 +1284,6 @@
             <p> 单一职责</p>
 
           
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://tietang.github.com/2016/03/09/hystrix/Hystrix简介/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="铁汤">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.gif">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="多少光年">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="多少光年" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/03/09/hystrix/Hystrix简介/" itemprop="url">
-                  Hystrix简介
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-03-09T09:22:47+08:00">
-                2016-03-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/技术/" itemprop="url" rel="index">
-                    <span itemprop="name">技术</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/技术/Hystrix/" itemprop="url" rel="index">
-                    <span itemprop="name">Hystrix</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/2016/03/09/hystrix/Hystrix简介/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/09/hystrix/Hystrix简介/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          Hystrix简介
-          <!--noindex-->
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/03/09/hystrix/Hystrix简介/">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
         
       
     </div>
@@ -974,6 +1416,15 @@
 
           
           
+             <span id="/2016/03/09/hystrix/Hystrix降级模式总结/" class="leancloud_visitors" data-flag-title="Hystrix降级模式总结">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
 
           
 
@@ -995,6 +1446,172 @@
           <!--noindex-->
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/03/09/hystrix/Hystrix降级模式总结/">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://tietang.github.com/2016/03/09/hystrix/Hystrix简介/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="铁汤">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="多少光年">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="多少光年" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/03/09/hystrix/Hystrix简介/" itemprop="url">
+                  Hystrix简介
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-03-09T09:22:47+08:00">
+                2016-03-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术/Hystrix/" itemprop="url" rel="index">
+                    <span itemprop="name">Hystrix</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2016/03/09/hystrix/Hystrix简介/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/09/hystrix/Hystrix简介/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/03/09/hystrix/Hystrix简介/" class="leancloud_visitors" data-flag-title="Hystrix简介">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          Hystrix简介
+          <!--noindex-->
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/03/09/hystrix/Hystrix简介/">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1131,6 +1748,15 @@
 
           
           
+             <span id="/2016/03/04/技术/工具/wrk基准测试工具安装使用/" class="leancloud_visitors" data-flag-title="wrk基准测试工具安装使用">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
 
           
 
@@ -1161,955 +1787,6 @@
 <p>  Output:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">Running 30s test @ http://127.0.0.1:8080/index.html</div><div class="line">  12 threads and 400 connections</div><div class="line">  Thread Stats   Avg      Stdev     Max   +/- Stdev</div><div class="line">    Latency   635.91us    0.89ms  12.92ms   93.69%</div><div class="line">    Req/Sec    56.20k     8.07k   62.00k    86.54%</div><div class="line">  22464657 requests in 30.00s, 17.76GB read</div><div class="line">Requests/sec: 748868.53</div><div class="line">Transfer/sec:    606.33MB</div></pre></td></tr></table></figure>
 <h2 id="参数说明"><a href="#参数说明" class="headerlink" title="参数说明"></a>参数说明</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">$ wrk</div><div class="line">Usage: wrk &lt;options&gt; &lt;url&gt;                            </div><div class="line">  Options:                                            </div><div class="line">    -c, --connections &lt;N&gt;  Connections to keep open   </div><div class="line">    -d, --duration    &lt;T&gt;  Duration of test           </div><div class="line">    -t, --threads     &lt;N&gt;  Number of threads to use   </div><div class="line">                                                      </div><div class="line">    -s, --script      &lt;S&gt;  Load Lua script file       </div><div class="line">    -H, --header      &lt;H&gt;  Add header to request      </div><div class="line">        --latency          Print latency statistics   </div><div class="line">        --timeout     &lt;T&gt;  Socket/request timeout     </div><div class="line">    -v, --version          Print version details      </div><div class="line">                                                      </div><div class="line">  Numeric arguments may include a SI unit (1k, 1M, 1G)</div><div class="line">  Time arguments may include a time unit (2s, 2m, 2h)</div></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://tietang.github.com/2016/02/25/hystrix/Hystrix参数详解/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="铁汤">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.gif">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="多少光年">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="多少光年" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/02/25/hystrix/Hystrix参数详解/" itemprop="url">
-                  Hystrix 参数详解
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-02-25T09:20:00+08:00">
-                2016-02-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/技术/" itemprop="url" rel="index">
-                    <span itemprop="name">技术</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/技术/Hystrix/" itemprop="url" rel="index">
-                    <span itemprop="name">Hystrix</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/2016/02/25/hystrix/Hystrix参数详解/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/02/25/hystrix/Hystrix参数详解/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>hystrix.command.default和hystrix.threadpool.default中的default为默认CommandKey</p>
-<h1 id="Command-Properties"><a href="#Command-Properties" class="headerlink" title="Command Properties"></a>Command Properties</h1><h2 id="Execution相关的属性的配置："><a href="#Execution相关的属性的配置：" class="headerlink" title="Execution相关的属性的配置："></a>Execution相关的属性的配置：</h2><ul>
-<li><p>hystrix.command.default.execution.isolation.strategy 隔离策略，默认是Thread, 可选Thread｜Semaphore</p>
-<ul>
-<li>thread 通过线程数量来限制并发请求数，可以提供额外的保护，但有一定的延迟。一般用于网络调用</li>
-<li>semaphore 通过semaphore count来限制并发请求数，适用于无网络的高并发请求</li>
-</ul>
-</li>
-<li><p>hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds  命令执行超时时间，默认1000ms</p>
-</li>
-<li>hystrix.command.default.execution.timeout.enabled 执行是否启用超时，默认启用true</li>
-<li>hystrix.command.default.execution.isolation.thread.interruptOnTimeout 发生超时是是否中断，默认true</li>
-<li>hystrix.command.default.execution.isolation.semaphore.maxConcurrentRequests 最大并发请求数，默认10，该参数当使用ExecutionIsolationStrategy.SEMAPHORE策略时才有效。如果达到最大并发请求数，请求会被拒绝。理论上选择semaphore size的原则和选择thread size一致，但选用semaphore时每次执行的单元要比较小且执行速度快（ms级别），否则的话应该用thread。<br>semaphore应该占整个容器（tomcat）的线程池的一小部分。</li>
-</ul>
-<h2 id="Fallback相关的属性"><a href="#Fallback相关的属性" class="headerlink" title="Fallback相关的属性"></a>Fallback相关的属性</h2><p>这些参数可以应用于Hystrix的THREAD和SEMAPHORE策略</p>
-<ul>
-<li>hystrix.command.default.fallback.isolation.semaphore.maxConcurrentRequests  如果并发数达到该设置值，请求会被拒绝和抛出异常并且fallback不会被调用。默认10</li>
-<li>hystrix.command.default.fallback.enabled 当执行失败或者请求被拒绝，是否会尝试调用hystrixCommand.getFallback() 。默认true</li>
-</ul>
-<h2 id="Circuit-Breaker相关的属性"><a href="#Circuit-Breaker相关的属性" class="headerlink" title="Circuit Breaker相关的属性"></a>Circuit Breaker相关的属性</h2><ul>
-<li>hystrix.command.default.circuitBreaker.enabled 用来跟踪circuit的健康性，如果未达标则让request短路。默认true</li>
-<li>hystrix.command.default.circuitBreaker.requestVolumeThreshold  一个rolling window内最小的请求数。如果设为20，那么当一个rolling window的时间内（比如说1个rolling window是10秒）收到19个请求，即使19个请求都失败，也不会触发circuit break。默认20</li>
-<li>hystrix.command.default.circuitBreaker.sleepWindowInMilliseconds 触发短路的时间值，当该值设为5000时，则当触发circuit break后的5000毫秒内都会拒绝request，也就是5000毫秒后才会关闭circuit。默认5000</li>
-<li>hystrix.command.default.circuitBreaker.errorThresholdPercentage错误比率阀值，如果错误率&gt;=该值，circuit会被打开，并短路所有请求触发fallback。默认50</li>
-<li>hystrix.command.default.circuitBreaker.forceOpen 强制打开熔断器，如果打开这个开关，那么拒绝所有request，默认false</li>
-<li>hystrix.command.default.circuitBreaker.forceClosed 强制关闭熔断器   如果这个开关打开，circuit将一直关闭且忽略circuitBreaker.errorThresholdPercentage</li>
-</ul>
-<h2 id="Metrics相关参数"><a href="#Metrics相关参数" class="headerlink" title="Metrics相关参数"></a>Metrics相关参数</h2><ul>
-<li>hystrix.command.default.metrics.rollingStats.timeInMilliseconds 设置统计的时间窗口值的，毫秒值，circuit break 的打开会根据1个rolling window的统计来计算。若rolling window被设为10000毫秒，则rolling window会被分成n个buckets，每个bucket包含success，failure，timeout，rejection的次数的统计信息。默认10000</li>
-<li>hystrix.command.default.metrics.rollingStats.numBuckets 设置一个rolling window被划分的数量，若numBuckets＝10，rolling window＝10000，那么一个bucket的时间即1秒。必须符合rolling window % numberBuckets == 0。默认10</li>
-<li>hystrix.command.default.metrics.rollingPercentile.enabled 执行时是否enable指标的计算和跟踪，默认true</li>
-<li>hystrix.command.default.metrics.rollingPercentile.timeInMilliseconds  设置rolling percentile window的时间，默认60000</li>
-<li>hystrix.command.default.metrics.rollingPercentile.numBuckets 设置rolling percentile window的numberBuckets。逻辑同上。默认6</li>
-<li>hystrix.command.default.metrics.rollingPercentile.bucketSize 如果bucket size＝100，window＝10s，若这10s里有500次执行，只有最后100次执行会被统计到bucket里去。增加该值会增加内存开销以及排序的开销。默认100</li>
-<li>hystrix.command.default.metrics.healthSnapshot.intervalInMilliseconds  记录health 快照（用来统计成功和错误绿）的间隔，默认500ms</li>
-</ul>
-<h2 id="Request-Context-相关参数"><a href="#Request-Context-相关参数" class="headerlink" title="Request Context 相关参数"></a>Request Context 相关参数</h2><p>hystrix.command.default.requestCache.enabled 默认true，需要重载getCacheKey()，返回null时不缓存<br>hystrix.command.default.requestLog.enabled  记录日志到HystrixRequestLog，默认true</p>
-<h1 id="Collapser-Properties-相关参数"><a href="#Collapser-Properties-相关参数" class="headerlink" title="Collapser Properties 相关参数"></a>Collapser Properties 相关参数</h1><p>hystrix.collapser.default.maxRequestsInBatch 单次批处理的最大请求数，达到该数量触发批处理，默认Integer.MAX_VALUE<br>hystrix.collapser.default.timerDelayInMilliseconds 触发批处理的延迟，也可以为创建批处理的时间＋该值，默认10<br>hystrix.collapser.default.requestCache.enabled  是否对HystrixCollapser.execute() and HystrixCollapser.queue()的cache，默认true</p>
-<h1 id="ThreadPool-相关参数"><a href="#ThreadPool-相关参数" class="headerlink" title="ThreadPool 相关参数"></a>ThreadPool 相关参数</h1><p>线程数默认值10适用于大部分情况（有时可以设置得更小），如果需要设置得更大，那有个基本得公式可以follow：<br>requests per second at peak when healthy × 99th percentile latency in seconds + some breathing room<br>每秒最大支撑的请求数 <em> (99%平均响应时间 + 缓存值)<br>比如：每秒能处理1000个请求，99%的请求响应时间是60ms，那么公式是：<br> 1000 </em>（0.060+0.012）</p>
-<p>基本得原则时保持线程池尽可能小，他主要是为了释放压力，防止资源被阻塞。<br>当一切都是正常的时候，线程池一般仅会有1到2个线程激活来提供服务</p>
-<ul>
-<li>hystrix.threadpool.default.coreSize  并发执行的最大线程数，默认10</li>
-<li>hystrix.threadpool.default.maxQueueSize BlockingQueue的最大队列数，当设为－1，会使用SynchronousQueue，值为正时使用LinkedBlcokingQueue。该设置只会在初始化时有效，之后不能修改threadpool的queue size，除非reinitialising thread executor。默认－1。</li>
-<li>hystrix.threadpool.default.queueSizeRejectionThreshold  即使maxQueueSize没有达到，达到queueSizeRejectionThreshold该值后，请求也会被拒绝。因为maxQueueSize不能被动态修改，这个参数将允许我们动态设置该值。if maxQueueSize == -1，该字段将不起作用</li>
-<li>hystrix.threadpool.default.keepAliveTimeMinutes 如果corePoolSize和maxPoolSize设成一样（默认实现）该设置无效。如果通过plugin（<a href="https://github.com/Netflix/Hystrix/wiki/Plugins）使用自定义实现，该设置才有用，默认1" target="_blank" rel="external">https://github.com/Netflix/Hystrix/wiki/Plugins）使用自定义实现，该设置才有用，默认1</a>.</li>
-<li>hystrix.threadpool.default.metrics.rollingStats.timeInMilliseconds 线程池统计指标的时间，默认10000</li>
-<li>hystrix.threadpool.default.metrics.rollingStats.numBuckets  将rolling window划分为n个buckets，默认10</li>
-</ul>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://tietang.github.com/2016/02/22/music/Matthew-Lien-Bleeding-Wolves/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="铁汤">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.gif">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="多少光年">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="多少光年" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/02/22/music/Matthew-Lien-Bleeding-Wolves/" itemprop="url">
-                  Matthew Lien-Bleeding Wolves
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-02-22T13:22:54+08:00">
-                2016-02-22
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/music/" itemprop="url" rel="index">
-                    <span itemprop="name">music</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/2016/02/22/music/Matthew-Lien-Bleeding-Wolves/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/02/22/music/Matthew-Lien-Bleeding-Wolves/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="450" src="http://music.163.com/outchain/player?type=1&id=172149&auto=1&height=430"></iframe>
-
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://tietang.github.com/2016/02/22/转载/http2.0/装载：HTTP2-0的奇妙日常/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="铁汤">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.gif">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="多少光年">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="多少光年" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/02/22/转载/http2.0/装载：HTTP2-0的奇妙日常/" itemprop="url">
-                  装载：HTTP2.0的奇妙日常
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-02-22T09:57:03+08:00">
-                2016-02-22
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/转载/" itemprop="url" rel="index">
-                    <span itemprop="name">转载</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/转载/http-2-0/" itemprop="url" rel="index">
-                    <span itemprop="name">http 2.0</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/2016/02/22/转载/http2.0/装载：HTTP2-0的奇妙日常/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/02/22/转载/http2.0/装载：HTTP2-0的奇妙日常/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          HTTP2.0性能增强的核心：二进制分帧；HTTP2.0 首部压缩；所有的HTTP2.0的请求都在一个TCP链接上；并行双向字节流的请求和响应；HTTP2.0的请求优先级；HTTP2.0的服务器推送；“十年前端，终归如初”
-          <!--noindex-->
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/02/22/转载/http2.0/装载：HTTP2-0的奇妙日常/">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://tietang.github.com/2016/02/21/技术/Hexo/Hexo命令速记/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="铁汤">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.gif">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="多少光年">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="多少光年" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/02/21/技术/Hexo/Hexo命令速记/" itemprop="url">
-                  Hexo命令速记
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-02-21T22:31:12+08:00">
-                2016-02-21
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/技术/" itemprop="url" rel="index">
-                    <span itemprop="name">技术</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/技术/Hexo/" itemprop="url" rel="index">
-                    <span itemprop="name">Hexo</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/2016/02/21/技术/Hexo/Hexo命令速记/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/02/21/技术/Hexo/Hexo命令速记/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="简写"><a href="#简写" class="headerlink" title="简写"></a>简写</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">hexo n &quot;我的博客&quot; == hexo new &quot;我的博客&quot; #新建文章</div><div class="line">hexo p == hexo publish</div><div class="line">hexo g == hexo generate#生成</div><div class="line">hexo s == hexo server #启动服务预览</div><div class="line">hexo d == hexo deploy#部署</div></pre></td></tr></table></figure>
-<h2 id="服务器"><a href="#服务器" class="headerlink" title="服务器"></a>服务器</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">hexo server #Hexo 会监视文件变动并自动更新，您无须重启服务器。</div><div class="line">hexo server -s #静态模式</div><div class="line">hexo server -p 5000 #更改端口</div><div class="line">hexo server -i 192.168.1.1 #自定义 IP</div><div class="line"></div><div class="line">hexo clean #清除缓存 网页正常情况下可以忽略此条命令</div><div class="line">hexo g #生成静态网页</div><div class="line">hexo d #开始部署</div><div class="line">hexo d -g #部署前先生成今天网页</div></pre></td></tr></table></figure>
-<h2 id="监视文件变动"><a href="#监视文件变动" class="headerlink" title="监视文件变动"></a>监视文件变动</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">hexo generate #使用 Hexo 生成静态文件快速而且简单</div><div class="line">hexo generate --watch #监视文件变动</div></pre></td></tr></table></figure>
-<h2 id="完成后部署"><a href="#完成后部署" class="headerlink" title="完成后部署"></a>完成后部署</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">两个命令的作用是相同的</div><div class="line">hexo generate --deploy</div><div class="line">hexo deploy --generate</div><div class="line">hexo deploy -g</div><div class="line">hexo server -g</div></pre></td></tr></table></figure>
-<h2 id="模版"><a href="#模版" class="headerlink" title="模版"></a>模版</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">hexo new &quot;postName&quot; #新建文章</div><div class="line">hexo new page &quot;pageName&quot; #新建页面</div><div class="line">hexo generate #生成静态页面至public目录</div><div class="line">hexo server #开启预览访问端口（默认端口4000，&apos;ctrl + c&apos;关闭server）</div><div class="line">hexo deploy #将.deploy目录部署到GitHub</div><div class="line"></div><div class="line">hexo new [layout] &lt;title&gt;</div><div class="line">hexo new photo &quot;My Gallery&quot;</div><div class="line">hexo new &quot;Hello World&quot; --lang tw</div></pre></td></tr></table></figure>
-<table>
-<thead>
-<tr>
-<th>变量</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>layout</td>
-<td>布局</td>
-</tr>
-<tr>
-<td>title</td>
-<td>标题</td>
-</tr>
-<tr>
-<td>date</td>
-<td>文件建立日期</td>
-</tr>
-</tbody>
-</table>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">layout: post</div><div class="line">date: 2014-03-03 19:07:43</div><div class="line">comments: true</div><div class="line">categories: Blog</div><div class="line">tags: [Hexo]</div><div class="line">keywords: Hexo, Blog</div><div class="line">description: 生命在于折腾，又把博客折腾到Hexo了。给Hexo点赞。</div></pre></td></tr></table></figure>
-<h2 id="常用指令"><a href="#常用指令" class="headerlink" title="常用指令"></a>常用指令</h2><h2 id="安装升级"><a href="#安装升级" class="headerlink" title="安装升级"></a>安装升级</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">npm install hexo -g #安装  </div><div class="line">npm update hexo -g #升级</div></pre></td></tr></table></figure>
-<h2 id="init"><a href="#init" class="headerlink" title="init"></a>init</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo init [folder]</div></pre></td></tr></table></figure>
-<p>新建一个网站。如果没有设置 <code>folder</code> ，Hexo 默认在目前的文件夹建立网站。</p>
-<h2 id="new"><a href="#new" class="headerlink" title="new"></a>new</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ hexo new [layout] &lt;title&gt;</div><div class="line">$ hexo n [layout] &lt;title&gt;</div></pre></td></tr></table></figure>
-<p>新建一篇文章。如果没有设置 <code>layout</code> 的话，默认使用 <a href="configuration.html">_config.yml</a> 中的 <code>default_layout</code> 参数代替。如果标题包含空格的话，请使用引号括起来。</p>
-<h2 id="generate"><a href="#generate" class="headerlink" title="generate"></a>generate</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>生成静态文件。</p>
-<table>
-<thead>
-<tr>
-<th>选项</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>-d</code>, <code>--deploy</code></td>
-<td>文件生成后立即部署网站</td>
-</tr>
-<tr>
-<td><code>-w</code>, <code>--watch</code></td>
-<td>监视文件变动</td>
-</tr>
-</tbody>
-</table>
-<h2 id="publish"><a href="#publish" class="headerlink" title="publish"></a>publish</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo publish [layout] &lt;filename&gt;</div></pre></td></tr></table></figure>
-<p>发表草稿。</p>
-<h2 id="server"><a href="#server" class="headerlink" title="server"></a>server</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>启动服务器。默认情况下，访问网址为： <code>http://localhost:4000/</code>。</p>
-<table>
-<thead>
-<tr>
-<th>选项</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>-p</code>, <code>--port</code></td>
-<td>重设端口</td>
-</tr>
-<tr>
-<td><code>-s</code>, <code>--static</code></td>
-<td>只使用静态文件</td>
-</tr>
-<tr>
-<td><code>-l</code>, <code>--log</code></td>
-<td>启动日记记录，使用覆盖记录格式</td>
-</tr>
-</tbody>
-</table>
-<h2 id="deploy"><a href="#deploy" class="headerlink" title="deploy"></a>deploy</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>部署网站。</p>
-<table>
-<thead>
-<tr>
-<th>参数</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>-g</code>, <code>--generate</code></td>
-<td>部署之前预先生成静态文件</td>
-</tr>
-</tbody>
-</table>
-<h2 id="render"><a href="#render" class="headerlink" title="render"></a>render</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo render &lt;file1&gt; [file2] ...</div></pre></td></tr></table></figure>
-<p>渲染文件。</p>
-<table>
-<thead>
-<tr>
-<th>参数</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>-o</code>, <code>--output</code></td>
-<td>设置输出路径</td>
-</tr>
-</tbody>
-</table>
-<h2 id="migrate"><a href="#migrate" class="headerlink" title="migrate"></a>migrate</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo migrate &lt;<span class="built_in">type</span>&gt;</div></pre></td></tr></table></figure>
-<p>从其他博客系统 <a href="migration.html">迁移内容</a>。</p>
-<h2 id="clean"><a href="#clean" class="headerlink" title="clean"></a>clean</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo clean</div></pre></td></tr></table></figure>
-<p>清除缓存文件 (<code>db.json</code>) 和已生成的静态文件 (<code>public</code>)。</p>
-<h2 id="list"><a href="#list" class="headerlink" title="list"></a>list</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo list &lt;<span class="built_in">type</span>&gt;</div></pre></td></tr></table></figure>
-<p>列出网站资料。</p>
-<h2 id="version"><a href="#version" class="headerlink" title="version"></a>version</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo version</div></pre></td></tr></table></figure>
-<p>显示 Hexo 版本。</p>
-<h2 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h2><h3 id="安全模式"><a href="#安全模式" class="headerlink" title="安全模式"></a>安全模式</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo --safe</div></pre></td></tr></table></figure>
-<p>在安全模式下，不会载入插件和脚本。当您在安装新插件遭遇问题时，可以尝试以安全模式重新执行。</p>
-<h3 id="调试模式"><a href="#调试模式" class="headerlink" title="调试模式"></a>调试模式</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo --debug</div></pre></td></tr></table></figure>
-<p>在终端中显示调试信息并记录到 <code>debug.log</code>。当您碰到问题时，可以尝试用调试模式重新执行一次，并 <a href="https://github.com/hexojs/hexo/issues/new" target="_blank" rel="external">提交调试信息到 GitHub</a>。</p>
-<h3 id="简洁模式"><a href="#简洁模式" class="headerlink" title="简洁模式"></a>简洁模式</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo --silent</div></pre></td></tr></table></figure>
-<p>隐藏终端信息。</p>
-<h3 id="自定义配置文件的路径"><a href="#自定义配置文件的路径" class="headerlink" title="自定义配置文件的路径"></a>自定义配置文件的路径</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo --config custom.yml</div></pre></td></tr></table></figure>
-<p>自定义配置文件的路径，执行后将不再使用 <code>_config.yml</code>。</p>
-<h3 id="显示草稿"><a href="#显示草稿" class="headerlink" title="显示草稿"></a>显示草稿</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo --draft</div></pre></td></tr></table></figure>
-<p>显示 <code>source/_drafts</code> 文件夹中的草稿文章。</p>
-<h3 id="自定义-CWD"><a href="#自定义-CWD" class="headerlink" title="自定义 CWD"></a>自定义 CWD</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo --cwd /path/to/cwd</div></pre></td></tr></table></figure>
-<p>自定义当前工作目录（Current working directory）的路径。</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://tietang.github.com/2016/02/21/技术/领域模型/领域模型的价值/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="铁汤">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.gif">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="多少光年">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="多少光年" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/02/21/技术/领域模型/领域模型的价值/" itemprop="url">
-                  领域模型的价值
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-02-21T20:20:42+08:00">
-                2016-02-21
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/技术/" itemprop="url" rel="index">
-                    <span itemprop="name">技术</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/技术/领域模型/" itemprop="url" rel="index">
-                    <span itemprop="name">领域模型</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/2016/02/21/技术/领域模型/领域模型的价值/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/02/21/技术/领域模型/领域模型的价值/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="价值"><a href="#价值" class="headerlink" title="价值"></a>价值</h2><ul>
-<li>提供什么服务：<ul>
-<li>什么来体现服务：运行方式，运行过程和业务逻辑</li>
-</ul>
-</li>
-<li>提供的质量：如何服务，要做的事情</li>
-</ul>
-<h2 id="传统数据库为中心"><a href="#传统数据库为中心" class="headerlink" title="传统数据库为中心"></a>传统数据库为中心</h2><p>业务逻辑在数据库上，结合系统代码来保证业务逻辑的实现。<br>以数据库为中心的开发如何的OO﹐如何多的设计模式﹐架构体系如何优美﹐它始终离不开数据库。</p>
-<h2 id="OO-面向对象"><a href="#OO-面向对象" class="headerlink" title="OO|面向对象"></a>OO|面向对象</h2><p>表现点则是直接在对象本身上﹐在于对象之间真正的交互过程﹐结果也是保留在对象的属性和对象与对象的关系中<br>逻辑直接存在于对象上﹐这与现实情况是吻合的。</p>
-<p>领域模型是一种思维﹐是一种方法,是在系统分析阶段使用﹐而不是在代码中进行纯设计时的工具。不是为了OO而领域﹐不是为了最终要新增数据库而领域。在没有理解领域模型本质时，任何编码都得不到收益。</p>
-<p>在分析或架构一个系统时，要得出系统的服务和服务场景，即user case。</p>
-<h2 id="领域模型的特点"><a href="#领域模型的特点" class="headerlink" title="领域模型的特点"></a>领域模型的特点</h2><ol>
-<li>领域模型是对具有某个边界的领域的一个抽象，反映了领域内用户业务需求的本质；领域模型是有边界的，只反应了我们在领域内所关注的部分；<br>　　2. 领域模型只反映业务，和任何技术实现无关；领域模型不仅能反映领域中的一些实体概念，如货物、书本、应聘记录、地址等；还能反映领域中的一些过程概念，如资金转账，等；<br>　　3. 领域模型确保了我们的软件的业务逻辑都在一个模型中，都在一个地方；这样对提高软件的可维护性，业务可理解性以及可重用性方面都有很好的帮助；<br>　　4. 领域模型能够帮助开发人员相对平滑地将领域知识转化为软件构造；<br>　　5. 领域模型贯穿软件分析、设计，以及开发的整个过程；领域专家、设计人员、开发人员通过领域模型进行交流，彼此共享知识与信息；因为大家面向的都是同一个模型，所以可以防止需求走样，可以让软件设计开发人员做出来的软件真正满足需求；<br>　　6. 要建立正确的领域模型并不简单，需要领域专家、设计、开发人员积极沟通共同努力，然后才能使大家对领域的认识不断深入，从而不断细化和完善领域模型；<br>　　7. 为了让领域模型看的见，我们需要用一些方法来表示它；图是表达领域模型最常用的方式，但不是唯一的表达方式，代码或文字描述也能表达领域模型；<br>　　8. 领域模型是整个软件的核心，是软件中最有价值和最具竞争力的部分；设计足够精良且符合业务需求的领域模型能够更快速的响应需求变化。</li>
-</ol>
 
           
         
@@ -2184,7 +1861,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">23</span>
+              <span class="site-state-item-count">24</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -2192,7 +1869,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-count">14</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -2201,7 +1878,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">29</span>
+                <span class="site-state-item-count">32</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -2233,11 +1910,20 @@
               </span>
             
               <span class="links-of-author-item">
-                <a href="https://500px.com/wtt2012" target="_blank" title="500px">
+                <a href="https://500px.com/tietang" target="_blank" title="500px">
                   
                     <i class="fa fa-fw fa-500px"></i>
                   
                   500px
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/users/ae2ad10f3a37/latest_articles" target="_blank" title="简书">
+                  
+                    <i class="fa fa-fw fa-book"></i>
+                  
+                  简书
                 </a>
               </span>
             
@@ -2396,6 +2082,113 @@
   
 
   
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("hnptsbiP3Vo0p1mh9LOUp8Hm-gzGzoHsz", "EnEGfUaCAor7TTQXX1Gud6Fs");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
 
   
 
