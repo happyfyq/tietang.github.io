@@ -133,6 +133,10 @@ social:
   蜂鸟: http://my.fengniao.com/tietang
   500px: https://500px.com/tietang
   简书: http://www.jianshu.com/users/ae2ad10f3a37/latest_articles
+  微服务: http://www.jianshu.com/collection/3f476518d832
+  大数据: http://www.jianshu.com/collection/6bac5f0a8c84
+
+
 
 # Social Links Icons
 # Icon Mapping:
@@ -149,6 +153,8 @@ social_icons:
   蜂鸟: camera
   500px: 500px
   简书: book
+  微服务: cloud
+  大数据: cubes
 
 
 # Sidebar Avatar
