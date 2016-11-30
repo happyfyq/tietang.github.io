@@ -16,4 +16,4 @@ hexo init
 npm install
 
 
-如果部署不成功，删除.deploy_git后重新执行
+如果部署不成功，或者会把全部源码部署过去，可以删除.deploy_git后重新执行
