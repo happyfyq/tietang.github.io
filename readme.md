@@ -11,6 +11,7 @@ npm install --save hexo-generator-tag
 
 
 cd folder
+npm install hexo --save
 hexo init
 npm install
 
