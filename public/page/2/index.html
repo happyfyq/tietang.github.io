@@ -420,6 +420,371 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://tietang.github.com/2016/09/08/微服务/微服务之spring-cloud分布式外部化和中心化配置管理/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="铁汤">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="多少光年">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="多少光年" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/09/08/微服务/微服务之spring-cloud分布式外部化和中心化配置管理/" itemprop="url">
+                  微服务之spring-cloud分布式外部化和中心化配置管理
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-09-08T19:22:47+08:00">
+                2016-09-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/微服务/" itemprop="url" rel="index">
+                    <span itemprop="name">微服务</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2016/09/08/微服务/微服务之spring-cloud分布式外部化和中心化配置管理/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/08/微服务/微服务之spring-cloud分布式外部化和中心化配置管理/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/09/08/微服务/微服务之spring-cloud分布式外部化和中心化配置管理/" class="leancloud_visitors" data-flag-title="微服务之spring-cloud分布式外部化和中心化配置管理">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><img src="http://upload-images.jianshu.io/upload_images/2519252-16f4dd62aebd0502.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/600" alt="DPP_0001.jpg"></p>
+<p>微服务化之后，应用的数量剧增，零时需要调整配置参数时，无论是运维直接在服务器上修改还是工程中修改配置后重新打包部署，对运维来说工作量是巨大的，而且人为的操作会加大出错的几率，那么外化和中心化配置可以更好的解决分布式环境的配置问题。Spring Cloud提供了2种方式的外化配置：</p>
+<ol>
+<li>Spring Cloud Config 通过本地文件系统，git/svn仓库来管理配置文件，可以满足基本外化需求，但不能精细的管理配置项。</li>
+<li>Spring Cloud Zookeeper Config 通过Zookeeper分级命名空间来储存配置项数据，并且支持基础上下文和profile命名空间，另外Zookeeper可以实时监听节点变化和通知机制，应该是首选。</li>
+</ol>
+<p>Spring Cloud Zookeeper Config提供的功能：</p>
+<ul>
+<li>和Spring Boot无缝集成，能完全无缝替代properties或yml文件的配置。</li>
+<li>支持默认上下文命名空间。</li>
+<li>支持profile命名空间。</li>
+<li>支持应用名称命名空间。</li>
+<li>命名空间上支持配置的继承。</li>
+<li>支持更改实时通知和endpoint <code>/refresh</code>被动刷新，该特性不太好用。</li>
+</ul>
+<p>Spring Cloud Zookeeper Config 基本能满足要求了，但其实时通知机制会造成应用暂停体验不好，需要初始化操作的配置（比如数据库连接池，http连接池等）实时更新的意义不大。需要实时更新的是那些在运行时从配置缓存中实时获取的参数，因此在此基础上增加基于Spring Cloud Zookeeper Config和CuratorFramework的实时通知组件，基本设计思路是这样的：</p>
+<ol>
+<li>每一个需要动态更新的节点下增加push_status节点，任意值。</li>
+<li>监听push_status节点的值变事件（NodeDataChanged）。</li>
+<li>当修改push_status节点值时，会通知所有监听该节点的应用端。</li>
+<li>应用端收到NodeDataChanged事件，递归获取push_status节点下所有的节点数据，并更新配置缓存。</li>
+</ol>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://tietang.github.com/2016/09/08/微服务/微服务拆分实践/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="铁汤">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="多少光年">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="多少光年" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/09/08/微服务/微服务拆分实践/" itemprop="url">
+                  微服务拆分实践
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-09-08T19:22:47+08:00">
+                2016-09-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/微服务/" itemprop="url" rel="index">
+                    <span itemprop="name">微服务</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2016/09/08/微服务/微服务拆分实践/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/08/微服务/微服务拆分实践/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/09/08/微服务/微服务拆分实践/" class="leancloud_visitors" data-flag-title="微服务拆分实践">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><img src="http://upload-images.jianshu.io/upload_images/2519252-54c30064a539893e.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/600" alt="IMG_20161026_144514.jpg"></p>
+<p>说到微服务就不得不说拆分了，服务拆分要有一些指导依据。</p>
+<h3 id="拆分依据"><a href="#拆分依据" class="headerlink" title="拆分依据"></a>拆分依据</h3><p>微服务的理论知识有大量的分享，这里是我对微服务理论基础认识的一些观点：</p>
+<ul>
+<li>小，且专注于做一件事情，即满足<a href="http://www.infoq.com/cn/articles/single-responsibility-in-software-development" target="_blank" rel="external">单一职责原则</a>。 关于单一职责可以阅读我的另一篇文章<a href="http://www.infoq.com/cn/articles/single-responsibility-in-software-development" target="_blank" rel="external">《软件开发中的单一职责》</a></li>
+<li>运行在独立的进程中。</li>
+<li>轻量级的通信机制，RPC或者HTTP或者MQ。</li>
+<li>松耦合，独立部署。</li>
+<li>康威定律：设计系统的组织，其产生的设计等同于组织之内、组织之间的沟通结构。</li>
+</ul>
+<p><strong>服务拆分依据结合上面的理论基础充分考虑了以下因素：</strong></p>
+<ul>
+<li>业务和领域模型</li>
+<li>技术、业务量等其他因素</li>
+<li>团队</li>
+</ul>
+<p>业务应该说是最实在的，也是最好理解而且最容易把握的。虽然领域的有界上下文从理论上能指导拆分，但是万万需要拆分的不是一个全新的系统，而是一个在线上稳定运行了很长时间的，很多人一砖一瓦堆砌起来的，并且仍然在持续添砖加瓦，不管是桥梁，还是高楼，我们的目的是让系统运行的更健壮，而不是拆成七零八碎，所对于这样的老系统，用领域拆分需要结合团队现状，理论结合实际，事半功倍。</p>
+<p>运行时隔离也是很重要的拆分依据，会根据一些具有特定功能的API单独拆分出来作为一个微服务，和其他微服务隔离，避免相互影响，避免一个老鼠害了一锅汤。比如一些文件上传一类的API，特征是响应时间长，对IO依赖比较多，其线程池需要特殊配置；比如多线程利用CPU来换取响应时间的等等。</p>
+<p>对于康威定理，究竟是团队影响拆分，还是拆分影响团队，那就需要均衡利弊了。如果是因为拆分微服务，而拆分了团队，那势必会影响到团队的稳定性和团队成员的归属感，尤其是一个组建很久的老团队。反之，团队负责多种业务，也没有明显的职责区分，就要考虑是否拆分团队，明确拆分后的团队职责。</p>
+<p>对于正在运行的系统，如何拆分和拆分为多大的粒度，事实上是不能有太过理论化理想化，更需要深入项目本身和该项目团队，了解业务，人和代码。不能是拆迁队，也不是修缮，应该是拆成各种形状的合理大小的积木。</p>
+<p>孰重孰轻很难说明白，团队不一样项目不一样，实践就不一样，找到适合自己团队的方法。</p>
+<h3 id="拆分粒度"><a href="#拆分粒度" class="headerlink" title="拆分粒度"></a>拆分粒度</h3><p>拆分粒度不应该过分追求细粒度，要考虑适中不能过大或过小。按照单一职责原则和康威定律，在业务域、团队还有技术上平衡粒度。拆分后的代码应该是易控制，易维护的，业务职责也是明确单一的。 </p>
+<h3 id="拆分过程实践"><a href="#拆分过程实践" class="headerlink" title="拆分过程实践"></a>拆分过程实践</h3><p>在拆分过程不得不考虑的是业务在跑，砖在砌，不能停，而且拆分工作也必须得进行，过程上不能一部到位，必须一步一步走，也由于此拆分后落地上线也要稳妥。所以，过程上，我也采用了比较稳妥的战术，<strong>先拆分为maven module，然后在拆分为微服务可部署构件</strong>。这样的好处是，拆分过程不影响业务迭代，而且可以随意组合成单体应用和微服务app，并且还可以事先测试和验证拆分，最大限度的降低微服务化实施的风险。</p>
+<p><strong>下面是拆分代码过程实践经验：</strong></p>
+<p>1). <strong>设计module骨架</strong></p>
+<p>module骨架的设计是基础，影响最终拆分结果，拆分成功的向导。按照技术，业务，部署打包，测试这几个维度来规划设计，下面是一个参考。</p>
+<p><strong>最终骨架模型：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">root web app</div><div class="line">	webapp  //war module，打包为单体war，整体部署</div><div class="line">	micro-services //微服务pom module</div><div class="line">		user-service</div><div class="line">		customer-service</div><div class="line">		order-service</div><div class="line">		other-service</div><div class="line">		api-gateway</div><div class="line">	biz //业务相关的module</div><div class="line">		entitys 			//所有实体类</div><div class="line">		biz-base			//一些无法拆分的代码上有依赖的服务</div><div class="line">		biz-user			//用户业务</div><div class="line">		biz-customer		//客户业务</div><div class="line">		biz-order			//订单业务</div><div class="line">		...					</div><div class="line">	commons</div><div class="line">		async-framework  //一部框架</div><div class="line">		utils				//工具类</div></pre></td></tr></table></figure>
+<p>2). <strong>拆分技术commons</strong></p>
+<p>作为第一步，先对整个工程按业务和功能进行了maven多module的拆分。拆分过程没有技巧可言，一步一步走，一步一个脚印。首先是分离出技术上的commons，感觉这应该是最好拆分的了，把相关的类重构到一个包里，在分离出一个module即可。实际过程并非如此，因为是老项目，这类commons也并没有想象的容易，经过很多人的添砖加瓦，并没有完全按照<a href="http://www.infoq.com/cn/articles/single-responsibility-in-software-development" target="_blank" rel="external">单一职责原则</a>来砌，根本就是把业务特征的代码也放到了技术类代码中，不过review代码后感觉还好，微遵循的毕竟是少数，那就先重构代码，把业务特性的砖从类里移出去。</p>
+<p>3). <strong>拆分entity</strong></p>
+<p>很多在业务代码上都会共享entity类，通常没法也没法把entity类分门别类，最简单就是把所有的entity类放到一个module，谁需要谁依赖的原则。entity类也没有太多jar依赖和业务依赖，也不会形成污染源。</p>
+<p>4). <strong>公共业务</strong></p>
+<p>同commons和entity方法，不在复述，也被各个业务依赖，这种业务大部分是过渡性的，在未来迭代演进时可以通过其他方式抽象集成。</p>
+<p>5). <strong>拆分业务代码</strong></p>
+<p>拆分业务是最痛苦的事情了，这个要看原来的代码整洁度和互相依赖程度，一般采取2中方法：</p>
+<ul>
+<li>新建业务module，加入基础module的pom依赖，再从源module复制和该业务module相关的代码（包括单元测试代码）过来，解决编译错误和单元测试错误，完成本业务拆分。</li>
+<li>从源module复制一个新业务module，保持代码一致，先删除和本义务无关的代码（包括单元测试代码），再删除无关的pom依赖，解决编译错误和单元测试错误，完成本业务拆分。</li>
+</ul>
+<p>选择哪种方法，可以根据代码整洁度和互相依赖程度，如果代码很整洁且相互依赖较弱，可以采取前者，否则就采取后者。</p>
+<p>6). <strong>拆分微服务</strong></p>
+<p>有了以上的拆分基础，可以在合适的业务迭代将各个微服务module迁移到不同的代码仓库，完成进一步隔离管理。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
   <link itemprop="mainEntityOfPage" href="http://tietang.github.com/2016/09/06/微服务/Feign使用性能优化/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1466,338 +1831,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://tietang.github.com/2016/03/09/hystrix/Hystrix降级模式总结/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="铁汤">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.gif">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="多少光年">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="多少光年" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/03/09/hystrix/Hystrix降级模式总结/" itemprop="url">
-                  Hystrix降级模式总结
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-03-09T09:22:47+08:00">
-                2016-03-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/技术/" itemprop="url" rel="index">
-                    <span itemprop="name">技术</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/技术/Hystrix/" itemprop="url" rel="index">
-                    <span itemprop="name">Hystrix</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/2016/03/09/hystrix/Hystrix降级模式总结/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/09/hystrix/Hystrix降级模式总结/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/03/09/hystrix/Hystrix降级模式总结/" class="leancloud_visitors" data-flag-title="Hystrix降级模式总结">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          Hystrix降级
-          <!--noindex-->
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/03/09/hystrix/Hystrix降级模式总结/">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://tietang.github.com/2016/03/09/hystrix/Hystrix简介/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="铁汤">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.gif">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="多少光年">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="多少光年" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/03/09/hystrix/Hystrix简介/" itemprop="url">
-                  Hystrix简介
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-03-09T09:22:47+08:00">
-                2016-03-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/技术/" itemprop="url" rel="index">
-                    <span itemprop="name">技术</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/技术/Hystrix/" itemprop="url" rel="index">
-                    <span itemprop="name">Hystrix</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/2016/03/09/hystrix/Hystrix简介/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/09/hystrix/Hystrix简介/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/03/09/hystrix/Hystrix简介/" class="leancloud_visitors" data-flag-title="Hystrix简介">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          Hystrix简介
-          <!--noindex-->
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/03/09/hystrix/Hystrix简介/">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1843,7 +1876,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">25</span>
+              <span class="site-state-item-count">27</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1860,7 +1893,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">35</span>
+                <span class="site-state-item-count">39</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
