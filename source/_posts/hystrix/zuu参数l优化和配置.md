@@ -155,3 +155,12 @@ ribbon:
 
 主要是`ConnectTimeout`和`ReadTimeout`2个参数，最终会设置到http Client中。
 
+注意这个参数很重要了，会配合`execution.isolation.thread.timeoutInMilliseconds `一起来用，多少合适要根据微服务实际情况来定：
+
+- **太小：**会导致很多正常业务失败
+- **太大：**会导致实际的熔断效果很差，严重会导致雪崩。
+
+一般实际大小为：
+
+- 要保证该服务的可用性为几个9？99.5 99.9 99.99 
+- 要保证的N个9的最大响应时间。
