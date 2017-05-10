@@ -1,3 +1,17 @@
+---
+title: JDBC如何开启事务
+thumbnail: 'http://7xiovs.com1.z0.glb.clouddn.com/P70430-092839.jpg'
+date: 2017-04-10 18:22:47
+categories:
+	- JDBC
+tags:
+	- JDBC
+	- 事务
+keywords:
+	- JDBC
+	- 事务
+description:
+---
 
 
 面试了很多人，每每问到“JDBC如何开启一个事务？”，大部分人的回答是：“通过openTransaction方法”，有的说是通过Connection，有的是说通过Statement，更有的说通过Connection拿到一个`Transaction`实例，再通过`openTransaction`方法来开启，那么同样关闭事务就有close方法“closeTransaction”。
