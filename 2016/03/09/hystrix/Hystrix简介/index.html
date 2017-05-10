@@ -1,0 +1,978 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="hystrix" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="Hystrix简介">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hystrix简介">
+<meta property="og:url" content="http://tietang.github.com/2016/03/09/hystrix/Hystrix简介/index.html">
+<meta property="og:site_name" content="多少光年">
+<meta property="og:description" content="Hystrix简介">
+<meta property="og:image" content="http://7xiovs.com1.z0.glb.clouddn.com/hystrix-hystrix-logo-tagline-640.png">
+<meta property="og:image" content="http://7xiovs.com1.z0.glb.clouddn.com/hystrix-soa-1-1280.png">
+<meta property="og:image" content="http://7xiovs.com1.z0.glb.clouddn.com/hystrix-soa-2-1280.png">
+<meta property="og:image" content="http://7xiovs.com1.z0.glb.clouddn.com/hystrix-soa-3-1280.png">
+<meta property="og:image" content="http://7xiovs.com1.z0.glb.clouddn.com/hystrix-soa-4-isolation-1280.png">
+<meta property="og:updated_time" content="2016-11-30T07:08:56.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hystrix简介">
+<meta name="twitter:description" content="Hystrix简介">
+<meta name="twitter:image" content="http://7xiovs.com1.z0.glb.clouddn.com/hystrix-hystrix-logo-tagline-640.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"right","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://tietang.github.com/2016/03/09/hystrix/Hystrix简介/"/>
+
+
+
+
+
+  <title> Hystrix简介 | 多少光年 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-74077761-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?a671e5198b87c08c17ebf22563539dd1";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">多少光年</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">风可以吹走尘土,但吹不走记忆</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://tietang.github.com/2016/03/09/hystrix/Hystrix简介/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="铁汤">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="多少光年">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="多少光年" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Hystrix简介
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-03-09T09:22:47+08:00">
+                2016-03-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术/Hystrix/" itemprop="url" rel="index">
+                    <span itemprop="name">Hystrix</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2016/03/09/hystrix/Hystrix简介/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/09/hystrix/Hystrix简介/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/03/09/hystrix/Hystrix简介/" class="leancloud_visitors" data-flag-title="Hystrix简介">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+
+          
+              <div class="post-description">
+                  Hystrix简介
+              </div>
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="http://7xiovs.com1.z0.glb.clouddn.com/hystrix-hystrix-logo-tagline-640.png" alt=""></p>
+<ol>
+<li><a href="#what">What Is Hystrix?</a></li>
+<li><a href="#purpose">What Is Hystrix For?</a></li>
+<li><a href="#problem">What Problem Does Hystrix Solve?</a></li>
+<li><a href="#principles">What Design Principles Underlie Hystrix?</a></li>
+<li><a href="#how">How Does Hystrix Accomplish Its Goals?</a></li>
+</ol>
+<p><a name="what"></a></p>
+<h2 id="Hystrix是什么"><a href="#Hystrix是什么" class="headerlink" title="Hystrix是什么?"></a>Hystrix是什么?</h2><p>在分布式环境中，不可避免的有许多服务依赖，而且有时候一些服务会失败。Hystrix library通过添加延迟容忍和容错逻辑来控制分布式服务之间的相互影响。Hystrix通过服务之间访问的隔离点阻止连锁故障，并提供了失败回退机制（fallback），来改进系统服务的弹性。</p>
+<h4 id="Hystrix的历史"><a href="#Hystrix的历史" class="headerlink" title="Hystrix的历史"></a>Hystrix的历史</h4><p>Hystrix是在2011年由Netflix API 团队的弹性工程演变而来。在2012年，Hystrix日益完善和成熟，在Netflix的许多团队也开始采用。现在，在Netflix，每天有成千上万的线程隔离和数百亿的信号隔离被调用执行。这已经在可用性和弹性上产生了很大的改进。</p>
+<p>下面的链接提供了围绕Hystrix和挑战，试图解决：</p>
+<ul>
+<li><a href="http://techblog.netflix.com/2011/12/making-netflix-api-more-resilient.html" target="_blank" rel="external">&ldquo;Making Netflix API More Resilient&rdquo;</a></li>
+<li><a href="http://techblog.netflix.com/2012/02/fault-tolerance-in-high-volume.html" target="_blank" rel="external">&ldquo;Fault Tolerance in a High Volume, Distributed System&rdquo;</a></li>
+<li><a href="https://speakerdeck.com/benjchristensen/performance-and-fault-tolerance-for-the-netflix-api-august-2012" target="_blank" rel="external">&ldquo;Performance and Fault Tolerance for the Netflix API&rdquo;</a></li>
+<li><a href="http://programming.oreilly.com/2013/06/application-resilience-in-a-service-oriented-architecture.html" target="_blank" rel="external">&ldquo;Application Resilience in a Service-oriented Architecture&rdquo;</a></li>
+<li>[&ldquo;Application Resilience Engineering &amp; Operations at Netflix&rdquo;] (<a href="https://speakerdeck.com/benjchristensen/application-resilience-engineering-and-operations-at-netflix" target="_blank" rel="external">https://speakerdeck.com/benjchristensen/application-resilience-engineering-and-operations-at-netflix</a>)</li>
+</ul>
+<p><a name="purpose"></a></p>
+<h2 id="Hystrix能做什么"><a href="#Hystrix能做什么" class="headerlink" title="Hystrix能做什么?"></a>Hystrix能做什么?</h2><p>Hystrix被设计为：</p>
+<ul>
+<li>保护通过第三方客户端库服务依赖访问（通常通过网络），控制其延迟和故障</li>
+<li>在复杂的分布式系统中阻止连锁故障反应</li>
+<li>快速失败和快速恢复</li>
+<li>Fallback降级和在可能的情况下优雅地降级</li>
+<li>启用近实时监测，报警和操作控制</li>
+</ul>
+<p><a name="problem"></a></p>
+<h2 id="Hystrix解决了什么问题"><a href="#Hystrix解决了什么问题" class="headerlink" title="Hystrix解决了什么问题?"></a>Hystrix解决了什么问题?</h2><p>复杂分布式架构的应用程序有许多依赖，其中每一个在某些时候都会不可避免的发生失败。如果这个主应用没有从那些外部失败隔离，那么就会有被拖垮的风险。</p>
+<p>例如，1个应用依赖30个服务，每个服务有99.99%可用，那么预期：</p>
+<blockquote>
+<p>99.99<sup>30</sup>  =  99.7% uptime<br>10亿请求中的0.3%  = 3,000,000 次失败<br>即使所有依赖的服务都能达到 99.99% 的可用率，每月大约有2+小时不可用<br>随着服务依赖数量的变多，服务不稳定的概率会成指数性提高.</p>
+</blockquote>
+<p><strong>现实通常会更残酷。</strong></p>
+<p><strong>如果你没有针对整个系统做快速恢复</strong>，即使所有依赖只有 0.01% 的不可用率，累积起来每个月给系统带来的不可用时间也有数小时之多。</p>
+<hr>
+<p>当一切都ok的请求流看起来是这样的：</p>
+<p><img src="http://7xiovs.com1.z0.glb.clouddn.com/hystrix-soa-1-1280.png" alt=""></p>
+<p>当许多后端系统中的一个成为潜在故障时，可能会阻塞所有用户请求：</p>
+<p><img src="http://7xiovs.com1.z0.glb.clouddn.com/hystrix-soa-2-1280.png" alt=""></p>
+<p>一个高并发后端依赖成为潜在危险时，它会在几秒钟中导致所有服务器上的所有的资源耗尽。<br>在网络中或者客户端库中运行的每一个app都有可能会导致成为潜在的故障源。比失败更坏的是，这个问题app也可能会导致服务之间的延迟增加，从而备份队列，线程，和其他系统资源，导致更多系统的级联故障。</p>
+<p><img src="http://7xiovs.com1.z0.glb.clouddn.com/hystrix-soa-3-1280.png" alt=""></p>
+<p>当通过第三方客户端网络访问时，这些问题会加剧，这个第三方客户端就是一个黑盒，其实现细节是不清楚的，它能随时改变行为，每个客户端库的网络和资源配置是不同的，通常难以监控和修改。<br>如果这些网络请求通过第三方客户端发出，问题会变得更加严重，因为这些第三方客户端对于应用来说相当于『黑盒』——无法了解其实现细节，随时可能发生变更，网络/资源配置随客户端的不同而不同，同时又难以监控和修改。同时，应用依赖链中的服务可能非常耗时，或者这些可能导致问题的网络请求根本没有被我们的应用显式地调用！</p>
+<p>网络连接可能失败或者降级。服务或者服务器可能失效或者变慢。新依赖的库或者部署的服务可能改变行为或性能，亦或是依赖的客户端库本身有bug。<br>所有以上这些所描述的失败和延迟都需要被隔离和管理，才不至于因为单个服务失败而导致整个应用活系统垮掉。</p>
+<p><a name="principles"></a></p>
+<h2 id="What-Design-Principles-Underlie-Hystrix"><a href="#What-Design-Principles-Underlie-Hystrix" class="headerlink" title="What Design Principles Underlie Hystrix?"></a>What Design Principles Underlie Hystrix?</h2><p>Hystrix works by:</p>
+<ul>
+<li>防止任何单一依赖耗尽容器（如Tomcat）内的所有用户线程</li>
+<li>隔离和减低负载，对无法及时处理时快速失败，而不是排队</li>
+<li>提供失败回退（fallback）降级，无论何时都尽可能保护使用者免受破坏。</li>
+<li>采用隔离技术（如隔离壁，泳道，和熔断器模式）来限制任何一个依赖性的影响。</li>
+<li>通过最近实时metrics、监控和警告来优化以满足近实时性的要求</li>
+<li>在 Hystrix许多方面都需要只是配置属性的动态修改并能低延迟传播，提供优化以满足快速恢复的要求</li>
+<li>能保护应用不受依赖服务的整个执行过程中失败的影响，而不仅仅是网络请求</li>
+</ul>
+<p><a name="how"></a></p>
+<h2 id="How-Does-Hystrix-Accomplish-Its-Goals"><a href="#How-Does-Hystrix-Accomplish-Its-Goals" class="headerlink" title="How Does Hystrix Accomplish Its Goals?"></a>How Does Hystrix Accomplish Its Goals?</h2><p>Hystrix does this by:</p>
+<ul>
+<li><p>使用<code>HystrixCommand</code>或者<code>HystrixObservableCommand</code>包装所有的外部系统（或者依赖服务）调用，每个<code>HystrixCommand</code>或者<code>HystrixObservableCommand</code>在隔离的线程中/信号下执行（参考这个例子<a href="http://en.wikipedia.org/wiki/Command_pattern" target="_blank" rel="external">command pattern</a>）</p>
+</li>
+<li><p>超时机制，调用时间比定义的超时阀值大时超时。除了默认值，通过设置&ldquo;properties&rdquo;给每个依赖服务定义超时阀值,超时时间一般设为比99.5%平均时间略高即可.当调用超时时，直接返回或执行fallback逻辑。</p>
+</li>
+<li><p>为每个依赖维护一个小的线程池（或信号），如果线程池已满调用将被立即拒绝来代替排队方式。</p>
+</li>
+<li>测量成功，失败（抛出异常），超时和线程拒绝。</li>
+<li>如果错误比率达到设定的阀值，通过手动或者自动方式平稳的停止一个时间周期调用所有请求。</li>
+<li>当请求失败、拒绝，超时或者发生短路时，执行失败回退（fallback）逻辑。</li>
+<li>近实时监控度量，动态配置修改</li>
+</ul>
+<p>当使用 Hystrix 包装了你的所有依赖服务的请求后，下面图中所示的系统拓扑将会变成如下形式，每个依赖服务都被隔离开来，Hystrix 会严格控制其在延迟发生时对资源的占用，并在任何失效发生时，执行失败回退逻辑。</p>
+<p><img src="http://7xiovs.com1.z0.glb.clouddn.com/hystrix-soa-4-isolation-1280.png" alt=""></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/hystrix/" rel="tag"># hystrix</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/03/09/hystrix/Hystrix降级模式总结/" rel="next" title="Hystrix降级模式总结">
+                <i class="fa fa-chevron-left"></i> Hystrix降级模式总结
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/06/02/微服务/微服务之微/" rel="prev" title="微服务之微">
+                微服务之微 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/03/09/hystrix/Hystrix简介/"
+     data-title="Hystrix简介"
+     data-content=""
+     data-url="http://tietang.github.com/2016/03/09/hystrix/Hystrix简介/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/03/09/hystrix/Hystrix简介/"
+           data-title="Hystrix简介" data-url="http://tietang.github.com/2016/03/09/hystrix/Hystrix简介/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="铁汤" />
+          <p class="site-author-name" itemprop="name">铁汤</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">31</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">17</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">45</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/tietang/" target="_blank" title="Github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://my.fengniao.com/tietang" target="_blank" title="蜂鸟">
+                  
+                    <i class="fa fa-fw fa-camera"></i>
+                  
+                  蜂鸟
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://500px.com/tietang" target="_blank" title="500px">
+                  
+                    <i class="fa fa-fw fa-500px"></i>
+                  
+                  500px
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/users/ae2ad10f3a37/latest_articles" target="_blank" title="简书">
+                  
+                    <i class="fa fa-fw fa-book"></i>
+                  
+                  简书
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/collection/3f476518d832" target="_blank" title="微服务">
+                  
+                    <i class="fa fa-fw fa-cloud"></i>
+                  
+                  微服务
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/collection/6bac5f0a8c84" target="_blank" title="大数据">
+                  
+                    <i class="fa fa-fw fa-cubes"></i>
+                  
+                  大数据
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Hystrix是什么"><span class="nav-number">1.</span> <span class="nav-text">Hystrix是什么?</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Hystrix的历史"><span class="nav-number">1.0.1.</span> <span class="nav-text">Hystrix的历史</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hystrix能做什么"><span class="nav-number">2.</span> <span class="nav-text">Hystrix能做什么?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hystrix解决了什么问题"><span class="nav-number">3.</span> <span class="nav-text">Hystrix解决了什么问题?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#What-Design-Principles-Underlie-Hystrix"><span class="nav-number">4.</span> <span class="nav-text">What Design Principles Underlie Hystrix?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#How-Does-Hystrix-Accomplish-Its-Goals"><span class="nav-number">5.</span> <span class="nav-text">How Does Hystrix Accomplish Its Goals?</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">铁汤</span>
+</div>
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"tietang"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("hnptsbiP3Vo0p1mh9LOUp8Hm-gzGzoHsz", "EnEGfUaCAor7TTQXX1Gud6Fs");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+
+</body>
+</html>
