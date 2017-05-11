@@ -86,7 +86,7 @@
 
 <meta property="og:type" content="website">
 <meta property="og:title" content="多少光年">
-<meta property="og:url" content="http://tietang.github.com/tags/Hystrix/index.html">
+<meta property="og:url" content="http://tietang.github.com/tags/hystrix/index.html">
 <meta property="og:site_name" content="多少光年">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="多少光年">
@@ -117,13 +117,13 @@
 
 
 
-  <link rel="canonical" href="http://tietang.github.com/tags/Hystrix/"/>
+  <link rel="canonical" href="http://tietang.github.com/tags/hystrix/"/>
 
 
 
 
 
-  <title> 标签: Hystrix | 多少光年 </title>
+  <title> 标签: hystrix | 多少光年 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -256,7 +256,7 @@
   <div id="posts" class="posts-collapse">
     <div class="collection-title">
       <h2 >
-        Hystrix
+        hystrix
         <small>标签</small>
       </h2>
     </div>
@@ -269,9 +269,9 @@
 
       <h1 class="post-title">
         
-            <a class="post-title-link" href="/2016/11/18/hystrix/Hystrix semaphore和thread隔离的区别/" itemprop="url">
+            <a class="post-title-link" href="/2016/09/02/hystrix/RestTemplate遇上Hystrix/" itemprop="url">
               
-                <span itemprop="name">Hystrix semaphore和thread隔离策略的区别及配置参考</span>
+                <span itemprop="name">RestTemplate遇上Hystrix</span>
               
             </a>
         
@@ -279,9 +279,9 @@
 
       <div class="post-meta">
         <time class="post-time" itemprop="dateCreated"
-              datetime="2016-11-18T19:22:47+08:00"
-              content="2016-11-18" >
-          11-18
+              datetime="2016-09-02T09:20:00+08:00"
+              content="2016-09-02" >
+          09-02
         </time>
       </div>
 
@@ -297,9 +297,9 @@
 
       <h1 class="post-title">
         
-            <a class="post-title-link" href="/2016/11/17/hystrix/zuu参数l优化和配置/" itemprop="url">
+            <a class="post-title-link" href="/2016/03/09/hystrix/Hystrix降级模式总结/" itemprop="url">
               
-                <span itemprop="name">zuul 参数调优</span>
+                <span itemprop="name">Hystrix降级模式总结</span>
               
             </a>
         
@@ -307,9 +307,65 @@
 
       <div class="post-meta">
         <time class="post-time" itemprop="dateCreated"
-              datetime="2016-11-17T19:22:47+08:00"
-              content="2016-11-17" >
-          11-17
+              datetime="2016-03-09T09:22:47+08:00"
+              content="2016-03-09" >
+          03-09
+        </time>
+      </div>
+
+    </header>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <h1 class="post-title">
+        
+            <a class="post-title-link" href="/2016/03/09/hystrix/Hystrix简介/" itemprop="url">
+              
+                <span itemprop="name">Hystrix简介</span>
+              
+            </a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2016-03-09T09:22:47+08:00"
+              content="2016-03-09" >
+          03-09
+        </time>
+      </div>
+
+    </header>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <h1 class="post-title">
+        
+            <a class="post-title-link" href="/2016/02/25/hystrix/Hystrix参数详解/" itemprop="url">
+              
+                <span itemprop="name">Hystrix 参数详解</span>
+              
+            </a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2016-02-25T09:20:00+08:00"
+              content="2016-02-25" >
+          02-25
         </time>
       </div>
 
@@ -359,7 +415,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">27</span>
+              <span class="site-state-item-count">31</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -367,7 +423,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-count">17</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -376,7 +432,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">39</span>
+                <span class="site-state-item-count">45</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -472,7 +528,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2016</span>
+  <span itemprop="copyrightYear">2017</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
@@ -664,56 +720,6 @@
               },
               error: function(counter, error) {
                 console.log('Failed to save Visitor num, with error message: ' + error.message);
-              }
-            });
-          } else {
-            var newcounter = new Counter();
-            /* Set ACL */
-            var acl = new AV.ACL();
-            acl.setPublicReadAccess(true);
-            acl.setPublicWriteAccess(true);
-            newcounter.setACL(acl);
-            /* End Set ACL */
-            newcounter.set("title", title);
-            newcounter.set("url", url);
-            newcounter.set("time", 1);
-            newcounter.save(null, {
-              success: function(newcounter) {
-                var $element = $(document.getElementById(url));
-                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
-              },
-              error: function(newcounter, error) {
-                console.log('Failed to create');
-              }
-            });
-          }
-        },
-        error: function(error) {
-          console.log('Error:' + error.code + " " + error.message);
-        }
-      });
-    }
-
-    $(function() {
-      var Counter = AV.Object.extend("Counter");
-      if ($('.leancloud_visitors').length == 1) {
-        addCount(Counter);
-      } else if ($('.post-title-link').length > 1) {
-        showTime(Counter);
-      }
-    });
-  </script>
-
-
-
-  
-
-  
-
-
-</body>
-</html>
-rror.message);
               }
             });
           } else {

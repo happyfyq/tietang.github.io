@@ -265,6 +265,727 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://tietang.github.com/2017/05/10/MQ/一次线上事故对本地文件异步队列的思考/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="铁汤">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="多少光年">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="多少光年" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/05/10/MQ/一次线上事故对本地文件异步队列的思考/" itemprop="url">
+                  一次线上事故对“本地文件队列异步使用”的思考
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-10T18:22:47+08:00">
+                2017-05-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/MQ/" itemprop="url" rel="index">
+                    <span itemprop="name">MQ</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2017/05/10/MQ/一次线上事故对本地文件异步队列的思考/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/05/10/MQ/一次线上事故对本地文件异步队列的思考/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2017/05/10/MQ/一次线上事故对本地文件异步队列的思考/" class="leancloud_visitors" data-flag-title="一次线上事故对“本地文件队列异步使用”的思考">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="事故描述"><a href="#事故描述" class="headerlink" title="事故描述"></a>事故描述</h2><p>事故现象是部分服务http请求无响应。事故从发生到恢复，接近3个小时，事故过程中重启应用服务，只能坚持几分钟到十几分钟，在真正发现问题前通过不断重启服务实例来支撑，庆幸的是核心服务没有出现无响应的事故。</p>
+<p>最终分析为AMQ出现故障，现象是MQ客户端sendMessage后等待响应，但一直在等待，AMQ监控端口ok，控制台也可以打开，由于紧急没有具体分析，直接重启AMQ服务，切换master，通过验证服务全部恢复。</p>
+<p>这次故障大部分服务都使用了AMQ，但除了一个核心服务没受到明显影响外，其他使用AMQ的服务都不同程度的收到了影响，服务不可用。</p>
+<p>事后通过分析这个核心服务正式使用了<strong>本地文件队列</strong>避免了事故放大，逃过一劫，当时如果这个核心服务也受到影响就可想而知了，客户估计要炸了，公司也会受到很大的损失。</p>
+<p>此次事故也证明了我当时的这个架构思路的正确性，主要体现在隔离和降级。</p>
+<h2 id="说说这个核心服务使用“本地文件队列”"><a href="#说说这个核心服务使用“本地文件队列”" class="headerlink" title="说说这个核心服务使用“本地文件队列”"></a>说说这个核心服务使用“本地文件队列”</h2><p>我开发出来这个组件在这个团队使用一直很稳定效果也很好。</p>
+<p>实际上这个团队使用<strong>“本地文件队列”</strong>的姿势并不是我期望的，本身使用方法并没有明显不妥，只是会延迟消息的消费，但这中方法可以很好的且有效的隔离故障。</p>
+<p>就是在发送AMQ消息的方法上添加了<code>@AsyncExecutable</code>，所以在入AMQ前先入队“本地文件队列”，然后“本地文件队列”消费者再把消息生产到AMQ。</p>
+<p><img src="http://7xiovs.com1.z0.glb.clouddn.com/async.png" alt=""></p>
+<p>这里正是利用率“本地文件队列”的优点，比较可靠，只依赖于本地文件系统，不会有网络故障的特性，近似不会被阻塞。</p>
+<p>在事故分析中，实际上AMQ对该核心服务也受到影响，但由于采用了“本地文件队列”作为一级队列，有效的隔离了对AMQ的网络依赖，所以没有放大事故。事故中“本地文件队列”中消息被积累，没有被消费，重启服务后才被消费，原因后面再分析。</p>
+<h2 id="再说说此次事故中服务不可用的原因"><a href="#再说说此次事故中服务不可用的原因" class="headerlink" title="再说说此次事故中服务不可用的原因"></a>再说说此次事故中服务不可用的原因</h2><ol>
+<li>AMQ出现故障，现象是MQ客户端sendMessage后等待响应，但一直在等待。</li>
+<li>AMQ Client消息的生产和Tomcat共用worker线程</li>
+<li>AMQ Client消息的生产没有超时机制</li>
+<li>AMQ Client消息的生产采用同步发送，异步发送有一些问题场景不太合适。</li>
+</ol>
+<p>所以基于以上信息，AMQ消息的生产阻塞了Tomcat worker线程，最终导致worker线程被耗光而服务不可用。</p>
+<p>在事故中通过线程堆栈信息和Tomcat线程使用数统计也确定了线程很快被耗光而请求被阻塞。</p>
+<p>另一个服务中采用了异步线程池来生产AMQ消息，但拒绝策略采用了<code>CallerRunsPolicy</code>, 也是线程池线程很快被耗光而再耗光Tomcat worker线程，最终导致服务不可用。</p>
+<p>事故产生的原因就是代码中没有有效做网路调用的隔离和降级。</p>
+<p>上面提到的核心服务也受到影响，参考《<a href="本地文件队列-异步隔离.md">本地文件队列-异步隔离</a>》，也是因为<strong>“本地文件队列”</strong>拒绝策略采用了<code>CallerRunsPolicy</code>，最终导致线程池线程很快被耗光，而使用<strong>“本地文件队列”</strong>消费调度主线程，消费调度主线程被阻塞而无法消费“本地文件队列”消息并生产到AMQ。但这里和其他服务不同的是，主业务和AMQ的消息生产是隔离的，主业务生产消息到<strong>“本地文件队列”</strong>就返回，并不直接依赖AMQ。</p>
+<p>本文中提到了使用<strong>本地文件队列</strong>的隔离姿势。</p>
+<p>后面再介绍使用<strong>本地文件队列</strong>的降级姿势。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://tietang.github.com/2017/05/10/MQ/本地文件队列-异步隔离/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="铁汤">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="多少光年">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="多少光年" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/05/10/MQ/本地文件队列-异步隔离/" itemprop="url">
+                  本地文件队列-异步隔离架构
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-10T18:00:47+08:00">
+                2017-05-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/MQ/" itemprop="url" rel="index">
+                    <span itemprop="name">MQ</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2017/05/10/MQ/本地文件队列-异步隔离/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/05/10/MQ/本地文件队列-异步隔离/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2017/05/10/MQ/本地文件队列-异步隔离/" class="leancloud_visitors" data-flag-title="本地文件队列-异步隔离架构">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="常见的异步方式："><a href="#常见的异步方式：" class="headerlink" title="常见的异步方式："></a>常见的异步方式：</h2><h3 id="创建异步线程"><a href="#创建异步线程" class="headerlink" title="创建异步线程"></a>创建异步线程</h3><p>每个新创建一个线程来执行异步任务，任务结束线程也终止。<br>线程的创建成本比较大，不建议使用。</p>
+<h3 id="使用Queue，producer-consumer方式"><a href="#使用Queue，producer-consumer方式" class="headerlink" title="使用Queue，producer/consumer方式"></a>使用Queue，producer/consumer方式</h3><p>在内部创建一个Queue，worker线程直接将异步处理的任务放入queue，一个或多个异步线程从queue中消费并执行任务。</p>
+<h3 id="线程池"><a href="#线程池" class="headerlink" title="线程池"></a>线程池</h3><p>用线程池来替换每次创建线程，减少线程创建的成本，线程被复用，一次创建多处使用。</p>
+<p>和使用Queue类似，也是通过<code>BlockingQueue</code>实现,但策略上更复杂，向线程池提交Callable&amp;Runnable任务，由线程池调度执行。</p>
+<p>参考：<code>java.util.concurrent.ThreadPoolExecutor#execute</code></p>
+<h3 id="spring-Async注解"><a href="#spring-Async注解" class="headerlink" title="spring @Async注解"></a>spring @Async注解</h3><p>通过注解来来简化了异步编程，只需要在需要异步的方法上使用<code>@Async</code>注解即可。<br>其本质也是在线程池功能上扩展的，将异步执行方法封装为一个<code>Callable</code>，然后提交给线程池。</p>
+<h4 id="org-springframework-aop-interceptor-AsyncExecutionInterceptor"><a href="#org-springframework-aop-interceptor-AsyncExecutionInterceptor" class="headerlink" title="org.springframework.aop.interceptor.AsyncExecutionInterceptor:"></a>org.springframework.aop.interceptor.AsyncExecutionInterceptor:</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> Object <span class="title">invoke</span><span class="params">(<span class="keyword">final</span> MethodInvocation invocation)</span> <span class="keyword">throws</span> Throwable </span>&#123;</div><div class="line">		Class&lt;?&gt; targetClass = (invocation.getThis() != <span class="keyword">null</span> ? AopUtils.getTargetClass(invocation.getThis()) : <span class="keyword">null</span>);</div><div class="line">		Method specificMethod = ClassUtils.getMostSpecificMethod(invocation.getMethod(), targetClass);</div><div class="line">		<span class="keyword">final</span> Method userDeclaredMethod = BridgeMethodResolver.findBridgedMethod(specificMethod);</div><div class="line"></div><div class="line">		AsyncTaskExecutor executor = determineAsyncExecutor(userDeclaredMethod);</div><div class="line">		<span class="keyword">if</span> (executor == <span class="keyword">null</span>) &#123;</div><div class="line">			<span class="keyword">throw</span> <span class="keyword">new</span> IllegalStateException(</div><div class="line">					<span class="string">"No executor specified and no default executor set on AsyncExecutionInterceptor either"</span>);</div><div class="line">		&#125;</div><div class="line"></div><div class="line">		Callable&lt;Object&gt; task = <span class="keyword">new</span> Callable&lt;Object&gt;() &#123;</div><div class="line">			<span class="meta">@Override</span></div><div class="line">			<span class="function"><span class="keyword">public</span> Object <span class="title">call</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">				<span class="keyword">try</span> &#123;</div><div class="line">					Object result = invocation.proceed();</div><div class="line">					<span class="keyword">if</span> (result <span class="keyword">instanceof</span> Future) &#123;</div><div class="line">						<span class="keyword">return</span> ((Future&lt;?&gt;) result).get();</div><div class="line">					&#125;</div><div class="line">				&#125;</div><div class="line">				<span class="keyword">catch</span> (ExecutionException ex) &#123;</div><div class="line">					handleError(ex.getCause(), userDeclaredMethod, invocation.getArguments());</div><div class="line">				&#125;</div><div class="line">				<span class="keyword">catch</span> (Throwable ex) &#123;</div><div class="line">					handleError(ex, userDeclaredMethod, invocation.getArguments());</div><div class="line">				&#125;</div><div class="line">				<span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">			&#125;</div><div class="line">		&#125;;</div><div class="line"></div><div class="line">		<span class="keyword">return</span> doSubmit(task, executor, invocation.getMethod().getReturnType());</div><div class="line">	&#125;</div></pre></td></tr></table></figure>
+<p>详细参考：<a href="http://docs.spring.io/spring/docs/current/spring-framework-reference/htmlsingle/#scheduling-annotation-support-async" target="_blank" rel="external">http://docs.spring.io/spring/docs/current/spring-framework-reference/htmlsingle/#scheduling-annotation-support-async</a></p>
+<h2 id="背景和场景"><a href="#背景和场景" class="headerlink" title="背景和场景"></a>背景和场景</h2><h3 id="产生的背景"><a href="#产生的背景" class="headerlink" title="产生的背景"></a>产生的背景</h3><p>在项目中使用了<code>@Async</code>来执行异步任务，但在线上运行时出现了一次OOM的故障。通过分析发现是，线程池队列设置的比较大，当时的JVM内存给的也比较少（2048M），异步任务方法参数中传了大量的数据，任务执行被后端数据库阻塞（后端数据库变慢），最后导致缓存了大量的数据被放到线程池队列。其实JVM内存配置合适，线程池队列数合适，并配置合适的<code>RejectedExecutionHandler</code>策略。</p>
+<p>产生这个组件，1) 旨在替换内存队列的异步方式 2) 用来方便扩展集成分布式MQ</p>
+<h3 id="异步隔离"><a href="#异步隔离" class="headerlink" title="异步隔离"></a>异步隔离</h3><p>除了上面背景和场景，开发这个组件的另一个初衷就是有效异步隔离和作为一个降级备份方案。<br>也是主要实现了文件队列方式的一个原因。</p>
+<p>当我们使用分布式MQ时，难免分布式MQ宕机或者其他网络等原因导致不能生产消息，或者阻塞影响到本身的业务，出现这种情况时可以降级到本地文件队列。</p>
+<p>本地文件队列的优点是速度快，只要文件系统不出问题可以认为不会被阻塞。缺点是本地文件队列生产的消息必须自己来消费，出现故障时消息消费会延迟，文件系统的损坏也会导致消息丢失。主要看使用的姿势，更看重哪一方面了。</p>
+<h2 id="基本架构设计思路"><a href="#基本架构设计思路" class="headerlink" title="基本架构设计思路"></a>基本架构设计思路</h2><p>采用producer/consumer生产消费设计模式。</p>
+<p>参考了<code>@Async</code>思路，定义一个注解<code>@AsyncExecutable</code>, 使用Spring拦截器拦截注解了<code>@AsyncExecutable</code>的方法，可以使用AOP或者BeanPostProcessor来应用拦截器。</p>
+<h3 id="producer"><a href="#producer" class="headerlink" title="producer"></a>producer</h3><p>拦截器拦截到<code>@AsyncExecutable</code>方法后，将该方法所有的参数和方法信息作为Message，并序列化Message，序列化采用Kryo或者Json，将序列化后的信息放入队列。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Message</span> </span>&#123;</div><div class="line"></div><div class="line">     String beanName;</div><div class="line">     String klassName;</div><div class="line">     String methodName;</div><div class="line">     Class&lt;?&gt;[] argTypes;</div><div class="line">     Object[] args;</div><div class="line">     <span class="keyword">boolean</span> hasTransactional = <span class="keyword">true</span>;</div><div class="line">     </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="consumer"><a href="#consumer" class="headerlink" title="consumer"></a>consumer</h3><p>有1个调度主线程和worker线程组成，主线程负责从队列中拉取消息，并分发到worker线程，worker线程采用线程池，使用了spring提供的TaskExecutor。</p>
+<p>worker线程反序列化消息为Message对象，并根据Message中的方法信息在spring ApplicationContext中查找到spring 管理的bean，并通过反射来调用。</p>
+<h3 id="队列"><a href="#队列" class="headerlink" title="队列"></a>队列</h3><p>队列抽象了一个<code>BlockableQueue</code>, 通过<code>BlockableQueue</code>具体实现来扩展，可以是内存，文件，或分布式MQ。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"> <span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">BlockableQueue</span>&lt;<span class="title">T</span>&gt; </span>&#123;</div><div class="line"></div><div class="line">    String DefaultQueueName = <span class="string">"fileQueue"</span>;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * push一个消息到队列</div><div class="line">     *</div><div class="line">     * <span class="doctag">@param</span> t</div><div class="line">     * <span class="doctag">@return</span></div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">offer</span><span class="params">(T t)</span></span>;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 从队列pop一个消息，如果队列中无可用消息，则阻塞</div><div class="line">     *</div><div class="line">     * <span class="doctag">@return</span></div><div class="line">     * <span class="doctag">@throws</span> InterruptedException</div><div class="line">     */</div><div class="line">    <span class="function">T <span class="title">take</span><span class="params">()</span> <span class="keyword">throws</span> InterruptedException</span>;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 从队列pop一个消息，如果队列中无可用消息，则返回null</div><div class="line">     *</div><div class="line">     * <span class="doctag">@return</span></div><div class="line">     */</div><div class="line">    <span class="function">T <span class="title">poll</span><span class="params">()</span></span>;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 队列中消息数量</div><div class="line">     *</div><div class="line">     * <span class="doctag">@return</span></div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">size</span><span class="params">()</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>通用的默认实现：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div></pre></td><td class="code"><pre><div class="line"> </div><div class="line">import java.util.Queue;</div><div class="line">import java.util.concurrent.locks.Condition;</div><div class="line">import java.util.concurrent.locks.Lock;</div><div class="line">import java.util.concurrent.locks.ReentrantLock;</div><div class="line"></div><div class="line">public class DefaultBlockableQueue implements BlockableQueue&lt;byte[]&gt; &#123;</div><div class="line">    final Lock lock = new ReentrantLock();</div><div class="line">    final Condition notEmpty = lock.newCondition();</div><div class="line">    private Queue&lt;byte[]&gt; queue = null;</div><div class="line"></div><div class="line"></div><div class="line">    public FileBlockableQueue(Queue&lt;byte[]&gt; queue) &#123;</div><div class="line">        this.queue = queue;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public boolean offer(byte[] bytes) &#123;</div><div class="line">        lock.lock();</div><div class="line">        try &#123;</div><div class="line">            boolean v = queue.offer(bytes);</div><div class="line">            notEmpty.signal();</div><div class="line">            return v;</div><div class="line">        &#125; finally &#123;</div><div class="line">            lock.unlock();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">    @Override</div><div class="line">    public byte[] take() throws InterruptedException &#123;</div><div class="line">        lock.lock();</div><div class="line">        try &#123;</div><div class="line">            while (queue.size() == 0) &#123;</div><div class="line">                notEmpty.await();</div><div class="line">            &#125;</div><div class="line">            byte[] bytes = queue.poll();</div><div class="line">            return bytes;</div><div class="line">        &#125; finally &#123;</div><div class="line">            lock.unlock();</div><div class="line">        &#125;</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public byte[] poll() &#123;</div><div class="line">        return queue.poll();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public int size() &#123;</div><div class="line">        return queue.size();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>本文实现了一个文件队列，采用去哪儿文件队列实现，这是一个fork：<a href="https://github.com/tietang/fqueue。" target="_blank" rel="external">https://github.com/tietang/fqueue。</a></p>
+<p>对编程模型来说不用关心异步细节，只需要在需要异步的方法上注解<code>@AsyncExecutable</code>即可。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://tietang.github.com/2017/04/10/技术/JDBC如何开启事务/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="铁汤">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="多少光年">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="多少光年" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/04/10/技术/JDBC如何开启事务/" itemprop="url">
+                  JDBC如何开启事务
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-04-10T18:22:47+08:00">
+                2017-04-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JDBC/" itemprop="url" rel="index">
+                    <span itemprop="name">JDBC</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2017/04/10/技术/JDBC如何开启事务/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/04/10/技术/JDBC如何开启事务/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2017/04/10/技术/JDBC如何开启事务/" class="leancloud_visitors" data-flag-title="JDBC如何开启事务">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>面试了很多人，每每问到“JDBC如何开启一个事务？”，大部分人的回答是：“通过openTransaction方法”，有的说是通过Connection，有的是说通过Statement，更有的说通过Connection拿到一个<code>Transaction</code>实例，再通过<code>openTransaction</code>方法来开启，那么同样关闭事务就有close方法“closeTransaction”。</p>
+<p>想必这些人都是被“hibernate”害了还是“不注重java基础”，一上来就被框架误导呢？</p>
+<p>先看看一个标准的JDBC例子伪代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">Connection conn = DriverManager.getConnection(...);</div><div class="line"><span class="keyword">try</span>&#123;</div><div class="line">  con.setAutoCommit(<span class="keyword">false</span>);</div><div class="line">  Statement stmt = con.createStatement();</div><div class="line"></div><div class="line">   <span class="comment">//1 or more queries or updates</span></div><div class="line"></div><div class="line">   con.commit();</div><div class="line">&#125;<span class="keyword">catch</span>(Exception e)&#123;</div><div class="line">   con.rollback();</div><div class="line">&#125;<span class="keyword">finally</span>&#123;</div><div class="line">   con.close();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>所以，看到上面的例子，开启手动事务的关键是<code>con.setAutoCommit(false)</code>，JDBC事务默认是开启的，并且是自动提交：</p>
+<ol>
+<li>关闭自动提交：<code>java.sql.Connection.setAutoCommit(false)</code><ul>
+<li><code>setAutoCommit(true)</code>：每次操作都会被认为是一个事务并且自动提交</li>
+</ul>
+</li>
+<li>手动提交事务：<code>con.commit()</code>;</li>
+<li>出现异常时回滚，不一定在catch语句中，只要在<code>con.commit()</code>前需要回滚时执行都可：<code>con.rollback()</code>;</li>
+<li>关闭连接：<code>con.close();</code></li>
+<li>设置事务隔离级别: java.sql.Connection#setTransactionIsolation</li>
+</ol>
+<p>参考：<a href="https://docs.oracle.com/javase/tutorial/jdbc/basics/transactions.html" target="_blank" rel="external">https://docs.oracle.com/javase/tutorial/jdbc/basics/transactions.html</a></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://tietang.github.com/2017/03/26/微服务/微服务之EurekaServer原理/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="铁汤">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="多少光年">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="多少光年" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/03/26/微服务/微服务之EurekaServer原理/" itemprop="url">
+                  微服务Eureka Server原理
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-26T19:20:00+08:00">
+                2017-03-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/微服务/" itemprop="url" rel="index">
+                    <span itemprop="name">微服务</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2017/03/26/微服务/微服务之EurekaServer原理/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/26/微服务/微服务之EurekaServer原理/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2017/03/26/微服务/微服务之EurekaServer原理/" class="leancloud_visitors" data-flag-title="微服务Eureka Server原理">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Eureka的相关知识，在之前的《微服务之Eureka服务发现》中已经讲了很多，这里不再重复，本文主要通过Eureka Server源码和配置来阐述Eureka Server的工作原理。</p>
+<p>Eureka提供了一系列REST的API，供Eureka Client来调用，实现服务注册，注销，心跳，状态更新等等操作，参考官网<a href="https://github.com/Netflix/eureka/wiki/Eureka-REST-operations" target="_blank" rel="external">EurekaREst操作</a>。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">REST API &lt;Jersey&gt;</div><div class="line">Response Cache &lt;com.google.common.cache.LoadingCache&gt;</div><div class="line">InstanceRegistry &lt;ConcurrentHashMap&gt;</div><div class="line"></div><div class="line">EvictionTimer&lt;java.util.Timer&gt;</div><div class="line">CacheUpdateTask&lt;java.util.Timer&gt;</div></pre></td></tr></table></figure>
+<h2 id="REST-API"><a href="#REST-API" class="headerlink" title="REST API"></a>REST API</h2><p>基于Jersey实现，主要以appId[appname]和instanceId为操作维度，内容可以是xml或者json。相关的实现可以在<code>com.netflix.eureka.resources</code>包中找到。基于appId和instanceId和各种操作组合的实现，可以认为是InstanceRegistry的操作入口。</p>
+<h2 id="InstanceRegistry"><a href="#InstanceRegistry" class="headerlink" title="InstanceRegistry"></a>InstanceRegistry</h2><p>Registry是Eureka Server的核心，服务发现就是围绕Registry来实现。以下提到的类都可以在<code>com.netflix.eureka.registry</code>包中找到。</p>
+<p>整个Registry由4个接口组成：</p>
+<ul>
+<li>LeaseManager: register,cacel,renew,evict等基本操作</li>
+<li>LookupService: 这个抽象是要是client和server端共用，EurekaClient也继承了该接口，主要用来查找服务和服务实例。</li>
+<li>InstanceRegistry: 提供了实例相关的丰富的操作。</li>
+<li>PeerAwareInstanceRegistry: eureka server之间的注册信息复制</li>
+</ul>
+<p>如下是类关系图：</p>
+<p><img src="http://7xiovs.com1.z0.glb.clouddn.com/eureka_registry.png" alt=""></p>
+<h2 id="几个重要的定时任务"><a href="#几个重要的定时任务" class="headerlink" title="几个重要的定时任务"></a>几个重要的定时任务</h2><h3 id="心跳补偿任务EvictionTask"><a href="#心跳补偿任务EvictionTask" class="headerlink" title="心跳补偿任务EvictionTask"></a>心跳补偿任务EvictionTask</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[com.netflix.eureka.registry.AbstractInstanceRegistry.EvictionTask]</div></pre></td></tr></table></figure>
+<p>主要是用来做心跳补偿，目的是用来取消或清理过期的注册信息，通常是eureka client在停止前未成功发送cacel请求。例如eureka client停止时网络不通了、eureka client进程奔溃了等等。</p>
+<p>这个定时任务是通过<code>eureka.server.eviction-interval-timer-in-ms</code>参数来配置处理间隔，默认是60s。</p>
+<p>补偿时间=当前时间-该任务最后执行时间-执行间隔<br>其中<code>该任务最后执行时间-执行间隔</code>主要是计算出实际执行时间的细微差别，也为后面的<code>补偿时间&gt;0</code>埋下伏笔。</p>
+<p><code>补偿时间&gt;0</code>或者<code>最后更新时间 + leaseDuration[默认是90s，客户端durationInSecs]+补偿时间&lt;当前时间</code> 时会执行evict清理过期实例。</p>
+<p><strong>补偿时间&gt;0,</strong> 即就是当前任务执行和上次执行的时间间隔大于配置的时间间隔，正常情况补偿时间应该很小。</p>
+<p><strong>最后更新时间+leaseDuration+补偿时间&lt;当前时间</strong>，即就是最后一次成功心跳到当前时间的间隔比eureka client配置的间隔大。</p>
+<p>其中<strong>leaseDuration</strong>: 在eureka client中通过<code>eureka.instance.lease-expiration-duration-in-seconds[leaseExpirationDurationInSeconds]</code>参数来配置，默认是90s。</p>
+<p>下面是源代码：</p>
+<p><strong>计算补偿时间：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">long</span> <span class="title">getCompensationTimeMs</span><span class="params">()</span> </span>&#123;</div><div class="line">            <span class="keyword">long</span> currNanos = getCurrentTimeNano();</div><div class="line">            <span class="keyword">long</span> lastNanos = lastExecutionNanosRef.getAndSet(currNanos);</div><div class="line">            <span class="keyword">if</span> (lastNanos == <span class="number">0l</span>) &#123;</div><div class="line">                <span class="keyword">return</span> <span class="number">0l</span>;</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            <span class="keyword">long</span> elapsedMs = TimeUnit.NANOSECONDS.toMillis(currNanos - lastNanos);</div><div class="line">            <span class="keyword">long</span> compensationTime = elapsedMs - serverConfig.getEvictionIntervalTimerInMs();</div><div class="line">            <span class="keyword">return</span> compensationTime &lt;= <span class="number">0l</span> ? <span class="number">0l</span> : compensationTime;</div><div class="line">        &#125;</div></pre></td></tr></table></figure>
+<p><strong>这个是补偿清理逻辑：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">evict</span><span class="params">(<span class="keyword">long</span> additionalLeaseMs)</span> </span>&#123;</div><div class="line">        logger.debug(<span class="string">"Running the evict task"</span>);</div><div class="line"></div><div class="line">        <span class="keyword">if</span> (!isLeaseExpirationEnabled()) &#123;</div><div class="line">            logger.debug(<span class="string">"DS: lease expiration is currently disabled."</span>);</div><div class="line">            <span class="keyword">return</span>;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="comment">// We collect first all expired items, to evict them in random order. For large eviction sets,</span></div><div class="line">        <span class="comment">// if we do not that, we might wipe out whole apps before self preservation kicks in. By randomizing it,</span></div><div class="line">        <span class="comment">// the impact should be evenly distributed across all applications.</span></div><div class="line">        List&lt;Lease&lt;InstanceInfo&gt;&gt; expiredLeases = <span class="keyword">new</span> ArrayList&lt;&gt;();</div><div class="line">        <span class="keyword">for</span> (Entry&lt;String, Map&lt;String, Lease&lt;InstanceInfo&gt;&gt;&gt; groupEntry : registry.entrySet()) &#123;</div><div class="line">            Map&lt;String, Lease&lt;InstanceInfo&gt;&gt; leaseMap = groupEntry.getValue();</div><div class="line">            <span class="keyword">if</span> (leaseMap != <span class="keyword">null</span>) &#123;</div><div class="line">                <span class="keyword">for</span> (Entry&lt;String, Lease&lt;InstanceInfo&gt;&gt; leaseEntry : leaseMap.entrySet()) &#123;</div><div class="line">                    Lease&lt;InstanceInfo&gt; lease = leaseEntry.getValue();</div><div class="line">                    <span class="keyword">if</span> (lease.isExpired(additionalLeaseMs) &amp;&amp; lease.getHolder() != <span class="keyword">null</span>) &#123;</div><div class="line">                        expiredLeases.add(lease);</div><div class="line">                    &#125;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="comment">// To compensate for GC pauses or drifting local time, we need to use current registry size as a base for</span></div><div class="line">        <span class="comment">// triggering self-preservation. Without that we would wipe out full registry.</span></div><div class="line">        <span class="keyword">int</span> registrySize = (<span class="keyword">int</span>) getLocalRegistrySize();</div><div class="line">        <span class="keyword">int</span> registrySizeThreshold = (<span class="keyword">int</span>) (registrySize * serverConfig.getRenewalPercentThreshold());</div><div class="line">        <span class="keyword">int</span> evictionLimit = registrySize - registrySizeThreshold;</div><div class="line"></div><div class="line">        <span class="keyword">int</span> toEvict = Math.min(expiredLeases.size(), evictionLimit);</div><div class="line">        <span class="keyword">if</span> (toEvict &gt; <span class="number">0</span>) &#123;</div><div class="line">            logger.info(<span class="string">"Evicting &#123;&#125; items (expired=&#123;&#125;, evictionLimit=&#123;&#125;)"</span>, toEvict, expiredLeases.size(), evictionLimit);</div><div class="line"></div><div class="line">            Random random = <span class="keyword">new</span> Random(System.currentTimeMillis());</div><div class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; toEvict; i++) &#123;</div><div class="line">                <span class="comment">// Pick a random item (Knuth shuffle algorithm)</span></div><div class="line">                <span class="keyword">int</span> next = i + random.nextInt(expiredLeases.size() - i);</div><div class="line">                Collections.swap(expiredLeases, i, next);</div><div class="line">                Lease&lt;InstanceInfo&gt; lease = expiredLeases.get(i);</div><div class="line"></div><div class="line">                String appName = lease.getHolder().getAppName();</div><div class="line">                String id = lease.getHolder().getId();</div><div class="line">                EXPIRED.increment();</div><div class="line">                logger.warn(<span class="string">"DS: Registry: expired lease for &#123;&#125;/&#123;&#125;"</span>, appName, id);</div><div class="line">                internalCancel(appName, id, <span class="keyword">false</span>);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<p>从上面的逻辑上看，配置的时间间隔有2个：</p>
+<ul>
+<li>eureka server端：<code>eviction-interval-timer-in-ms</code></li>
+<li>eureka client端：<code>lease-expiration-duration-in-seconds</code></li>
+</ul>
+<p>这2个参数同时作用着清理逻辑，配置时就要注意，<code>eviction-interval-timer-in-ms</code>要比<code>lease-expiration-duration-in-seconds</code>配置的要小，产生的结果就完全不一样。</p>
+<h2 id="ResponseCache"><a href="#ResponseCache" class="headerlink" title="ResponseCache"></a>ResponseCache</h2><p>通过readOnlyCache和readWriteCache实现：</p>
+<ul>
+<li>readOnlyCache: java.util.concurrent.ConcurrentMap</li>
+<li>readWriteCache: com.google.common.cache.LoadingCache</li>
+</ul>
+<p>readWriteCache会自动从registry中更新。</p>
+<p>这个缓存只作用于获取整个注册表和app的实例注册信息。</p>
+<h3 id="缓存更新CacheUpdateTask"><a href="#缓存更新CacheUpdateTask" class="headerlink" title="缓存更新CacheUpdateTask"></a>缓存更新CacheUpdateTask</h3><p>这个任务用来定期更新只读缓存,逻辑上比较简单，定期从读写缓存中取出K/V，比较是否一致，不一致更新。</p>
+<p>更新间隔通过参数<code>eureka.server.response-cache-update-interval-ms</code>来配置，默认是30s。</p>
+<h3 id="readWriteCache"><a href="#readWriteCache" class="headerlink" title="readWriteCache"></a>readWriteCache</h3><p>过期时间通过参数<code>eureka.server.response-cache-auto-expiration-in-seconds</code>来配置，默认是180s。</p>
+<h2 id="eureka-Server几个重要的配置"><a href="#eureka-Server几个重要的配置" class="headerlink" title="eureka Server几个重要的配置"></a>eureka Server几个重要的配置</h2><p>eureka.server.enable-self-preservation</p>
+<p>是否开启自我保护模式，默认为true。</p>
+<p>在开启状态下，Eureka Server会保持</p>
+<p>默认情况下，如果Eureka Server在一定时间内没有接收到某个微服务实例的心跳，Eureka Server将会注销该实例（默认90秒）。但是当网络分区故障发生时，微服务与Eureka Server之间无法正常通信，以上行为可能变得非常危险了——因为微服务本身其实是健康的，此时本不应该注销这个微服务。</p>
+<p>Eureka通过“自我保护模式”来解决这个问题——当Eureka Server节点在短时间内丢失过多客户端时（可能发生了网络分区故障），那么这个节点就会进入自我保护模式。一旦进入该模式，Eureka Server就会保护服务注册表中的信息，不再删除服务注册表中的数据（也就是不会注销任何微服务）。当网络故障恢复后，该Eureka Server节点会自动退出自我保护模式。</p>
+<p>综上，自我保护模式是一种应对网络异常的安全保护措施。它的架构哲学是宁可同时保留所有微服务（健康的微服务和不健康的微服务都会保留），也不盲目注销任何健康的微服务。使用自我保护模式，可以让Eureka集群更加的健壮、稳定。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">#是否开启自我保护模式，默认为true。</div><div class="line">enableSelfPreservation: true</div><div class="line">#默认是85%</div><div class="line">renewal-percent-threshold: 0.85</div><div class="line">#默认是15分钟</div><div class="line">renewal-threshold-update-interval-ms: 15</div><div class="line">#缓存更新时间，默认30s</div><div class="line">response-cache-update-interval-ms: 10</div><div class="line">#缓存过期时间，默认180s</div><div class="line">response-cache-auto-expiration-in-seconds: 30</div><div class="line"># 实例过期清理时间间隔，默认60秒</div><div class="line">eviction-interval-timer-in-ms: 10</div></pre></td></tr></table></figure>
+<h2 id="eureka-client几个重要的配置"><a href="#eureka-client几个重要的配置" class="headerlink" title="eureka client几个重要的配置"></a>eureka client几个重要的配置</h2><p>eureka.client.registry-fetch-interval-seconds</p>
+<p>表示eureka client间隔多久去拉取服务注册信息，默认为30秒，对于api-gateway，如果要迅速获取服务注册状态，可以缩小该值，比如5秒</p>
+<p>eureka.instance.lease-expiration-duration-in-seconds</p>
+<p>leaseExpirationDurationInSeconds，表示eureka server至上一次收到client的心跳之后，等待下一次心跳的超时时间，在这个时间内若没收到下一次心跳，则将移除该instance。</p>
+<p>默认为90秒<br>如果该值太大，则很可能将流量转发过去的时候，该instance已经不存活了。<br>如果该值设置太小了，则instance则很可能因为临时的网络抖动而被摘除掉。<br>该值至少应该大于leaseRenewalIntervalInSeconds<br>eureka.instance.lease-renewal-interval-in-seconds</p>
+<p>leaseRenewalIntervalInSeconds，表示eureka client发送心跳给server端的频率。如果在leaseExpirationDurationInSeconds后，server端没有收到client的心跳，则将摘除该instance。除此之外，如果该instance实现了HealthCheckCallback，并决定让自己unavailable的话，则该instance也不会接收到流量。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
   <link itemprop="mainEntityOfPage" href="http://tietang.github.com/2016/11/27/nginx/安装Nginx&Lua模块/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1028,703 +1749,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://tietang.github.com/2016/09/10/微服务/微服务优缺点论述/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="铁汤">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.gif">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="多少光年">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="多少光年" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/09/10/微服务/微服务优缺点论述/" itemprop="url">
-                  微服务优缺点论述
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-09-10T19:22:47+08:00">
-                2016-09-10
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/微服务/" itemprop="url" rel="index">
-                    <span itemprop="name">微服务</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/2016/09/10/微服务/微服务优缺点论述/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/10/微服务/微服务优缺点论述/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/09/10/微服务/微服务优缺点论述/" class="leancloud_visitors" data-flag-title="微服务优缺点论述">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><img src="http://upload-images.jianshu.io/upload_images/2519252-a51def43c01ae44e.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/400" alt="IMG_20161026_142532.jpg"></p>
-<p>随着业务发展，业务功能的堆叠和复杂化，团队壮大，代码量也增加，各种问题开始凸显：</p>
-<ul>
-<li>代码结构开始变得混乱，难以管理，提交冲突，改一处引多处。</li>
-<li>沟通成本变高。</li>
-<li>代码维护难：“修复越多，缺陷越多”。</li>
-<li>引入和集成技术变得困难，依赖版本冲突，新特性无法使用。</li>
-</ul>
-<p>最后开发效率也开始下降，代码维护的成本提高。</p>
-<p>上线后稳定性不高，更大几率的影响可靠性和可用性，所有功能都运行在一个进程中，任何一个功能中出现bug，比如内存泄露，逻辑死循环耗尽CPU等，可以导致整个应用挂掉。<br>其中几个高并发功能，也不得不部署将所有功能增加部署实例，内存和CPU利用不够充分，灵活性也变差。</p>
-<p>其缺点也很明显：</p>
-<ul>
-<li>运维工作量增加，应用运维管理复杂。</li>
-<li>代码重复率增加，团队自治带来的重复劳动。</li>
-<li>分布式系统固有的复杂性和缺点：网络延迟，不可靠，负载均衡，调用，事务等等</li>
-</ul>
-<p>微服务架构可以从一定程度上解决或缓解上述问题，但它也不是万能的，但也带来了一系列的非功能性需求，比如说分布式事务、自动化运维，服务发现，服务路由等额外需求，但其带来的好处以及克服其缺点总结如下：</p>
-<ul>
-<li>服务发现带来很多自运维特性。</li>
-<li>单一职责原则在各种各种场景的解耦合</li>
-<li>业务开发：只关注小团队所熟悉和负责的业务，做到专而精，并且容易实现持续交付。</li>
-<li>代码管理：无论多git repository还是多maven module都可以做到一般的代码隔离，尤其是积累很多年的代码，拆分后更清晰不混乱，易管理。</li>
-<li>技术实现：处理的业务不同，可能会采取不同的技术栈，如果是单体，依赖有冲突的时候不得不花时间fix冲突或者妥协放弃集成。微服务拆分后，相互独立，集成新技术更容易。</li>
-<li>测试：尤其是对单元测试和自动化测试更有好处，但对于整个集成测试却带来了挑战，通过可视化运维系统和一个完整的测试环境搭建，以及架构上适当调整，成熟化测试环境后，可以弥补这种不便。</li>
-<li>独立部署，快速而出错几率比较低，但运维量比较大，但通过可视化自动运维系统来克服。</li>
-<li>运行时的隔离，这个是显而易见的，就跟汽车道路一样，谁跑谁的道，互补干扰。</li>
-<li>分布式事务也有很多成熟的参考方案来解决：补偿型，可靠事件型，TCC型等。</li>
-<li>服务调用上，可以通过超时、隔离、服务发现负载均衡提高可用性和可靠性。</li>
-<li>网络延迟，可以采用轻量级协议和连接池技术等来弥补。</li>
-</ul>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://tietang.github.com/2016/09/08/微服务/微服务实施spring-cloud中踩过的坑/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="铁汤">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.gif">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="多少光年">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="多少光年" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/09/08/微服务/微服务实施spring-cloud中踩过的坑/" itemprop="url">
-                  微服务实施spring-cloud中踩过的坑
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-09-08T19:22:47+08:00">
-                2016-09-08
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/微服务/" itemprop="url" rel="index">
-                    <span itemprop="name">微服务</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/2016/09/08/微服务/微服务实施spring-cloud中踩过的坑/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/08/微服务/微服务实施spring-cloud中踩过的坑/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/09/08/微服务/微服务实施spring-cloud中踩过的坑/" class="leancloud_visitors" data-flag-title="微服务实施spring-cloud中踩过的坑">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><img src="http://upload-images.jianshu.io/upload_images/2519252-d2cc7d03dc185c51.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="P61023-131735-01.jpg"></p>
-<h2 id="注册IP问题"><a href="#注册IP问题" class="headerlink" title="注册IP问题"></a>注册IP问题</h2><p>早期的Spring Cloud Eureka在注册获取网卡IP时，不能区分外网网卡和内网网卡，如果安装了虚拟机和docker也不能区分虚拟网卡，每次启动注册的IP都有可能不一样，如果要注册为外网网卡IP，那运行带宽就不够，这个bug应该说是比较严重的问题，因此重写了网卡IP获取的逻辑来解决，同时也反馈给了spring cloud团队，再后期的版本中添加了网卡接口排序和通过名称过滤的功能来得到解决。</p>
-<h2 id="HealthCheck的问题"><a href="#HealthCheck的问题" class="headerlink" title="HealthCheck的问题"></a>HealthCheck的问题</h2><p>在一些极小概率的情况下，会导致Eureka Server 下线微服务实例，出现“Remote status from Eureka server is down”的问题，即便是重启微服务也无济于事，不过已经有码友在spring cloud 官方github贴出了解决方法的issue。</p>
-<h2 id="Zookeeper版本带来的性能问题"><a href="#Zookeeper版本带来的性能问题" class="headerlink" title="Zookeeper版本带来的性能问题"></a>Zookeeper版本带来的性能问题</h2><p>现象是一个团队在实施微服务时，发现部署到服务器上的微服务，在没有任何请求时，仍然CPU占用20~30%；匪夷所思的是，同样的微服务包在本地开发机器、本地物理机、本地虚拟机运行并未出现。通过jvisualvm观察,如下图：</p>
-<p><img src="http://7xiovs.com1.z0.glb.clouddn.com/zk_jvisualvm.png" alt=""></p>
-<p>可以看到和Zookeeper有关，同时我的另一个Demo微服务在任何环境下却未出现该问题。比较jar中依赖包之后发现，2个包中唯一不一样的是Apache Curator版本，一个是2.8.0, spring cloud默认依赖的版本；没问题的是Apache Curator 2.9.1。<strong>Apache Curator 2.8.0 BUG！！！</strong>在[Apache Curator 2.9.1 Release Notes](<https: 12332392="" issues.apache.org="" jira="" secure="" releasenote.jspa?projectid="12314425&version=">也发现了对此bug的描述。升级到2.9.1问题解决，皆大欢喜。同时上报此bug给Spring Cloud团队，升级Apache Curator版本。</https:></p>
-<h2 id="Feign使用不当带来的性能问题"><a href="#Feign使用不当带来的性能问题" class="headerlink" title="Feign使用不当带来的性能问题"></a>Feign使用不当带来的性能问题</h2><p>Feign在Spring容器中使用了独立应用上下文，要注意命名空间上隔离，详情参考：<a href="http://tietang.wang/2016/09/06/%E5%BE%AE%E6%9C%8D%E5%8A%A1/Feign%E4%BD%BF%E7%94%A8%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/" target="_blank" rel="external"><strong>Feign正确的使用方法和性能优化注意事项</strong></a> |<a href="http://www.jianshu.com/p/191d45210d16来绕过坑。" target="_blank" rel="external">http://www.jianshu.com/p/191d45210d16来绕过坑。</a></p>
-<p>这几个坑是不能容忍的，踩过其他小坑就不计其数了，但都不伤大雅，可以替代。</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://tietang.github.com/2016/09/08/微服务/微服务之API网关设计/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="铁汤">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.gif">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="多少光年">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="多少光年" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/09/08/微服务/微服务之API网关设计/" itemprop="url">
-                  微服务之API网关设计
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-09-08T19:22:47+08:00">
-                2016-09-08
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/微服务/" itemprop="url" rel="index">
-                    <span itemprop="name">微服务</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/2016/09/08/微服务/微服务之API网关设计/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/08/微服务/微服务之API网关设计/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/09/08/微服务/微服务之API网关设计/" class="leancloud_visitors" data-flag-title="微服务之API网关设计">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><img src="http://upload-images.jianshu.io/upload_images/2519252-3f8e955deefa1708.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/600" alt="P60528-094513-01.jpeg"></p>
-<p>微服务除了互相之间调用，还需要将API提供给外部应用访问，像浏览器，移动app，第三合作方等等，这就需要前段路由来管理后端微服务提供的服务。提供类似功能的应用有着多样化的名称，比如前置服务器/前置机、路由服务器、(反向)代理服务器，API网关服务器也是其中的一个叫法，只是场景和侧重点不一样。</p>
-<p>API网关，顾名思义，就是外部到内部的一道门，其主要功能：</p>
-<ul>
-<li>服务路由：将前段应用的调用请求路由定位并负载均衡到具体的后端微服务实例，对于前端应用看起来就是1个应用提供的服务，微服务对于前段应用来说就是黑盒，前段应用也不需要关心内部如何分布，由哪个微服务提供。主要有静态路由和动态路由。<ul>
-<li>静态路由：有时候需要通过域名或者其他固定方式提供和配置路由表</li>
-<li>动态路由：通过服务发现服务，动态调整后端微服务的运行实例和路由表，为路由和负载均衡提供动态变化的服务注册信息。</li>
-</ul>
-</li>
-<li>安全：统一集中的身份认证，安全控制。比如登录，签名，黑名单等等，还可以挖掘和开发更高级的安全策略。</li>
-<li>弹性：限流和容错，也是另一个层面的安全防护，防止突发的流量或者高峰流量冲击后端微服务而导致其服务不可用，另一方面可以在高峰期通过容错和降级保证核心服务的运行。</li>
-<li>监控：实时观察后端微服务的TPS、响应时间，失败数量等准确的信息。</li>
-<li>日志：记录所有请求的访问日志数据，可以为日志分析和查询提供统一支持。</li>
-<li>其他，当然还有很多需要统一集中管理的都可以在网关层解决。</li>
-</ul>
-<p>在Spring Cloud Netflix中使用Zuul来作为API Gateway组件，并结合Undertow，可以满足大部分性能和网关功能需求了(更高要求可以参考：<a href="https://github.com/tietang/ngx-lua-zuul)，Zuul" target="_blank" rel="external">https://github.com/tietang/ngx-lua-zuul)，Zuul</a> + Undertow一般性能延迟，包括JVM和网络延迟在10%~20%，JVM延迟可以控制到10ms以内。另一方面，Zuul有强大的可定制化，通过ZuulFilter可以定制开发更多的网关功能。如下图所示：在Spring Cloud技术上，Zuul集成了Hystrix，Ribbon，Eureka Client等强大的技术栈，提供了开箱即用的Spring Cloud微服务网关功能。Zuul的强大之处是自由定制，这样对于很多老项目微服务化后，就不能按照Spring Cloud默认的动态路由规则运行，因此在其基础上定制了一些路由规则功能，更好的适应老项目微服务化。</p>
-<p><img src="http://7xiovs.com1.z0.glb.clouddn.com/API-Gateway.png" alt="API gateway"></p>
-<p><strong>定制的路由规则的主要功能:</strong></p>
-<ol>
-<li>路由表中包含源路径，微服务名称，目标路径。</li>
-<li>Endpoint粒度配置支持。</li>
-<li>路由支持1对1精确路由。</li>
-<li>源路径可以<code>前缀/**</code>格式来模糊路由。</li>
-<li>目标路径可以使用<code>前缀/**</code>格式来装配目标路径。</li>
-<li>保留默认动态路由规则：<code>服务名称/**</code> –&gt; 是否截去前缀 –&gt; 目标路径。</li>
-<li>保留默认动态路由规则是否支持截去前缀的配置参数<code>stripPrefix</code>特性。</li>
-<li>路由规则可以在不重启服务动态更新，这个功能通过外化配置来支持。</li>
-<li>匹配股则采取谁先匹配路由谁，也就是说在路由表中有2个或以上的路由规则可能被匹配到时，匹配最先查询到的规则。</li>
-</ol>
-<p><strong>路由规则格式采用properties格式：</strong></p>
-<blockquote>
-<p>源路径 = 微服务名称, 目标路径</p>
-</blockquote>
-<p>启动时读取配置并解析，放入路由表。请求时通过查询匹配到合适的路由转发。</p>
-<p>例如：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">/api/v1/trade=trade,/v1/trade</div><div class="line">/api/customer/**=customer,/api/v1/**</div><div class="line">/api/user/**=user</div></pre></td></tr></table></figure>
-<p>在上面的例子中：</p>
-<ul>
-<li>/api/v1/trade会精确的路由到trade微服务的/v1/trade；</li>
-<li>/api/customer/开头的api会路由转发到customer微服务的/api/v1/**，其中后面的**会被前面的**部分替换，比如/api/customer/card-&gt;/api/v1/card的转换。</li>
-<li>/api/user/开头的api会路由转发到user微服务的/api/user/**，endppoint不变。</li>
-</ul>
-<p>如果在Eureka Server中已经注册了微服务<code>payment</code>,那么在zuul启动后会自动添加路由规则，如果stripPrefix=false:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/payment/**=payment,/payment/**</div></pre></td></tr></table></figure>
-<p>如果stripPrefix=true:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/payment/**=payment,/payment/**</div></pre></td></tr></table></figure>
-<p>API网关通过部署多个实例来保证可用性，前端通过Nginx来负载均衡。</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://tietang.github.com/2016/09/08/微服务/微服务下分布式事务问题/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="铁汤">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.gif">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="多少光年">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="多少光年" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/09/08/微服务/微服务下分布式事务问题/" itemprop="url">
-                  微服务下分布式事务问题
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-09-08T19:22:47+08:00">
-                2016-09-08
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/微服务/" itemprop="url" rel="index">
-                    <span itemprop="name">微服务</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/2016/09/08/微服务/微服务下分布式事务问题/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/08/微服务/微服务下分布式事务问题/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/09/08/微服务/微服务下分布式事务问题/" class="leancloud_visitors" data-flag-title="微服务下分布式事务问题">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><img src="http://upload-images.jianshu.io/upload_images/2519252-f3c6ae1fcc9ee375.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/600" alt="IMG_20160925_143422.jpg"></p>
-<p>用<code>数据一致性</code>来描述更贴切一些，在微服务化后，分布式事务上有很多选择，像<strong>多阶段提交、补偿模式、可靠事件、TCC</strong>等等，多阶段提交强一致性好但很难提升吞吐，为了吞吐基本上都是选择了最终一致性的分布式事务模型。补偿模式、可靠事件、TCC都属于最终一致性的范畴，都被广泛采用。无论采用哪种模式，都应该在特定业务场景下选择合适的分布式事务模型，并且具体场景具体分析了。这些模型也有很多分享参考，不再废话，下面着重介绍另一种分布式事务模型。</p>
-<h3 id="交叉事务模型"><a href="#交叉事务模型" class="headerlink" title="交叉事务模型"></a>交叉事务模型</h3><p>最初是2个数据源，我把它叫做<code>双事务</code>，扩展后支持多个数据源叫做<code>交叉事务</code>，这种事务适用于有2个或多个DataSource的场景下来保证数据的事务完整性，吞吐和一致性效果都很不错，这种事务模型利用了JDBC事务，基本思路是先执行DML SQL，出现异常或者需要回滚时依次回滚已经执行事务，最后再执行提交, 并且实现难度也不大，下面是伪代码：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">List&lt;Connection&gt; connections = <span class="keyword">new</span> ArrayList&lt;&gt;();</div><div class="line"><span class="keyword">int</span> i = <span class="number">0</span>;</div><div class="line"><span class="keyword">try</span> &#123;</div><div class="line">    <span class="keyword">for</span> (Connection connection : connections) &#123;</div><div class="line">       <span class="keyword">boolean</span> isExecuted= execute(connection);</div><div class="line">        i++;</div><div class="line">        <span class="keyword">if</span>(!isExecuted)&#123;</div><div class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> SQLException();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125; <span class="keyword">catch</span> (SQLException e) &#123;</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt;= i; j++) &#123;</div><div class="line">        connections.get(j).rollback();</div><div class="line">    &#125;</div><div class="line">&#125; <span class="keyword">finally</span> &#123;</div><div class="line">    <span class="keyword">for</span> (Connection connection : connections) &#123;</div><div class="line">        connection.commit();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>交叉事务要配合实际的JDBC事务和一些锁机制才能很好的工作，交叉事务很好的解决了多数据源的问题，但不是任何场景都适用，我总结了适用场景供大家参考：</p>
-<ol>
-<li>每个数据源事务处理要求很快，通常是零点几~十几毫秒，<strong>不适合长事务慢事务</strong>。</li>
-<li>通过建立多个数据源来工作，不是网络接口。</li>
-<li>每个数据源事务中要<strong>配合锁机制保证数据一致性</strong>，where id=? for update行锁或者乐观锁都可以，但必须保证整个个事务过程中不允许被其他事务修改。</li>
-</ol>
-<p><strong>这个事务模型在这样一个测试模型下的测试结果：</strong></p>
-<p>在多线程下随机对10组数据做随机更新，并记录下测试的最终状态，最后读取数据库最后实际数据比较。在这样的测试模型，每秒大约3000的事务，多次测试结果均显示无不一致数据，效果很好，后期的实际业务测试下也显示出其一致性和性能都不错。</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1770,7 +1794,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">27</span>
+              <span class="site-state-item-count">31</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1778,7 +1802,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-count">17</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -1787,7 +1811,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">39</span>
+                <span class="site-state-item-count">45</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -1883,7 +1907,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2016</span>
+  <span itemprop="copyrightYear">2017</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

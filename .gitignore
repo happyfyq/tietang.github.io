@@ -64,7 +64,8 @@ node_modules/
 *.vspscc
 .builds
 *.dotCover
-
+/.deploy_git
+/.idea
 ## TODO: If you have NuGet Package Restore enabled, uncomment this
 #packages/
 

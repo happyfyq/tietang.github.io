@@ -265,7 +265,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://tietang.github.com/2016/09/08/微服务/微服务之Eureka服务发现/">
+  <link itemprop="mainEntityOfPage" href="http://tietang.github.com/2016/09/10/微服务/微服务优缺点论述/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="铁汤">
@@ -290,8 +290,188 @@
             
               
                 
-                <a class="post-title-link" href="/2016/09/08/微服务/微服务之Eureka服务发现/" itemprop="url">
-                  微服务之Eureka服务发现
+                <a class="post-title-link" href="/2016/09/10/微服务/微服务优缺点论述/" itemprop="url">
+                  微服务优缺点论述
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-09-10T19:22:47+08:00">
+                2016-09-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/微服务/" itemprop="url" rel="index">
+                    <span itemprop="name">微服务</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2016/09/10/微服务/微服务优缺点论述/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/10/微服务/微服务优缺点论述/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/09/10/微服务/微服务优缺点论述/" class="leancloud_visitors" data-flag-title="微服务优缺点论述">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><img src="http://upload-images.jianshu.io/upload_images/2519252-a51def43c01ae44e.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/400" alt="IMG_20161026_142532.jpg"></p>
+<p>随着业务发展，业务功能的堆叠和复杂化，团队壮大，代码量也增加，各种问题开始凸显：</p>
+<ul>
+<li>代码结构开始变得混乱，难以管理，提交冲突，改一处引多处。</li>
+<li>沟通成本变高。</li>
+<li>代码维护难：“修复越多，缺陷越多”。</li>
+<li>引入和集成技术变得困难，依赖版本冲突，新特性无法使用。</li>
+</ul>
+<p>最后开发效率也开始下降，代码维护的成本提高。</p>
+<p>上线后稳定性不高，更大几率的影响可靠性和可用性，所有功能都运行在一个进程中，任何一个功能中出现bug，比如内存泄露，逻辑死循环耗尽CPU等，可以导致整个应用挂掉。<br>其中几个高并发功能，也不得不部署将所有功能增加部署实例，内存和CPU利用不够充分，灵活性也变差。</p>
+<p>其缺点也很明显：</p>
+<ul>
+<li>运维工作量增加，应用运维管理复杂。</li>
+<li>代码重复率增加，团队自治带来的重复劳动。</li>
+<li>分布式系统固有的复杂性和缺点：网络延迟，不可靠，负载均衡，调用，事务等等</li>
+</ul>
+<p>微服务架构可以从一定程度上解决或缓解上述问题，但它也不是万能的，但也带来了一系列的非功能性需求，比如说分布式事务、自动化运维，服务发现，服务路由等额外需求，但其带来的好处以及克服其缺点总结如下：</p>
+<ul>
+<li>服务发现带来很多自运维特性。</li>
+<li>单一职责原则在各种各种场景的解耦合</li>
+<li>业务开发：只关注小团队所熟悉和负责的业务，做到专而精，并且容易实现持续交付。</li>
+<li>代码管理：无论多git repository还是多maven module都可以做到一般的代码隔离，尤其是积累很多年的代码，拆分后更清晰不混乱，易管理。</li>
+<li>技术实现：处理的业务不同，可能会采取不同的技术栈，如果是单体，依赖有冲突的时候不得不花时间fix冲突或者妥协放弃集成。微服务拆分后，相互独立，集成新技术更容易。</li>
+<li>测试：尤其是对单元测试和自动化测试更有好处，但对于整个集成测试却带来了挑战，通过可视化运维系统和一个完整的测试环境搭建，以及架构上适当调整，成熟化测试环境后，可以弥补这种不便。</li>
+<li>独立部署，快速而出错几率比较低，但运维量比较大，但通过可视化自动运维系统来克服。</li>
+<li>运行时的隔离，这个是显而易见的，就跟汽车道路一样，谁跑谁的道，互补干扰。</li>
+<li>分布式事务也有很多成熟的参考方案来解决：补偿型，可靠事件型，TCC型等。</li>
+<li>服务调用上，可以通过超时、隔离、服务发现负载均衡提高可用性和可靠性。</li>
+<li>网络延迟，可以采用轻量级协议和连接池技术等来弥补。</li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://tietang.github.com/2016/09/08/微服务/微服务实施spring-cloud中踩过的坑/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="铁汤">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="多少光年">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="多少光年" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/09/08/微服务/微服务实施spring-cloud中踩过的坑/" itemprop="url">
+                  微服务实施spring-cloud中踩过的坑
                 </a>
               
             
@@ -339,8 +519,8 @@
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2016/09/08/微服务/微服务之Eureka服务发现/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/08/微服务/微服务之Eureka服务发现/" itemprop="commentCount"></span>
+                <a href="/2016/09/08/微服务/微服务实施spring-cloud中踩过的坑/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/08/微服务/微服务实施spring-cloud中踩过的坑/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -350,7 +530,7 @@
 
           
           
-             <span id="/2016/09/08/微服务/微服务之Eureka服务发现/" class="leancloud_visitors" data-flag-title="微服务之Eureka服务发现">
+             <span id="/2016/09/08/微服务/微服务实施spring-cloud中踩过的坑/" class="leancloud_visitors" data-flag-title="微服务实施spring-cloud中踩过的坑">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -377,11 +557,176 @@
       
         
           
-            <p><img src="http://upload-images.jianshu.io/upload_images/2519252-3691e262041c9cdd.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/600" alt=""></p>
-<p>当调用API或者发起网络通信的时候，无论如何我们都要知道被调用方的IP和服务端口，大部分情况是通过域名和服务端口，事实上基于DNS的服务发现，因为DNS缓存、无法自治和其他不利因素的存在，有很多局限。传统的DNS方式，都是通过nginx或者其他代理软件来实现，物理机器的ip和port都是固定的，那么nginx中配置的服务ip和port也是固定的，服务列表的更新只能通过手动来做，但如果后端服务很多时，手动更新容易出错，效率也很低，这在后端服务发生故障时，不可用时间就可能会加长。在微服务中，尤其是使用了Docker等虚拟化技术的微服务，其IP和port都是动态分配的，服务实例数也是动态变化的，那么就需要精细而准确的服务发现机制。当微服务app启动后，告诉其他服务自己的ip和端口，这里的其他服务就是Eureka Server和Eureka Client，这样其他服务就知道这个服务有多少实例在线，都在哪些地方，方便去负载均衡和调用。</p>
-<p>Eureka属于客户端发现模式，客户端负责决定相应服务实例的网络位置，并且对请求实现负载均衡。客户端从一个服务注册服务中查询所有可用服务实例的库，并缓存到本地。服务调用时，客户端使用负载均衡算法从多个后端服务实例中选择出一个，然后发出请求。Eureka分为Eureka Server和Eureka client， Eureka Server是一个服务注册中心，为服务实例注册管理和查询可用实例提供了REST API，并可以用其定位、负载均衡、故障恢复后端服务的中间层服务。在服务启动后，Eureka Client向服务注册中心注册服务同时会拉去注册中心注册表副本；在服务停止的时候，Eureka Client向服务注册中心注销服务；服务注册后，Eureka Client会定时的发送心跳来刷新服务的最新状态。</p>
-<p>客户端发现模式的优点是服务调用、负载均衡不需要和Eureka Server通信，直接使用本地注册表副本，因此Eureka Server不可用时是不会影响正常的服务调用，性能也不会因为网络延迟和服务端延迟受到影响。但其缺点也很明显，但某个服务不可用时，各个Eureka Client不能及时的知道，需要1~3个心跳周期才能感知，但是，由于基于Netflix的服务调用端都会使用Hystrix来容错和降级，当服务调用不可用时Hystrix也能及时感知到，通过熔断机制来降级服务调用，因此弥补了基于客户端服务发现的时效性的缺点。</p>
-<p>Eureka Server采用的是对等通信(P2P),无中心化的架构，无master/slave区分，每一个server都是对等的，既是Server又是Client,所以其集群方式可以自由发挥，可以各点互连，也可以接力互连。Eureka Server通过运行多个实例以及彼此之间互相注册来提高可用性，每个节点需要添加一个或多个有效的serviceUrl指向另一个节点。利用Eureka Server这种架构特性， 我在Eureka Server Cluster的部署时采用了三角形通信模型，三角形是一个很好的均衡模型，既是各点互连，又是接力互连，三角形本身就是一个稳定性几何形状，有着稳固、坚定搜索、耐压的特点，家具、建筑、交通等各种行业都有应用。如下图所示，Eureka Cluster的每个实例都和另外2个实例通信交互。<br><img src="http://7xiovs.com1.z0.glb.clouddn.com/eureka_cluster.png" alt=""></p>
+            <p><img src="http://upload-images.jianshu.io/upload_images/2519252-d2cc7d03dc185c51.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="P61023-131735-01.jpg"></p>
+<h2 id="注册IP问题"><a href="#注册IP问题" class="headerlink" title="注册IP问题"></a>注册IP问题</h2><p>早期的Spring Cloud Eureka在注册获取网卡IP时，不能区分外网网卡和内网网卡，如果安装了虚拟机和docker也不能区分虚拟网卡，每次启动注册的IP都有可能不一样，如果要注册为外网网卡IP，那运行带宽就不够，这个bug应该说是比较严重的问题，因此重写了网卡IP获取的逻辑来解决，同时也反馈给了spring cloud团队，再后期的版本中添加了网卡接口排序和通过名称过滤的功能来得到解决。</p>
+<h2 id="HealthCheck的问题"><a href="#HealthCheck的问题" class="headerlink" title="HealthCheck的问题"></a>HealthCheck的问题</h2><p>在一些极小概率的情况下，会导致Eureka Server 下线微服务实例，出现“Remote status from Eureka server is down”的问题，即便是重启微服务也无济于事，不过已经有码友在spring cloud 官方github贴出了解决方法的issue。</p>
+<h2 id="Zookeeper版本带来的性能问题"><a href="#Zookeeper版本带来的性能问题" class="headerlink" title="Zookeeper版本带来的性能问题"></a>Zookeeper版本带来的性能问题</h2><p>现象是一个团队在实施微服务时，发现部署到服务器上的微服务，在没有任何请求时，仍然CPU占用20~30%；匪夷所思的是，同样的微服务包在本地开发机器、本地物理机、本地虚拟机运行并未出现。通过jvisualvm观察,如下图：</p>
+<p><img src="http://7xiovs.com1.z0.glb.clouddn.com/zk_jvisualvm.png" alt=""></p>
+<p>可以看到和Zookeeper有关，同时我的另一个Demo微服务在任何环境下却未出现该问题。比较jar中依赖包之后发现，2个包中唯一不一样的是Apache Curator版本，一个是2.8.0, spring cloud默认依赖的版本；没问题的是Apache Curator 2.9.1。<strong>Apache Curator 2.8.0 BUG！！！</strong>在[Apache Curator 2.9.1 Release Notes](<https: 12332392="" issues.apache.org="" jira="" secure="" releasenote.jspa?projectid="12314425&version=">也发现了对此bug的描述。升级到2.9.1问题解决，皆大欢喜。同时上报此bug给Spring Cloud团队，升级Apache Curator版本。</https:></p>
+<h2 id="Feign使用不当带来的性能问题"><a href="#Feign使用不当带来的性能问题" class="headerlink" title="Feign使用不当带来的性能问题"></a>Feign使用不当带来的性能问题</h2><p>Feign在Spring容器中使用了独立应用上下文，要注意命名空间上隔离，详情参考：<a href="http://tietang.wang/2016/09/06/%E5%BE%AE%E6%9C%8D%E5%8A%A1/Feign%E4%BD%BF%E7%94%A8%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/" target="_blank" rel="external"><strong>Feign正确的使用方法和性能优化注意事项</strong></a> |<a href="http://www.jianshu.com/p/191d45210d16来绕过坑。" target="_blank" rel="external">http://www.jianshu.com/p/191d45210d16来绕过坑。</a></p>
+<p>这几个坑是不能容忍的，踩过其他小坑就不计其数了，但都不伤大雅，可以替代。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://tietang.github.com/2016/09/08/微服务/微服务下分布式事务问题/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="铁汤">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="多少光年">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="多少光年" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/09/08/微服务/微服务下分布式事务问题/" itemprop="url">
+                  微服务下分布式事务问题
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-09-08T19:22:47+08:00">
+                2016-09-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/微服务/" itemprop="url" rel="index">
+                    <span itemprop="name">微服务</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2016/09/08/微服务/微服务下分布式事务问题/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/08/微服务/微服务下分布式事务问题/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/09/08/微服务/微服务下分布式事务问题/" class="leancloud_visitors" data-flag-title="微服务下分布式事务问题">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><img src="http://upload-images.jianshu.io/upload_images/2519252-f3c6ae1fcc9ee375.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/600" alt="IMG_20160925_143422.jpg"></p>
+<p>用<code>数据一致性</code>来描述更贴切一些，在微服务化后，分布式事务上有很多选择，像<strong>多阶段提交、补偿模式、可靠事件、TCC</strong>等等，多阶段提交强一致性好但很难提升吞吐，为了吞吐基本上都是选择了最终一致性的分布式事务模型。补偿模式、可靠事件、TCC都属于最终一致性的范畴，都被广泛采用。无论采用哪种模式，都应该在特定业务场景下选择合适的分布式事务模型，并且具体场景具体分析了。这些模型也有很多分享参考，不再废话，下面着重介绍另一种分布式事务模型。</p>
+<h3 id="交叉事务模型"><a href="#交叉事务模型" class="headerlink" title="交叉事务模型"></a>交叉事务模型</h3><p>最初是2个数据源，我把它叫做<code>双事务</code>，扩展后支持多个数据源叫做<code>交叉事务</code>，这种事务适用于有2个或多个DataSource的场景下来保证数据的事务完整性，吞吐和一致性效果都很不错，这种事务模型利用了JDBC事务，基本思路是先执行DML SQL，出现异常或者需要回滚时依次回滚已经执行事务，最后再执行提交, 并且实现难度也不大，下面是伪代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">List&lt;Connection&gt; connections = <span class="keyword">new</span> ArrayList&lt;&gt;();</div><div class="line"><span class="keyword">int</span> i = <span class="number">0</span>;</div><div class="line"><span class="keyword">try</span> &#123;</div><div class="line">    <span class="keyword">for</span> (Connection connection : connections) &#123;</div><div class="line">       <span class="keyword">boolean</span> isExecuted= execute(connection);</div><div class="line">        i++;</div><div class="line">        <span class="keyword">if</span>(!isExecuted)&#123;</div><div class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> SQLException();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125; <span class="keyword">catch</span> (SQLException e) &#123;</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt;= i; j++) &#123;</div><div class="line">        connections.get(j).rollback();</div><div class="line">    &#125;</div><div class="line">&#125; <span class="keyword">finally</span> &#123;</div><div class="line">    <span class="keyword">for</span> (Connection connection : connections) &#123;</div><div class="line">        connection.commit();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>交叉事务要配合实际的JDBC事务和一些锁机制才能很好的工作，交叉事务很好的解决了多数据源的问题，但不是任何场景都适用，我总结了适用场景供大家参考：</p>
+<ol>
+<li>每个数据源事务处理要求很快，通常是零点几~十几毫秒，<strong>不适合长事务慢事务</strong>。</li>
+<li>通过建立多个数据源来工作，不是网络接口。</li>
+<li>每个数据源事务中要<strong>配合锁机制保证数据一致性</strong>，where id=? for update行锁或者乐观锁都可以，但必须保证整个个事务过程中不允许被其他事务修改。</li>
+</ol>
+<p><strong>这个事务模型在这样一个测试模型下的测试结果：</strong></p>
+<p>在多线程下随机对10组数据做随机更新，并记录下测试的最终状态，最后读取数据库最后实际数据比较。在这样的测试模型，每秒大约3000的事务，多次测试结果均显示无不一致数据，效果很好，后期的实际业务测试下也显示出其一致性和性能都不错。</p>
 
           
         
@@ -785,6 +1130,358 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://tietang.github.com/2016/09/08/微服务/微服务之API网关设计/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="铁汤">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="多少光年">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="多少光年" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/09/08/微服务/微服务之API网关设计/" itemprop="url">
+                  微服务之API网关设计
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-09-08T19:22:47+08:00">
+                2016-09-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/微服务/" itemprop="url" rel="index">
+                    <span itemprop="name">微服务</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2016/09/08/微服务/微服务之API网关设计/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/08/微服务/微服务之API网关设计/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/09/08/微服务/微服务之API网关设计/" class="leancloud_visitors" data-flag-title="微服务之API网关设计">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><img src="http://upload-images.jianshu.io/upload_images/2519252-3f8e955deefa1708.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/600" alt="P60528-094513-01.jpeg"></p>
+<p>微服务除了互相之间调用，还需要将API提供给外部应用访问，像浏览器，移动app，第三合作方等等，这就需要前段路由来管理后端微服务提供的服务。提供类似功能的应用有着多样化的名称，比如前置服务器/前置机、路由服务器、(反向)代理服务器，API网关服务器也是其中的一个叫法，只是场景和侧重点不一样。</p>
+<p>API网关，顾名思义，就是外部到内部的一道门，其主要功能：</p>
+<ul>
+<li>服务路由：将前段应用的调用请求路由定位并负载均衡到具体的后端微服务实例，对于前端应用看起来就是1个应用提供的服务，微服务对于前段应用来说就是黑盒，前段应用也不需要关心内部如何分布，由哪个微服务提供。主要有静态路由和动态路由。<ul>
+<li>静态路由：有时候需要通过域名或者其他固定方式提供和配置路由表</li>
+<li>动态路由：通过服务发现服务，动态调整后端微服务的运行实例和路由表，为路由和负载均衡提供动态变化的服务注册信息。</li>
+</ul>
+</li>
+<li>安全：统一集中的身份认证，安全控制。比如登录，签名，黑名单等等，还可以挖掘和开发更高级的安全策略。</li>
+<li>弹性：限流和容错，也是另一个层面的安全防护，防止突发的流量或者高峰流量冲击后端微服务而导致其服务不可用，另一方面可以在高峰期通过容错和降级保证核心服务的运行。</li>
+<li>监控：实时观察后端微服务的TPS、响应时间，失败数量等准确的信息。</li>
+<li>日志：记录所有请求的访问日志数据，可以为日志分析和查询提供统一支持。</li>
+<li>其他，当然还有很多需要统一集中管理的都可以在网关层解决。</li>
+</ul>
+<p>在Spring Cloud Netflix中使用Zuul来作为API Gateway组件，并结合Undertow，可以满足大部分性能和网关功能需求了(更高要求可以参考：<a href="https://github.com/tietang/ngx-lua-zuul)，Zuul" target="_blank" rel="external">https://github.com/tietang/ngx-lua-zuul)，Zuul</a> + Undertow一般性能延迟，包括JVM和网络延迟在10%~20%，JVM延迟可以控制到10ms以内。另一方面，Zuul有强大的可定制化，通过ZuulFilter可以定制开发更多的网关功能。如下图所示：在Spring Cloud技术上，Zuul集成了Hystrix，Ribbon，Eureka Client等强大的技术栈，提供了开箱即用的Spring Cloud微服务网关功能。Zuul的强大之处是自由定制，这样对于很多老项目微服务化后，就不能按照Spring Cloud默认的动态路由规则运行，因此在其基础上定制了一些路由规则功能，更好的适应老项目微服务化。</p>
+<p><img src="http://7xiovs.com1.z0.glb.clouddn.com/API-Gateway.png" alt="API gateway"></p>
+<p><strong>定制的路由规则的主要功能:</strong></p>
+<ol>
+<li>路由表中包含源路径，微服务名称，目标路径。</li>
+<li>Endpoint粒度配置支持。</li>
+<li>路由支持1对1精确路由。</li>
+<li>源路径可以<code>前缀/**</code>格式来模糊路由。</li>
+<li>目标路径可以使用<code>前缀/**</code>格式来装配目标路径。</li>
+<li>保留默认动态路由规则：<code>服务名称/**</code> –&gt; 是否截去前缀 –&gt; 目标路径。</li>
+<li>保留默认动态路由规则是否支持截去前缀的配置参数<code>stripPrefix</code>特性。</li>
+<li>路由规则可以在不重启服务动态更新，这个功能通过外化配置来支持。</li>
+<li>匹配股则采取谁先匹配路由谁，也就是说在路由表中有2个或以上的路由规则可能被匹配到时，匹配最先查询到的规则。</li>
+</ol>
+<p><strong>路由规则格式采用properties格式：</strong></p>
+<blockquote>
+<p>源路径 = 微服务名称, 目标路径</p>
+</blockquote>
+<p>启动时读取配置并解析，放入路由表。请求时通过查询匹配到合适的路由转发。</p>
+<p>例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">/api/v1/trade=trade,/v1/trade</div><div class="line">/api/customer/**=customer,/api/v1/**</div><div class="line">/api/user/**=user</div></pre></td></tr></table></figure>
+<p>在上面的例子中：</p>
+<ul>
+<li>/api/v1/trade会精确的路由到trade微服务的/v1/trade；</li>
+<li>/api/customer/开头的api会路由转发到customer微服务的/api/v1/**，其中后面的**会被前面的**部分替换，比如/api/customer/card-&gt;/api/v1/card的转换。</li>
+<li>/api/user/开头的api会路由转发到user微服务的/api/user/**，endppoint不变。</li>
+</ul>
+<p>如果在Eureka Server中已经注册了微服务<code>payment</code>,那么在zuul启动后会自动添加路由规则，如果stripPrefix=false:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/payment/**=payment,/payment/**</div></pre></td></tr></table></figure>
+<p>如果stripPrefix=true:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/payment/**=payment,/payment/**</div></pre></td></tr></table></figure>
+<p>API网关通过部署多个实例来保证可用性，前端通过Nginx来负载均衡。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://tietang.github.com/2016/09/08/微服务/微服务之Eureka服务发现/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="铁汤">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="多少光年">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="多少光年" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/09/08/微服务/微服务之Eureka服务发现/" itemprop="url">
+                  微服务之Eureka服务发现
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-09-08T19:22:47+08:00">
+                2016-09-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/微服务/" itemprop="url" rel="index">
+                    <span itemprop="name">微服务</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2016/09/08/微服务/微服务之Eureka服务发现/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/08/微服务/微服务之Eureka服务发现/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/09/08/微服务/微服务之Eureka服务发现/" class="leancloud_visitors" data-flag-title="微服务之Eureka服务发现">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><img src="http://upload-images.jianshu.io/upload_images/2519252-3691e262041c9cdd.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/600" alt=""></p>
+<p>当调用API或者发起网络通信的时候，无论如何我们都要知道被调用方的IP和服务端口，大部分情况是通过域名和服务端口，事实上基于DNS的服务发现，因为DNS缓存、无法自治和其他不利因素的存在，有很多局限。传统的DNS方式，都是通过nginx或者其他代理软件来实现，物理机器的ip和port都是固定的，那么nginx中配置的服务ip和port也是固定的，服务列表的更新只能通过手动来做，但如果后端服务很多时，手动更新容易出错，效率也很低，这在后端服务发生故障时，不可用时间就可能会加长。在微服务中，尤其是使用了Docker等虚拟化技术的微服务，其IP和port都是动态分配的，服务实例数也是动态变化的，那么就需要精细而准确的服务发现机制。当微服务app启动后，告诉其他服务自己的ip和端口，这里的其他服务就是Eureka Server和Eureka Client，这样其他服务就知道这个服务有多少实例在线，都在哪些地方，方便去负载均衡和调用。</p>
+<p>Eureka属于客户端发现模式，客户端负责决定相应服务实例的网络位置，并且对请求实现负载均衡。客户端从一个服务注册服务中查询所有可用服务实例的库，并缓存到本地。服务调用时，客户端使用负载均衡算法从多个后端服务实例中选择出一个，然后发出请求。Eureka分为Eureka Server和Eureka client， Eureka Server是一个服务注册中心，为服务实例注册管理和查询可用实例提供了REST API，并可以用其定位、负载均衡、故障恢复后端服务的中间层服务。在服务启动后，Eureka Client向服务注册中心注册服务同时会拉去注册中心注册表副本；在服务停止的时候，Eureka Client向服务注册中心注销服务；服务注册后，Eureka Client会定时的发送心跳来刷新服务的最新状态。</p>
+<p>客户端发现模式的优点是服务调用、负载均衡不需要和Eureka Server通信，直接使用本地注册表副本，因此Eureka Server不可用时是不会影响正常的服务调用，性能也不会因为网络延迟和服务端延迟受到影响。但其缺点也很明显，但某个服务不可用时，各个Eureka Client不能及时的知道，需要1~3个心跳周期才能感知，但是，由于基于Netflix的服务调用端都会使用Hystrix来容错和降级，当服务调用不可用时Hystrix也能及时感知到，通过熔断机制来降级服务调用，因此弥补了基于客户端服务发现的时效性的缺点。</p>
+<p>Eureka Server采用的是对等通信(P2P),无中心化的架构，无master/slave区分，每一个server都是对等的，既是Server又是Client,所以其集群方式可以自由发挥，可以各点互连，也可以接力互连。Eureka Server通过运行多个实例以及彼此之间互相注册来提高可用性，每个节点需要添加一个或多个有效的serviceUrl指向另一个节点。利用Eureka Server这种架构特性， 我在Eureka Server Cluster的部署时采用了三角形通信模型，三角形是一个很好的均衡模型，既是各点互连，又是接力互连，三角形本身就是一个稳定性几何形状，有着稳固、坚定搜索、耐压的特点，家具、建筑、交通等各种行业都有应用。如下图所示，Eureka Cluster的每个实例都和另外2个实例通信交互。<br><img src="http://7xiovs.com1.z0.glb.clouddn.com/eureka_cluster.png" alt=""></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
   <link itemprop="mainEntityOfPage" href="http://tietang.github.com/2016/09/06/微服务/Feign使用性能优化/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -976,861 +1673,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://tietang.github.com/2016/09/02/hystrix/RestTemplate遇上Hystrix/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="铁汤">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.gif">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="多少光年">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="多少光年" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/09/02/hystrix/RestTemplate遇上Hystrix/" itemprop="url">
-                  RestTemplate遇上Hystrix
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-09-02T09:20:00+08:00">
-                2016-09-02
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/技术/" itemprop="url" rel="index">
-                    <span itemprop="name">技术</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/技术/Hystrix/" itemprop="url" rel="index">
-                    <span itemprop="name">Hystrix</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/2016/09/02/hystrix/RestTemplate遇上Hystrix/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/02/hystrix/RestTemplate遇上Hystrix/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/09/02/hystrix/RestTemplate遇上Hystrix/" class="leancloud_visitors" data-flag-title="RestTemplate遇上Hystrix">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="RestTemplate遇上Hystrix"><a href="#RestTemplate遇上Hystrix" class="headerlink" title="RestTemplate遇上Hystrix"></a>RestTemplate遇上Hystrix</h1><h2 id="RestTemplate集成Hystrix和Robbin"><a href="#RestTemplate集成Hystrix和Robbin" class="headerlink" title="RestTemplate集成Hystrix和Robbin"></a>RestTemplate集成Hystrix和Robbin</h2><p>查看RestTemplate源代码，可以看到RestTemplate继承了InterceptingHttpAccessor类，InterceptingHttpAccessor类通过ClientHttpRequestInterceptor接口提供了扩展功能。</p>
-<p>实现intercept方法，在该方法中封装HystrixCommand和Ribbon逻辑即可。</p>
-<p>下面的代码是集成了HystrixCommand的例子：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> ClientHttpResponse <span class="title">intercept</span><span class="params">(</span></span></div><div class="line">            <span class="keyword">final</span> HttpRequest request, <span class="keyword">final</span> <span class="keyword">byte</span>[] body,</div><div class="line">            <span class="keyword">final</span> ClientHttpRequestExecution execution) <span class="keyword">throws</span> IOException &#123;</div><div class="line">        <span class="keyword">final</span> URI originalUri = request.getURI();</div><div class="line">        String serviceName = mapCommandKey(originalUri);</div><div class="line"></div><div class="line">        log.info(<span class="string">"&#123;&#125; :&#123;&#125; &#123;&#125; "</span>, serviceName, request.getMethod().name(), originalUri.toString());</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> RestTemplateHystrixCommnad(serviceName, () -&gt; &#123;</div><div class="line">            <span class="keyword">return</span> execution.execute(request, body);</div><div class="line">        &#125;, hystrixFallback).execute();</div><div class="line"></div><div class="line">    &#125;</div></pre></td></tr></table></figure>
-<p>下面是集成了HystrixCommand和Ribbon的例子</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> ClientHttpResponse <span class="title">intercept</span><span class="params">(</span></span></div><div class="line">            <span class="keyword">final</span> HttpRequest request, <span class="keyword">final</span> <span class="keyword">byte</span>[] body,</div><div class="line">            <span class="keyword">final</span> ClientHttpRequestExecution execution) <span class="keyword">throws</span> IOException &#123;</div><div class="line">        <span class="keyword">final</span> URI originalUri = request.getURI();</div><div class="line">        String serviceName = mapCommandKey(originalUri);</div><div class="line"></div><div class="line">        log.info(<span class="string">"&#123;&#125; :&#123;&#125; &#123;&#125; "</span>, serviceName, request.getMethod().name(), originalUri.toString());</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> RestTemplateHystrixCommnad(serviceName, () -&gt; &#123;</div><div class="line">            <span class="keyword">return</span> <span class="keyword">this</span>.loadBalancer.execute(serviceName, instance -&gt; &#123;</div><div class="line">                HttpRequest serviceRequest = <span class="keyword">new</span> HystrixLoadBalancerInterceptor.ServiceRequestWrapper(</div><div class="line">                        request,</div><div class="line">                        instance);</div><div class="line">                <span class="keyword">return</span> execution.execute(serviceRequest, body);</div><div class="line"></div><div class="line">            &#125;);</div><div class="line">        &#125;, hystrixFallback).execute();</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
-<p>2）RestTemplate支持Hystrix异步特性</p>
-<p>Hystrix的执行在线程隔离模型下是支持异步的，因此也扩展一个RestTemplate异步执行。如下代码所示，通过调用<code>queue()</code>方法返回一个Future。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Future&lt;String&gt; fs = <span class="keyword">new</span> CommandHelloWorld(<span class="string">"World"</span>).queue();</div><div class="line">String s = fs.get();</div></pre></td></tr></table></figure>
-<p>这样可以修改RestOperations接口方法为异步方法：</p>
-<p>从：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;T&gt;  <span class="function">T <span class="title">getForObject</span><span class="params">(String url, Class&lt;T&gt; responseType, Object... uriVariables)</span> <span class="keyword">throws</span> RestClientException</span>;</div></pre></td></tr></table></figure>
-<p>到：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;T&gt; <span class="function">Future&lt;T&gt; <span class="title">getForObject</span><span class="params">(String url, Class&lt;T&gt; responseType, Object... uriVariables)</span> <span class="keyword">throws</span> RestClientException</span>;</div></pre></td></tr></table></figure>
-<p>然后在原生的RestTemplate做一层代理，在代理层集成Hystrix和Ribbon，无论是JDK动态代理还是硬编码实现代理都变得容易，然后就可以这样来调用了：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">HystrixAsyncRestOperations asyncRestTemplate =<span class="keyword">null</span>;</div><div class="line"><span class="comment">//先依次调用</span></div><div class="line">Future&lt;String&gt; future1 = asyncRestTemplate.getForObject(<span class="string">"http://tietang.wang/"</span>, String.class);</div><div class="line">Future&lt;String&gt; future2 = asyncRestTemplate.getForObject(<span class="string">"http://tietang.wang/2016/03/17/hystrix/%E6%80%8E%E6%A0%B7%E4%BD%BF%E7%94%A8Hystrix/"</span>, String.class);</div><div class="line"><span class="comment">//再依次获取调用结果</span></div><div class="line">String html1 = future1.get();</div><div class="line">String html2 = future2.get(<span class="number">100</span>, TimeUnit.MILLISECONDS);<span class="comment">//异步超时，建议</span></div></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://tietang.github.com/2016/06/28/技术/软件开发中的单一职责/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="铁汤">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.gif">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="多少光年">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="多少光年" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/06/28/技术/软件开发中的单一职责/" itemprop="url">
-                  软件开发中的单一职责
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-06-28T09:06:33+08:00">
-                2016-06-28
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/技术/" itemprop="url" rel="index">
-                    <span itemprop="name">技术</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/技术/杂谈/" itemprop="url" rel="index">
-                    <span itemprop="name">杂谈</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/2016/06/28/技术/软件开发中的单一职责/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/28/技术/软件开发中的单一职责/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/06/28/技术/软件开发中的单一职责/" class="leancloud_visitors" data-flag-title="软件开发中的单一职责">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="软件开发中的单一职责"><a href="#软件开发中的单一职责" class="headerlink" title="软件开发中的单一职责"></a>软件开发中的单一职责</h1><p>最近在实践微服务化过程中，对其“单一职责”原则深有体会。<br>那么只有微服务化才可以单一职责，才可以解耦吗？答案是否定的。</p>
-<p>单一职责原则是这样定义的：单一的功能，并且完全封装起来。</p>
-<p>我们做后端Java开发的，应该最熟悉的就是标准的3层架构了，尤其是使用Spring.io体系的：Controller，Service，Dao/Repository。为什么要分层？就是为了保证单一职责，数据模型的事情交给Controller，业务逻辑的事情交给Service，和数据打交道的事情就交给Dao/Repository。有时候或者有些人会分层分的更多，4层，5层，我自己也这样干过，说白了也是为了保证单一职责，3层不能满足单一职责了，耦合度高了，就分。</p>
-<p>我们都知道一个webapp在经过一定时间的开发后，就惨不忍睹，即便是有标准的分层，页面或模板文件一大堆，最初的很清晰的3层标准架构也变味了，Controller，Service，Dao/Repository各层之间、Service之间、Dao/Repository之间互相调用，一团乱麻。这个时候没改一行代码都有可能一个老鼠害了一锅汤，bug就如同蚂蚁洞。</p>
-<h3 id="这些问题最后就造成："><a href="#这些问题最后就造成：" class="headerlink" title="这些问题最后就造成："></a>这些问题最后就造成：</h3><ul>
-<li>可扩展性灵活性差，出现性能问题</li>
-<li>业务变更和开发困难，维护成本很高，交付时间长</li>
-<li>回归测试量很大</li>
-<li>…</li>
-</ul>
-<p>为了解决这些问题，就需要时时刻刻清楚的记住“<strong>单一职责</strong>”，<strong>单一职责</strong>可以用到软件开发的任何地方。</p>
-<p>应该说职责分离来解耦是最常用最有效的架构方法，这能够很大限度的简化一切。</p>
-<h3 id="下面就从软件开发、设计、架构，以及重构-演进-进化，从小到大几个方面来说说单一职责："><a href="#下面就从软件开发、设计、架构，以及重构-演进-进化，从小到大几个方面来说说单一职责：" class="headerlink" title="下面就从软件开发、设计、架构，以及重构/演进/进化，从小到大几个方面来说说单一职责："></a>下面就从软件开发、设计、架构，以及重构/演进/进化，从小到大几个方面来说说<strong>单一职责</strong>：</h3><h2 id="类方法-函数"><a href="#类方法-函数" class="headerlink" title="类方法/函数"></a>类方法/函数</h2><p>这应该是最小的能体现<strong>单一职责</strong>的程序单元了。最熟悉的最典型的莫过于Helper/Utils类方法了，但这种类方法的特征很明显，也很容易遵循单一职责，99%以上的开发人员都可以做到。但不仅仅这样的类方法要遵循单一职责原则，每一个类方法都应该遵循<strong>单一职责</strong>原则，尤其是一些处理业务逻辑的类方法更要遵循<strong>单一职责</strong>原则，处理业务的类方法通常要配合类的单一职责原则进行，下节中讨论。</p>
-<p>因此，这也是为什么很多TL要求类方法代码行数保持在20行左右，其实就是为了保证单一职责，20行左右是一个<strong>经验粗略数字</strong>，当然，10行或者30行来完成类方法也是可以的。大部分单一职责的类方法用20行左右的代码就够了，如果超过20行就要考虑是否保证了单一职责了。那我们在<strong>迭代重构</strong>的过程中就要考虑拆分这样的类方法来保证单一职责。</p>
-<p>类方法的单一职责是最单纯的，很具体的，不惨杂任何额外信息，只关心输入、输出、和职责；一定要明确地定义类方法的职责，保证在迭代中不被错误的扩张，调用方错误的使用。</p>
-<h2 id="类-函数文件"><a href="#类-函数文件" class="headerlink" title="类/函数文件"></a>类/函数文件</h2><p>要用面向对象的设计方法，<strong>单一职责原则</strong>来定义类。开发人员一定要很好地理解“单一职责原则”，具有面向对象的抽象思维能力。</p>
-<p>当在迭代中一个类过于庞大或者快速膨胀，说明已经有坏味道了，这时候就需要考虑用单一职责原则或者面向对象的分析方法来重构和重新定义类了，通常就是要抽象和拆分类，否则将来会变成一个方法容器。</p>
-<p>把类比作一个人，她的职责就是完成自己职责范围内的事情，如果她什么事情都管，就叫多管闲事，可以想象她多管闲事的后果了，会搅得鸡犬不宁。同样，类也是，类如果多管闲事，那会搅得真个应用不稳定，漏洞百出，还很难修复。所以说定义一个类，要明确这个类的职责。使用面向对象的分析和设计方法，能很好地准确定义一个类的职责范围，通常就要用到封装、继承、多态和抽象等设计方法。</p>
-<h2 id="包结构-文件夹"><a href="#包结构-文件夹" class="headerlink" title="包结构/文件夹"></a>包结构/文件夹</h2><p>分层就是最常用的架构方法之一，分层具体体现在分包和分类，就是分门别类的意思。俗话说，物以类聚，人以群分。</p>
-<p>包结构在单一职责原则上是类的补充，职责范围进一步扩大。如果把一个类叫做一个人，那么包就是一个最小单位的团队，职责就是负责一类特定事情。<br>如何分包呢？那就要用到分类学的知识了，要以什么特征来分，可能不仅仅只有一种特征，比如，先用公司域名来做基础包名，这里叫一级包名；然后再用一个特定的有意义的标识作为二级子包名；之后按分层（web,dao,service等等）方法做三级包名，也可以先按照业务再按分层。例如：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">域名：tietang.wang</div><div class="line">有个项目叫：social</div><div class="line">那么我可以这样分：</div><div class="line">wang.tietang</div><div class="line">	- social</div><div class="line">		- web</div><div class="line">		- service</div><div class="line">		- dao</div><div class="line">		- commons</div><div class="line"></div><div class="line">也可以这样：</div><div class="line"></div><div class="line">wang.tietang</div><div class="line">	- commons</div><div class="line">	- user</div><div class="line">		- web</div><div class="line">		- service</div><div class="line">		- dao</div><div class="line">	- relation</div><div class="line">		- web</div><div class="line">		- service</div><div class="line">		- dao</div></pre></td></tr></table></figure>
-<h2 id="多工程-module"><a href="#多工程-module" class="headerlink" title="多工程/module"></a>多工程/module</h2><p>通常以多maven module或者gradle 多module形式存在，来保证单一职责。<br>当业务量还没有达到服务拆分的火候，又需要规整项目结构，通常在一个app发展的太庞大时或者在工程建设初期采取，从文件系统上隔离，通过module依赖来集成。需要注意的是这样的架构或拆分不是随意的，要以单一职责原则来拆分，更具体一点就是要根据业务，技术框架功能等特性来拆分。</p>
-<p>比如，按技术组件拆分，通常会有一些技术组件，可以把她放到commons module，如果有多种类型的技术组件，就拆分为commons module的子module；也可以直接将这些技术组件拆分为独立的工程，存在于独立的git/svn仓库，独立管理，专人负责；其他哪些module需要就依赖她。那拆分的这些技术组件的每一个应该遵循单一职责原则，例如数据分片的框架，NIO基础网络框架等等。</p>
-<p>比如，按业务拆分，例如有用户，订单，商品，支付，那么就按照这些业务拆分为子module，每一个子module就只负责自己的业务逻辑，也遵循单一职责。</p>
-<p>那每个module的职责范围又比类和包更大，这个时候职责也更模糊，有时候很难把握，对于技术组件可能相对清晰，业务module就要熟悉业务，明确业务边界。</p>
-<p>多module拆分后也是为将来服务化埋下伏笔，同时在物理文件系统比较清晰了，那在依赖管理上也要掌握好保持清晰的依赖逻辑，把握好单一职责原则。</p>
-<h2 id="微服务-可部署单元"><a href="#微服务-可部署单元" class="headerlink" title="微服务/可部署单元"></a>微服务/可部署单元</h2><p>微服务，从运行时隔离，但业务量发展到一定时候，从单体或者多module工程拆分或演化出来，可独立打包可独立部署并复合单一原则的application，当然了微服务所体现的价值不仅仅是隔离和独立部署，还有很多这里可以参考<a href="http://www.infoq.com/cn/news/2015/04/single-app-micro-service" target="_blank" rel="external">单体应用与微服务优缺点辨析</a>。单一职责在微服务中的价值是最重要的，包含了app层面和开发app的团队层面，微服务的大部分优点都可以围绕单一职责来张开。</p>
-<h2 id="团队"><a href="#团队" class="headerlink" title="团队"></a>团队</h2><p>先引用《韩非子·扬权》中的一段文字：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">夫物者有所宜，材者有所施，各处其宜，故上下无为。 </div><div class="line">使鸡司夜，令狸执鼠，皆用其能，上乃无事。</div><div class="line">上有所长，事乃不方。 </div><div class="line">矜而好能，下之所欺：辩惠好生，下因其材。</div><div class="line">上下易用，国故不治。</div></pre></td></tr></table></figure>
-<p><strong>参考：</strong></p>
-<ul>
-<li>原文：<a href="http://www.shici8.com/bookview_3501.html" target="_blank" rel="external">http://www.shici8.com/bookview_3501.html</a></li>
-<li>译文：<a href="http://www.shici8.com/article_8539.html" target="_blank" rel="external">http://www.shici8.com/article_8539.html</a></li>
-</ul>
-<p>各得其所，各司其职。所以，团队也要遵循单一职责原则，这样才能很好地管理团队成员的时间，提高效率。一个人专注做一件事情的效率远高于同时关注多件事情的。同样一个人一直管理和维护同一份代码要比多人同时维护多份代码的效率高很多。每一个人都有自己的个性，他有自己的擅长，让每一个人专注自己擅长的事情，那肯定事半功倍，整个团队绩效肯定也很突出。</p>
-<p>总之，引用古文名句说明了所有：</p>
-<ul>
-<li>物以类聚，人以群分。</li>
-<li>天下之事，分合交替，分久必合，合久必分！</li>
-<li>使鸡司夜，令狸执鼠，皆用其能，上乃无事。</li>
-</ul>
-<h3 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h3><p> <a href="http://www.jianshu.com/p/f9d15827465d" target="_blank" rel="external">http://www.jianshu.com/p/f9d15827465d</a></p>
-<p> <a href="https://zh.wikipedia.org/wiki/单一功能原则" target="_blank" rel="external">https://zh.wikipedia.org/wiki/单一功能原则</a></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://tietang.github.com/2016/06/16/技术/负载均衡之加权轮询算法/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="铁汤">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.gif">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="多少光年">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="多少光年" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/06/16/技术/负载均衡之加权轮询算法/" itemprop="url">
-                  负载均衡之加权轮询算法
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-06-16T09:06:33+08:00">
-                2016-06-16
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/技术/" itemprop="url" rel="index">
-                    <span itemprop="name">技术</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/技术/算法/" itemprop="url" rel="index">
-                    <span itemprop="name">算法</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/2016/06/16/技术/负载均衡之加权轮询算法/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/16/技术/负载均衡之加权轮询算法/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/06/16/技术/负载均衡之加权轮询算法/" class="leancloud_visitors" data-flag-title="负载均衡之加权轮询算法">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="负载均衡之加权轮询算法"><a href="#负载均衡之加权轮询算法" class="headerlink" title="负载均衡之加权轮询算法"></a>负载均衡之加权轮询算法</h1><h2 id="算法举例说明"><a href="#算法举例说明" class="headerlink" title="算法举例说明"></a>算法举例说明</h2><table>
-<thead>
-<tr>
-<th>服务实例</th>
-<th>权重 </th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td> 127.0.0.1:8001</td>
-<td>1</td>
-</tr>
-<tr>
-<td> 127.0.0.1:8002</td>
-<td>2</td>
-</tr>
-<tr>
-<td> 127.0.0.1:8003</td>
-<td>3</td>
-</tr>
-</tbody>
-</table>
-<h3 id="共有三个实例，总权重为6，那么实现效果应该为每调用6次："><a href="#共有三个实例，总权重为6，那么实现效果应该为每调用6次：" class="headerlink" title="共有三个实例，总权重为6，那么实现效果应该为每调用6次："></a>共有三个实例，总权重为6，那么实现效果应该为每调用6次：</h3><ul>
-<li>每个实例应该被调用权重次数</li>
-<li>权重数大的优先被调用</li>
-</ul>
-<h3 id="根据以上说明，那么进行排列组合："><a href="#根据以上说明，那么进行排列组合：" class="headerlink" title="根据以上说明，那么进行排列组合："></a>根据以上说明，那么进行排列组合：</h3><ul>
-<li>先按照权重大小排序</li>
-<li><p>把权重数做为调用次数排列</p>
-<p><strong>排列的结果是这样的：</strong></p>
-</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>序号</th>
-<th>服务实例</th>
-<th>权重</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>1</td>
-<td>127.0.0.1:8003</td>
-<td>3</td>
-</tr>
-<tr>
-<td>2</td>
-<td>127.0.0.1:8003</td>
-<td>3</td>
-</tr>
-<tr>
-<td>3</td>
-<td>127.0.0.1:8003</td>
-<td>3</td>
-</tr>
-<tr>
-<td>4</td>
-<td>127.0.0.1:8002</td>
-<td>2</td>
-</tr>
-<tr>
-<td>5</td>
-<td>127.0.0.1:8002</td>
-<td>2</td>
-</tr>
-<tr>
-<td>6</td>
-<td>127.0.0.1:8001</td>
-<td>1</td>
-</tr>
-</tbody>
-</table>
-<p>貌似没问题，但每个实例调用不是交替的，分布不够均匀，改进一下重新排列组合：</p>
-<table>
-<thead>
-<tr>
-<th>序号</th>
-<th>服务实例</th>
-<th>权重</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>1</td>
-<td>127.0.0.1:8003</td>
-<td>3</td>
-</tr>
-<tr>
-<td>2</td>
-<td>127.0.0.1:8002</td>
-<td>2</td>
-</tr>
-<tr>
-<td>3</td>
-<td>127.0.0.1:8003</td>
-<td>3</td>
-</tr>
-<tr>
-<td>4</td>
-<td>127.0.0.1:8002</td>
-<td>2</td>
-</tr>
-<tr>
-<td>5</td>
-<td>127.0.0.1:8003</td>
-<td>3</td>
-</tr>
-<tr>
-<td>6</td>
-<td>127.0.0.1:8001</td>
-<td>1</td>
-</tr>
-</tbody>
-</table>
-<p>或者</p>
-<table>
-<thead>
-<tr>
-<th>序号</th>
-<th>服务实例</th>
-<th>权重</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>1</td>
-<td>127.0.0.1:8003</td>
-<td>3   </td>
-</tr>
-<tr>
-<td>2</td>
-<td>127.0.0.1:8002</td>
-<td>2</td>
-</tr>
-<tr>
-<td>3</td>
-<td>127.0.0.1:8003</td>
-<td>3</td>
-</tr>
-<tr>
-<td>4</td>
-<td>127.0.0.1:8001</td>
-<td>1</td>
-</tr>
-<tr>
-<td>5</td>
-<td>127.0.0.1:8003</td>
-<td>3</td>
-</tr>
-<tr>
-<td>6</td>
-<td>127.0.0.1:8002</td>
-<td>2</td>
-</tr>
-</tbody>
-</table>
-<p>2个权重变量：weight，current_weight</p>
-<h3 id="weight"><a href="#weight" class="headerlink" title="weight"></a>weight</h3><p>配置的固定不变的权重</p>
-<h3 id="current-weight"><a href="#current-weight" class="headerlink" title="current_weight"></a>current_weight</h3><p>会动态调整的权重，初始化为0，运行时动态调整。<br>选取开始时，先重新调整current_weight= current_weight+weight，然后通过current_weight值从大到小排序，选择current_weight值最大的（实际编程中不一定要排序，可以直接取最大的）；<br>然后重新计算被选择的current_weight值= current_weight-总weight。</p>
-<p>下面是用Lua脚本实现的该算法：</p>
- <figure class="highlight lua"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">_M:next</span><span class="params">()</span></span></div><div class="line"><span class="keyword">local</span> servers=self.servers</div><div class="line">	<span class="keyword">local</span> totalWeight = totalWeight(servers)</div><div class="line">	<span class="keyword">for</span> k,v <span class="keyword">in</span> <span class="built_in">pairs</span>(servers) <span class="keyword">do</span></div><div class="line">	v.cweight=v.weight+v.cweight</div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line"><span class="built_in">table</span>.sort( servers, </div><div class="line">	<span class="function"><span class="keyword">function</span> <span class="params">(a,b)</span></span></div><div class="line">		<span class="keyword">return</span> a.cweight&gt;b.cweight</div><div class="line">	<span class="keyword">end</span> </div><div class="line">)</div><div class="line">selected=servers[<span class="number">1</span>]</div><div class="line">selected.cweight=selected.cweight-totalWeight</div><div class="line"></div><div class="line"><span class="keyword">return</span> selected</div><div class="line"></div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://tietang.github.com/2016/06/02/微服务/微服务之微/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="铁汤">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.gif">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="多少光年">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="多少光年" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/06/02/微服务/微服务之微/" itemprop="url">
-                  微服务之微
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-06-02T09:20:00+08:00">
-                2016-06-02
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/微服务/" itemprop="url" rel="index">
-                    <span itemprop="name">微服务</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/2016/06/02/微服务/微服务之微/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/02/微服务/微服务之微/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/06/02/微服务/微服务之微/" class="leancloud_visitors" data-flag-title="微服务之微">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p> 单一职责</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1876,7 +1718,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">27</span>
+              <span class="site-state-item-count">31</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1884,7 +1726,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-count">17</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -1893,7 +1735,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">39</span>
+                <span class="site-state-item-count">45</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -1989,7 +1831,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2016</span>
+  <span itemprop="copyrightYear">2017</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
