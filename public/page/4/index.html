@@ -1089,6 +1089,197 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://tietang.wang/2016/02/19/技术/FlatBuffers/FlatBuffers使用指南/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="铁汤">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="多少光年">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/02/19/技术/FlatBuffers/FlatBuffers使用指南/" itemprop="url">
+                  FlatBuffers 使用指南
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-02-19T20:20:42+08:00">
+                2016-02-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术/FlatBuffers/" itemprop="url" rel="index">
+                    <span itemprop="name">FlatBuffers</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2016/02/19/技术/FlatBuffers/FlatBuffers使用指南/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/02/19/技术/FlatBuffers/FlatBuffers使用指南/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2016/02/19/技术/FlatBuffers/FlatBuffers使用指南/" class="leancloud_visitors" data-flag-title="FlatBuffers 使用指南">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="FlatBuffers-使用指南"><a href="#FlatBuffers-使用指南" class="headerlink" title="FlatBuffers 使用指南"></a>FlatBuffers 使用指南</h1><p>FlatBuffers序列化性能是protobuf的2倍，但size也是protobuf的2倍</p>
+<h2 id="编译源码"><a href="#编译源码" class="headerlink" title="编译源码"></a>编译源码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ git clone https://github.com/google/flatbuffers.git</div><div class="line">#切换到最新release版本</div><div class="line">$ git checkout v1.2.0</div></pre></td></tr></table></figure>
+<h3 id="安装cmake"><a href="#安装cmake" class="headerlink" title="安装cmake"></a>安装cmake</h3><p><a href="http://www.cmake.org" target="_blank" rel="external">http://www.cmake.org</a>.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">for mac osx</div><div class="line">$ brew install cmake</div><div class="line">for centOS</div><div class="line">$ sudo yum install cmake</div></pre></td></tr></table></figure>
+<h3 id="用cmake构建project"><a href="#用cmake构建project" class="headerlink" title="用cmake构建project"></a>用cmake构建project</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">cmake -G &quot;Unix Makefiles&quot;</div><div class="line">cmake -G &quot;Visual Studio 10&quot;</div><div class="line">cmake -G &quot;Xcode&quot;</div></pre></td></tr></table></figure>
+<p>在*nix系统，mac osx系统也建议使用 <code>cmake -G &quot;Unix Makefiles&quot;</code>，生成<code>Makefile</code>,之后<code>make &amp; make install</code><br>编译生成<code>flatc</code>并安装到系统。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ cmake -G &quot;Unix Makefiles&quot;</div><div class="line">$ make</div><div class="line">$ make insall</div></pre></td></tr></table></figure>
+<h2 id="使用schema编译器flatc来生成基础代码"><a href="#使用schema编译器flatc来生成基础代码" class="headerlink" title="使用schema编译器flatc来生成基础代码"></a>使用schema编译器flatc来生成基础代码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ cd samples</div><div class="line">#在目录src中生成java代码</div><div class="line">$flatc -j -o src monster.fbs</div></pre></td></tr></table></figure>
+<h3 id="编程语言参数"><a href="#编程语言参数" class="headerlink" title="编程语言参数:"></a>编程语言参数:</h3><ul>
+<li>–cpp, -c : Generate a C++ header for all definitions in this file (as filename_generated.h).</li>
+<li>–java, -j : Generate Java code.</li>
+<li>–csharp, -n : Generate C# code.</li>
+<li>–go, -g : Generate Go code.</li>
+<li>–python, -p: Generate Python code.</li>
+<li>–javascript, -s: Generate JavaScript code.</li>
+<li>–php: Generate PHP code.</li>
+</ul>
+<h3 id="其他常用选项："><a href="#其他常用选项：" class="headerlink" title="其他常用选项："></a>其他常用选项：</h3><ul>
+<li>-o PATH 指定源码输出目录</li>
+<li>-I PATH 有include语句时，指定include目录</li>
+</ul>
+<h1 id="完整的参数"><a href="#完整的参数" class="headerlink" title="完整的参数"></a>完整的参数</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line">usage: flatc [OPTION]... FILE... [-- FILE...]</div><div class="line">  -b              Generate wire format binaries for any data definitions.</div><div class="line">  -t              Generate text output for any data definitions.</div><div class="line">  -c              Generate C++ headers for tables/structs.</div><div class="line">  -g              Generate Go files for tables/structs.</div><div class="line">  -j              Generate Java classes for tables/structs.</div><div class="line">  -s              Generate JavaScript code for tables/structs.</div><div class="line">  -n              Generate C# classes for tables/structs.</div><div class="line">  -p              Generate Python files for tables/structs.</div><div class="line">  -o PATH         Prefix PATH to all generated files.</div><div class="line">  -I PATH         Search for includes in the specified path.</div><div class="line">  -M              Print make rules for generated files.</div><div class="line">  --strict-json   Strict JSON: field names must be / will be quoted,</div><div class="line">                  no trailing commas in tables/vectors.</div><div class="line">  --defaults-json Output fields whose value is the default when</div><div class="line">                  writing JSON</div><div class="line">  --no-prefix     Don&apos;t prefix enum values with the enum type in C++.</div><div class="line">  --scoped-enums  Use C++11 style scoped and strongly typed enums.</div><div class="line">                  also implies --no-prefix.</div><div class="line">  --gen-includes  (deprecated), this is the default behavior.</div><div class="line">                  If the original behavior is required (no include</div><div class="line">                  statements) use --no-includes.</div><div class="line">  --no-includes   Don&apos;t generate include statements for included</div><div class="line">                  schemas the generated file depends on (C++).</div><div class="line">  --gen-mutable   Generate accessors that can mutate buffers in-place.</div><div class="line">  --gen-onefile   Generate single output file for C#</div><div class="line">  --raw-binary    Allow binaries without file_indentifier to be read.</div><div class="line">                  This may crash flatc given a mismatched schema.</div><div class="line">  --proto         Input is a .proto, translate to .fbs.</div><div class="line">  --schema        Serialize schemas instead of JSON (use with -b)</div><div class="line">FILEs may depend on declarations in earlier files.</div><div class="line">FILEs after the -- must be binary flatbuffer format files.</div><div class="line">Output files are named using the base file name of the input,</div><div class="line">and written to the current directory or the path given by -o.</div><div class="line">example: flatc -c -b schema1.fbs schema2.fbs data.json</div></pre></td></tr></table></figure>
+<h2 id="写schema-IDL文件"><a href="#写schema-IDL文件" class="headerlink" title="写schema IDL文件"></a>写schema IDL文件</h2><p>参考：<a href="http://google.github.io/flatbuffers/flatbuffers_guide_writing_schema.html" target="_blank" rel="external">http://google.github.io/flatbuffers/flatbuffers_guide_writing_schema.html</a></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://tietang.wang/2016/02/19/技术/FlatBuffers/FlatBuffers简介/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1245,197 +1436,6 @@
 <h3 id="为什么不使用Protocol-Buffers的，或者JSON"><a href="#为什么不使用Protocol-Buffers的，或者JSON" class="headerlink" title="为什么不使用Protocol Buffers的，或者JSON"></a>为什么不使用Protocol Buffers的，或者JSON</h3><p>Protocol Buffers的确和FlatBuffers比较类似，但其主要区别在于FlatBuffers在访问数据前不需要解析/拆包这一步。 而且Protocol Buffers既没有可选的文本导入/导出功能，也没有Schemas语法特性（比如union）。同时，在工程中使用时，FlatBuffers的引用比Protocol Buffers方便很多，只需要包含两三个头文件即可。</p>
 <p>JSON的可读性很好，而且当和动态类型语言（如JavaScript）一起使用时非常方便。然而在静态类型语言中序列化数据时，JSON不但具有运行效率低的明显缺点，而且会让你写更多的代码来访问数据（这个与直觉相反）。</p>
 <p>与Protocol Buffers或JSON Parsing这样的可选方案相比，FlatBuffers的优势在于开销更小，这主要是由于它没有解析过程。<a href="http://google.github.io/flatbuffers/md__benchmarks.html" target="_blank" rel="external">http://google.github.io/flatbuffers/md__benchmarks.html</a></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://tietang.wang/2016/02/19/技术/FlatBuffers/FlatBuffers使用指南/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="铁汤">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="多少光年">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/02/19/技术/FlatBuffers/FlatBuffers使用指南/" itemprop="url">
-                  FlatBuffers 使用指南
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-02-19T20:20:42+08:00">
-                2016-02-19
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/技术/" itemprop="url" rel="index">
-                    <span itemprop="name">技术</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/技术/FlatBuffers/" itemprop="url" rel="index">
-                    <span itemprop="name">FlatBuffers</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2016/02/19/技术/FlatBuffers/FlatBuffers使用指南/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/02/19/技术/FlatBuffers/FlatBuffers使用指南/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-             <span id="/2016/02/19/技术/FlatBuffers/FlatBuffers使用指南/" class="leancloud_visitors" data-flag-title="FlatBuffers 使用指南">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="FlatBuffers-使用指南"><a href="#FlatBuffers-使用指南" class="headerlink" title="FlatBuffers 使用指南"></a>FlatBuffers 使用指南</h1><p>FlatBuffers序列化性能是protobuf的2倍，但size也是protobuf的2倍</p>
-<h2 id="编译源码"><a href="#编译源码" class="headerlink" title="编译源码"></a>编译源码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ git clone https://github.com/google/flatbuffers.git</div><div class="line">#切换到最新release版本</div><div class="line">$ git checkout v1.2.0</div></pre></td></tr></table></figure>
-<h3 id="安装cmake"><a href="#安装cmake" class="headerlink" title="安装cmake"></a>安装cmake</h3><p><a href="http://www.cmake.org" target="_blank" rel="external">http://www.cmake.org</a>.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">for mac osx</div><div class="line">$ brew install cmake</div><div class="line">for centOS</div><div class="line">$ sudo yum install cmake</div></pre></td></tr></table></figure>
-<h3 id="用cmake构建project"><a href="#用cmake构建project" class="headerlink" title="用cmake构建project"></a>用cmake构建project</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">cmake -G &quot;Unix Makefiles&quot;</div><div class="line">cmake -G &quot;Visual Studio 10&quot;</div><div class="line">cmake -G &quot;Xcode&quot;</div></pre></td></tr></table></figure>
-<p>在*nix系统，mac osx系统也建议使用 <code>cmake -G &quot;Unix Makefiles&quot;</code>，生成<code>Makefile</code>,之后<code>make &amp; make install</code><br>编译生成<code>flatc</code>并安装到系统。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ cmake -G &quot;Unix Makefiles&quot;</div><div class="line">$ make</div><div class="line">$ make insall</div></pre></td></tr></table></figure>
-<h2 id="使用schema编译器flatc来生成基础代码"><a href="#使用schema编译器flatc来生成基础代码" class="headerlink" title="使用schema编译器flatc来生成基础代码"></a>使用schema编译器flatc来生成基础代码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ cd samples</div><div class="line">#在目录src中生成java代码</div><div class="line">$flatc -j -o src monster.fbs</div></pre></td></tr></table></figure>
-<h3 id="编程语言参数"><a href="#编程语言参数" class="headerlink" title="编程语言参数:"></a>编程语言参数:</h3><ul>
-<li>–cpp, -c : Generate a C++ header for all definitions in this file (as filename_generated.h).</li>
-<li>–java, -j : Generate Java code.</li>
-<li>–csharp, -n : Generate C# code.</li>
-<li>–go, -g : Generate Go code.</li>
-<li>–python, -p: Generate Python code.</li>
-<li>–javascript, -s: Generate JavaScript code.</li>
-<li>–php: Generate PHP code.</li>
-</ul>
-<h3 id="其他常用选项："><a href="#其他常用选项：" class="headerlink" title="其他常用选项："></a>其他常用选项：</h3><ul>
-<li>-o PATH 指定源码输出目录</li>
-<li>-I PATH 有include语句时，指定include目录</li>
-</ul>
-<h1 id="完整的参数"><a href="#完整的参数" class="headerlink" title="完整的参数"></a>完整的参数</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line">usage: flatc [OPTION]... FILE... [-- FILE...]</div><div class="line">  -b              Generate wire format binaries for any data definitions.</div><div class="line">  -t              Generate text output for any data definitions.</div><div class="line">  -c              Generate C++ headers for tables/structs.</div><div class="line">  -g              Generate Go files for tables/structs.</div><div class="line">  -j              Generate Java classes for tables/structs.</div><div class="line">  -s              Generate JavaScript code for tables/structs.</div><div class="line">  -n              Generate C# classes for tables/structs.</div><div class="line">  -p              Generate Python files for tables/structs.</div><div class="line">  -o PATH         Prefix PATH to all generated files.</div><div class="line">  -I PATH         Search for includes in the specified path.</div><div class="line">  -M              Print make rules for generated files.</div><div class="line">  --strict-json   Strict JSON: field names must be / will be quoted,</div><div class="line">                  no trailing commas in tables/vectors.</div><div class="line">  --defaults-json Output fields whose value is the default when</div><div class="line">                  writing JSON</div><div class="line">  --no-prefix     Don&apos;t prefix enum values with the enum type in C++.</div><div class="line">  --scoped-enums  Use C++11 style scoped and strongly typed enums.</div><div class="line">                  also implies --no-prefix.</div><div class="line">  --gen-includes  (deprecated), this is the default behavior.</div><div class="line">                  If the original behavior is required (no include</div><div class="line">                  statements) use --no-includes.</div><div class="line">  --no-includes   Don&apos;t generate include statements for included</div><div class="line">                  schemas the generated file depends on (C++).</div><div class="line">  --gen-mutable   Generate accessors that can mutate buffers in-place.</div><div class="line">  --gen-onefile   Generate single output file for C#</div><div class="line">  --raw-binary    Allow binaries without file_indentifier to be read.</div><div class="line">                  This may crash flatc given a mismatched schema.</div><div class="line">  --proto         Input is a .proto, translate to .fbs.</div><div class="line">  --schema        Serialize schemas instead of JSON (use with -b)</div><div class="line">FILEs may depend on declarations in earlier files.</div><div class="line">FILEs after the -- must be binary flatbuffer format files.</div><div class="line">Output files are named using the base file name of the input,</div><div class="line">and written to the current directory or the path given by -o.</div><div class="line">example: flatc -c -b schema1.fbs schema2.fbs data.json</div></pre></td></tr></table></figure>
-<h2 id="写schema-IDL文件"><a href="#写schema-IDL文件" class="headerlink" title="写schema IDL文件"></a>写schema IDL文件</h2><p>参考：<a href="http://google.github.io/flatbuffers/flatbuffers_guide_writing_schema.html" target="_blank" rel="external">http://google.github.io/flatbuffers/flatbuffers_guide_writing_schema.html</a></p>
 
           
         
@@ -1794,6 +1794,15 @@
         
 
         
+
+ <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+    <div class="links-of-blogroll-title">
+      <i class="fa  fa-fw fa-universal-access"></i>
+      最近访客
+    </div>
+    <div class="ds-recent-visitors" data-num-items="130"
+               data-avatar-size="23" id="ds-recent-visitors"/>
+</div>
 
 
       </section>

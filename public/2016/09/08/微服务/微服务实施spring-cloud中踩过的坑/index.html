@@ -397,7 +397,7 @@
 <h2 id="Zookeeper版本带来的性能问题"><a href="#Zookeeper版本带来的性能问题" class="headerlink" title="Zookeeper版本带来的性能问题"></a>Zookeeper版本带来的性能问题</h2><p>现象是一个团队在实施微服务时，发现部署到服务器上的微服务，在没有任何请求时，仍然CPU占用20~30%；匪夷所思的是，同样的微服务包在本地开发机器、本地物理机、本地虚拟机运行并未出现。通过jvisualvm观察,如下图：</p>
 <p><img src="http://7xiovs.com1.z0.glb.clouddn.com/zk_jvisualvm.png" alt=""></p>
 <p>可以看到和Zookeeper有关，同时我的另一个Demo微服务在任何环境下却未出现该问题。比较jar中依赖包之后发现，2个包中唯一不一样的是Apache Curator版本，一个是2.8.0, spring cloud默认依赖的版本；没问题的是Apache Curator 2.9.1。<strong>Apache Curator 2.8.0 BUG！！！</strong>在[Apache Curator 2.9.1 Release Notes](<https: 12332392="" issues.apache.org="" jira="" secure="" releasenote.jspa?projectid="12314425&version=">也发现了对此bug的描述。升级到2.9.1问题解决，皆大欢喜。同时上报此bug给Spring Cloud团队，升级Apache Curator版本。</https:></p>
-<h2 id="Feign使用不当带来的性能问题"><a href="#Feign使用不当带来的性能问题" class="headerlink" title="Feign使用不当带来的性能问题"></a>Feign使用不当带来的性能问题</h2><p>Feign在Spring容器中使用了独立应用上下文，要注意命名空间上隔离，详情参考：<a href="http://tietang.wang/2016/09/06/%E5%BE%AE%E6%9C%8D%E5%8A%A1/Feign%E4%BD%BF%E7%94%A8%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/" target="_blank" rel="external"><strong>Feign正确的使用方法和性能优化注意事项</strong></a> |<a href="http://www.jianshu.com/p/191d45210d16来绕过坑。" target="_blank" rel="external">http://www.jianshu.com/p/191d45210d16来绕过坑。</a></p>
+<h2 id="Feign使用不当带来的性能问题"><a href="#Feign使用不当带来的性能问题" class="headerlink" title="Feign使用不当带来的性能问题"></a>Feign使用不当带来的性能问题</h2><p>Feign在Spring容器中使用了独立应用上下文，要注意命名空间上隔离，详情参考：<a href="http://tietang.wang/2016/09/06/%E5%BE%AE%E6%9C%8D%E5%8A%A1/Feign%E4%BD%BF%E7%94%A8%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/"><strong>Feign正确的使用方法和性能优化注意事项</strong></a> |<a href="http://www.jianshu.com/p/191d45210d16来绕过坑。" target="_blank" rel="external">http://www.jianshu.com/p/191d45210d16来绕过坑。</a></p>
 <p>这几个坑是不能容忍的，踩过其他小坑就不计其数了，但都不伤大雅，可以替代。</p>
 
       
@@ -445,8 +445,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/09/08/微服务/微服务下分布式事务问题/" rel="next" title="微服务下分布式事务问题">
-                <i class="fa fa-chevron-left"></i> 微服务下分布式事务问题
+              <a href="/2016/09/08/微服务/微服务之spring-cloud分布式外部化和中心化配置管理/" rel="next" title="微服务之spring-cloud分布式外部化和中心化配置管理">
+                <i class="fa fa-chevron-left"></i> 微服务之spring-cloud分布式外部化和中心化配置管理
               </a>
             
           </div>
@@ -455,8 +455,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/09/08/微服务/微服务之API网关设计/" rel="prev" title="微服务之API网关设计">
-                微服务之API网关设计 <i class="fa fa-chevron-right"></i>
+              <a href="/2016/09/10/微服务/微服务优缺点论述/" rel="prev" title="微服务优缺点论述">
+                微服务优缺点论述 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -665,6 +665,15 @@
         
 
         
+
+ <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+    <div class="links-of-blogroll-title">
+      <i class="fa  fa-fw fa-universal-access"></i>
+      最近访客
+    </div>
+    <div class="ds-recent-visitors" data-num-items="130"
+               data-avatar-size="23" id="ds-recent-visitors"/>
+</div>
 
 
       </section>
