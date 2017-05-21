@@ -169,7 +169,7 @@ social_icons:
 # Sidebar Avatar
 # in theme directory(source/images): /images/avatar.jpg
 # in site  directory(source/uploads): /uploads/avatar.jpg
-#avatar:
+avatar: /images/weix.jpg
 
 
 # Table Of Contents in the Sidebar
@@ -207,10 +207,10 @@ sidebar:
   offset_float: 0
 
   # Back to top in sidebar
-  b2t: false
+  b2t: true
 
   # Scroll percent label in b2t button
-  scrollpercent: false
+  scrollpercent: true
 
 
 # Blogrolls
@@ -276,7 +276,7 @@ post_copyright:
 #   image: url-of-image   - Images's url
 custom_logo:
   enabled: false
-  image:
+  image: /images/weix.jpg
 
 
 # Code Highlight theme
