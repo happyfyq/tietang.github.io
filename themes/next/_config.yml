@@ -156,7 +156,7 @@ social_icons:
   enable: true
   # Icon Mappings.
   # KeyMapsToSocialItemKey: NameOfTheIconFromFontAwesome
-  GitHub: github
+  GitHub: github-alt
   Twitter: twitter
   Weibo: weibo
   蜂鸟: camera
