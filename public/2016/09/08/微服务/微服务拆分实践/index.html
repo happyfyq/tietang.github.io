@@ -84,38 +84,18 @@
 
 
 
-<meta name="description" content="说到微服务就不得不说拆分了，服务拆分要有一些指导依据。
-拆分依据微服务的理论知识有大量的分享，这里是我对微服务理论基础认识的一些观点：
-
-小，且专注于做一件事情，即满足单一职责原则。 关于单一职责可以阅读我的另一篇文章《软件开发中的单一职责》
-运行在独立的进程中。
-轻量级的通信机制，RPC或者HTTP或者MQ。
-松耦合，独立部署。
-康威定律：设计系统的组织，其产生的设计等同于组织之内、组织之间的">
+<meta name="description" content="说到微服务就不得不说拆分了，服务拆分要有一些指导依据。 拆分依据微服务的理论知识有大量的分享，这里是我对微服务理论基础认识的一些观点：  小，且专注于做一件事情，即满足单一职责原则。 关于单一职责可以阅读我的另一篇文章《软件开发中的单一职责》 运行在独立的进程中。 轻量级的通信机制，RPC或者HTTP或者MQ。 松耦合，独立部署。 康威定律：设计系统的组织，其产生的设计等同于组织之内、组织之间的">
+<meta name="keywords" content="微服务,Spring Cloud,Spring Boot">
 <meta property="og:type" content="article">
 <meta property="og:title" content="微服务拆分实践">
 <meta property="og:url" content="http://tietang.github.com/2016/09/08/微服务/微服务拆分实践/index.html">
 <meta property="og:site_name" content="多少光年">
-<meta property="og:description" content="说到微服务就不得不说拆分了，服务拆分要有一些指导依据。
-拆分依据微服务的理论知识有大量的分享，这里是我对微服务理论基础认识的一些观点：
-
-小，且专注于做一件事情，即满足单一职责原则。 关于单一职责可以阅读我的另一篇文章《软件开发中的单一职责》
-运行在独立的进程中。
-轻量级的通信机制，RPC或者HTTP或者MQ。
-松耦合，独立部署。
-康威定律：设计系统的组织，其产生的设计等同于组织之内、组织之间的">
+<meta property="og:description" content="说到微服务就不得不说拆分了，服务拆分要有一些指导依据。 拆分依据微服务的理论知识有大量的分享，这里是我对微服务理论基础认识的一些观点：  小，且专注于做一件事情，即满足单一职责原则。 关于单一职责可以阅读我的另一篇文章《软件开发中的单一职责》 运行在独立的进程中。 轻量级的通信机制，RPC或者HTTP或者MQ。 松耦合，独立部署。 康威定律：设计系统的组织，其产生的设计等同于组织之内、组织之间的">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2519252-54c30064a539893e.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/600">
 <meta property="og:updated_time" content="2016-11-30T07:08:57.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="微服务拆分实践">
-<meta name="twitter:description" content="说到微服务就不得不说拆分了，服务拆分要有一些指导依据。
-拆分依据微服务的理论知识有大量的分享，这里是我对微服务理论基础认识的一些观点：
-
-小，且专注于做一件事情，即满足单一职责原则。 关于单一职责可以阅读我的另一篇文章《软件开发中的单一职责》
-运行在独立的进程中。
-轻量级的通信机制，RPC或者HTTP或者MQ。
-松耦合，独立部署。
-康威定律：设计系统的组织，其产生的设计等同于组织之内、组织之间的">
+<meta name="twitter:description" content="说到微服务就不得不说拆分了，服务拆分要有一些指导依据。 拆分依据微服务的理论知识有大量的分享，这里是我对微服务理论基础认识的一些观点：  小，且专注于做一件事情，即满足单一职责原则。 关于单一职责可以阅读我的另一篇文章《软件开发中的单一职责》 运行在独立的进程中。 轻量级的通信机制，RPC或者HTTP或者MQ。 松耦合，独立部署。 康威定律：设计系统的组织，其产生的设计等同于组织之内、组织之间的">
 <meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/2519252-54c30064a539893e.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/600">
 
 

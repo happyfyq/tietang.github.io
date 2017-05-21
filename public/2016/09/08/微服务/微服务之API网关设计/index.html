@@ -84,27 +84,19 @@
 
 
 
-<meta name="description" content="微服务除了互相之间调用，还需要将API提供给外部应用访问，像浏览器，移动app，第三合作方等等，这就需要前段路由来管理后端微服务提供的服务。提供类似功能的应用有着多样化的名称，比如前置服务器/前置机、路由服务器、(反向)代理服务器，API网关服务器也是其中的一个叫法，只是场景和侧重点不一样。
-API网关，顾名思义，就是外部到内部的一道门，其主要功能：
-
-服务路由：将前段应用的调用请求路由定位并负">
+<meta name="description" content="微服务除了互相之间调用，还需要将API提供给外部应用访问，像浏览器，移动app，第三合作方等等，这就需要前段路由来管理后端微服务提供的服务。提供类似功能的应用有着多样化的名称，比如前置服务器/前置机、路由服务器、(反向)代理服务器，API网关服务器也是其中的一个叫法，只是场景和侧重点不一样。 API网关，顾名思义，就是外部到内部的一道门，其主要功能：  服务路由：将前段应用的调用请求路由定位并负">
+<meta name="keywords" content="微服务,Spring Cloud,Spring Boot,API Gateway,网关">
 <meta property="og:type" content="article">
 <meta property="og:title" content="微服务之API网关设计">
 <meta property="og:url" content="http://tietang.github.com/2016/09/08/微服务/微服务之API网关设计/index.html">
 <meta property="og:site_name" content="多少光年">
-<meta property="og:description" content="微服务除了互相之间调用，还需要将API提供给外部应用访问，像浏览器，移动app，第三合作方等等，这就需要前段路由来管理后端微服务提供的服务。提供类似功能的应用有着多样化的名称，比如前置服务器/前置机、路由服务器、(反向)代理服务器，API网关服务器也是其中的一个叫法，只是场景和侧重点不一样。
-API网关，顾名思义，就是外部到内部的一道门，其主要功能：
-
-服务路由：将前段应用的调用请求路由定位并负">
+<meta property="og:description" content="微服务除了互相之间调用，还需要将API提供给外部应用访问，像浏览器，移动app，第三合作方等等，这就需要前段路由来管理后端微服务提供的服务。提供类似功能的应用有着多样化的名称，比如前置服务器/前置机、路由服务器、(反向)代理服务器，API网关服务器也是其中的一个叫法，只是场景和侧重点不一样。 API网关，顾名思义，就是外部到内部的一道门，其主要功能：  服务路由：将前段应用的调用请求路由定位并负">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2519252-3f8e955deefa1708.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/600">
 <meta property="og:image" content="http://7xiovs.com1.z0.glb.clouddn.com/API-Gateway.png">
 <meta property="og:updated_time" content="2016-11-30T07:08:57.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="微服务之API网关设计">
-<meta name="twitter:description" content="微服务除了互相之间调用，还需要将API提供给外部应用访问，像浏览器，移动app，第三合作方等等，这就需要前段路由来管理后端微服务提供的服务。提供类似功能的应用有着多样化的名称，比如前置服务器/前置机、路由服务器、(反向)代理服务器，API网关服务器也是其中的一个叫法，只是场景和侧重点不一样。
-API网关，顾名思义，就是外部到内部的一道门，其主要功能：
-
-服务路由：将前段应用的调用请求路由定位并负">
+<meta name="twitter:description" content="微服务除了互相之间调用，还需要将API提供给外部应用访问，像浏览器，移动app，第三合作方等等，这就需要前段路由来管理后端微服务提供的服务。提供类似功能的应用有着多样化的名称，比如前置服务器/前置机、路由服务器、(反向)代理服务器，API网关服务器也是其中的一个叫法，只是场景和侧重点不一样。 API网关，顾名思义，就是外部到内部的一道门，其主要功能：  服务路由：将前段应用的调用请求路由定位并负">
 <meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/2519252-3f8e955deefa1708.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/600">
 
 

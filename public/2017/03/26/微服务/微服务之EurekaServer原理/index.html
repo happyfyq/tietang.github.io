@@ -1,0 +1,948 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="微服务,Eureka Server, Spring Cloud" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="Eureka的相关知识，在之前的《微服务之Eureka服务发现》中已经讲了很多，这里不再重复，本文主要通过Eureka Server源码和配置来阐述Eureka Server的工作原理。 Eureka提供了一系列REST的API，供Eureka Client来调用，实现服务注册，注销，心跳，状态更新等等操作，参考官网EurekaREst操作。 123456REST API &amp;lt;Jersey&amp;g">
+<meta name="keywords" content="微服务,Eureka Server, Spring Cloud">
+<meta property="og:type" content="article">
+<meta property="og:title" content="微服务Eureka Server原理">
+<meta property="og:url" content="http://tietang.github.com/2017/03/26/微服务/微服务之EurekaServer原理/index.html">
+<meta property="og:site_name" content="多少光年">
+<meta property="og:description" content="Eureka的相关知识，在之前的《微服务之Eureka服务发现》中已经讲了很多，这里不再重复，本文主要通过Eureka Server源码和配置来阐述Eureka Server的工作原理。 Eureka提供了一系列REST的API，供Eureka Client来调用，实现服务注册，注销，心跳，状态更新等等操作，参考官网EurekaREst操作。 123456REST API &amp;lt;Jersey&amp;g">
+<meta property="og:image" content="http://7xiovs.com1.z0.glb.clouddn.com/eureka_registry.png">
+<meta property="og:updated_time" content="2017-05-10T10:06:00.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="微服务Eureka Server原理">
+<meta name="twitter:description" content="Eureka的相关知识，在之前的《微服务之Eureka服务发现》中已经讲了很多，这里不再重复，本文主要通过Eureka Server源码和配置来阐述Eureka Server的工作原理。 Eureka提供了一系列REST的API，供Eureka Client来调用，实现服务注册，注销，心跳，状态更新等等操作，参考官网EurekaREst操作。 123456REST API &amp;lt;Jersey&amp;g">
+<meta name="twitter:image" content="http://7xiovs.com1.z0.glb.clouddn.com/eureka_registry.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"right","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://tietang.github.com/2017/03/26/微服务/微服务之EurekaServer原理/"/>
+
+
+
+
+
+  <title> 微服务Eureka Server原理 | 多少光年 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-74077761-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?a671e5198b87c08c17ebf22563539dd1";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">多少光年</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">风可以吹走尘土,但吹不走记忆</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://tietang.github.com/2017/03/26/微服务/微服务之EurekaServer原理/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="铁汤">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="多少光年">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="多少光年" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                微服务Eureka Server原理
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-26T19:20:00+08:00">
+                2017-03-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/微服务/" itemprop="url" rel="index">
+                    <span itemprop="name">微服务</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2017/03/26/微服务/微服务之EurekaServer原理/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/26/微服务/微服务之EurekaServer原理/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2017/03/26/微服务/微服务之EurekaServer原理/" class="leancloud_visitors" data-flag-title="微服务Eureka Server原理">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Eureka的相关知识，在之前的《微服务之Eureka服务发现》中已经讲了很多，这里不再重复，本文主要通过Eureka Server源码和配置来阐述Eureka Server的工作原理。</p>
+<p>Eureka提供了一系列REST的API，供Eureka Client来调用，实现服务注册，注销，心跳，状态更新等等操作，参考官网<a href="https://github.com/Netflix/eureka/wiki/Eureka-REST-operations" target="_blank" rel="external">EurekaREst操作</a>。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">REST API &lt;Jersey&gt;</div><div class="line">Response Cache &lt;com.google.common.cache.LoadingCache&gt;</div><div class="line">InstanceRegistry &lt;ConcurrentHashMap&gt;</div><div class="line"></div><div class="line">EvictionTimer&lt;java.util.Timer&gt;</div><div class="line">CacheUpdateTask&lt;java.util.Timer&gt;</div></pre></td></tr></table></figure>
+<h2 id="REST-API"><a href="#REST-API" class="headerlink" title="REST API"></a>REST API</h2><p>基于Jersey实现，主要以appId[appname]和instanceId为操作维度，内容可以是xml或者json。相关的实现可以在<code>com.netflix.eureka.resources</code>包中找到。基于appId和instanceId和各种操作组合的实现，可以认为是InstanceRegistry的操作入口。</p>
+<h2 id="InstanceRegistry"><a href="#InstanceRegistry" class="headerlink" title="InstanceRegistry"></a>InstanceRegistry</h2><p>Registry是Eureka Server的核心，服务发现就是围绕Registry来实现。以下提到的类都可以在<code>com.netflix.eureka.registry</code>包中找到。</p>
+<p>整个Registry由4个接口组成：</p>
+<ul>
+<li>LeaseManager: register,cacel,renew,evict等基本操作</li>
+<li>LookupService: 这个抽象是要是client和server端共用，EurekaClient也继承了该接口，主要用来查找服务和服务实例。</li>
+<li>InstanceRegistry: 提供了实例相关的丰富的操作。</li>
+<li>PeerAwareInstanceRegistry: eureka server之间的注册信息复制</li>
+</ul>
+<p>如下是类关系图：</p>
+<p><img src="http://7xiovs.com1.z0.glb.clouddn.com/eureka_registry.png" alt=""></p>
+<h2 id="几个重要的定时任务"><a href="#几个重要的定时任务" class="headerlink" title="几个重要的定时任务"></a>几个重要的定时任务</h2><h3 id="心跳补偿任务EvictionTask"><a href="#心跳补偿任务EvictionTask" class="headerlink" title="心跳补偿任务EvictionTask"></a>心跳补偿任务EvictionTask</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[com.netflix.eureka.registry.AbstractInstanceRegistry.EvictionTask]</div></pre></td></tr></table></figure>
+<p>主要是用来做心跳补偿，目的是用来取消或清理过期的注册信息，通常是eureka client在停止前未成功发送cacel请求。例如eureka client停止时网络不通了、eureka client进程奔溃了等等。</p>
+<p>这个定时任务是通过<code>eureka.server.eviction-interval-timer-in-ms</code>参数来配置处理间隔，默认是60s。</p>
+<p>补偿时间=当前时间-该任务最后执行时间-执行间隔<br>其中<code>该任务最后执行时间-执行间隔</code>主要是计算出实际执行时间的细微差别，也为后面的<code>补偿时间&gt;0</code>埋下伏笔。</p>
+<p><code>补偿时间&gt;0</code>或者<code>最后更新时间 + leaseDuration[默认是90s，客户端durationInSecs]+补偿时间&lt;当前时间</code> 时会执行evict清理过期实例。</p>
+<p><strong>补偿时间&gt;0,</strong> 即就是当前任务执行和上次执行的时间间隔大于配置的时间间隔，正常情况补偿时间应该很小。</p>
+<p><strong>最后更新时间+leaseDuration+补偿时间&lt;当前时间</strong>，即就是最后一次成功心跳到当前时间的间隔比eureka client配置的间隔大。</p>
+<p>其中<strong>leaseDuration</strong>: 在eureka client中通过<code>eureka.instance.lease-expiration-duration-in-seconds[leaseExpirationDurationInSeconds]</code>参数来配置，默认是90s。</p>
+<p>下面是源代码：</p>
+<p><strong>计算补偿时间：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">long</span> <span class="title">getCompensationTimeMs</span><span class="params">()</span> </span>&#123;</div><div class="line">            <span class="keyword">long</span> currNanos = getCurrentTimeNano();</div><div class="line">            <span class="keyword">long</span> lastNanos = lastExecutionNanosRef.getAndSet(currNanos);</div><div class="line">            <span class="keyword">if</span> (lastNanos == <span class="number">0l</span>) &#123;</div><div class="line">                <span class="keyword">return</span> <span class="number">0l</span>;</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            <span class="keyword">long</span> elapsedMs = TimeUnit.NANOSECONDS.toMillis(currNanos - lastNanos);</div><div class="line">            <span class="keyword">long</span> compensationTime = elapsedMs - serverConfig.getEvictionIntervalTimerInMs();</div><div class="line">            <span class="keyword">return</span> compensationTime &lt;= <span class="number">0l</span> ? <span class="number">0l</span> : compensationTime;</div><div class="line">        &#125;</div></pre></td></tr></table></figure>
+<p><strong>这个是补偿清理逻辑：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">evict</span><span class="params">(<span class="keyword">long</span> additionalLeaseMs)</span> </span>&#123;</div><div class="line">        logger.debug(<span class="string">"Running the evict task"</span>);</div><div class="line"></div><div class="line">        <span class="keyword">if</span> (!isLeaseExpirationEnabled()) &#123;</div><div class="line">            logger.debug(<span class="string">"DS: lease expiration is currently disabled."</span>);</div><div class="line">            <span class="keyword">return</span>;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="comment">// We collect first all expired items, to evict them in random order. For large eviction sets,</span></div><div class="line">        <span class="comment">// if we do not that, we might wipe out whole apps before self preservation kicks in. By randomizing it,</span></div><div class="line">        <span class="comment">// the impact should be evenly distributed across all applications.</span></div><div class="line">        List&lt;Lease&lt;InstanceInfo&gt;&gt; expiredLeases = <span class="keyword">new</span> ArrayList&lt;&gt;();</div><div class="line">        <span class="keyword">for</span> (Entry&lt;String, Map&lt;String, Lease&lt;InstanceInfo&gt;&gt;&gt; groupEntry : registry.entrySet()) &#123;</div><div class="line">            Map&lt;String, Lease&lt;InstanceInfo&gt;&gt; leaseMap = groupEntry.getValue();</div><div class="line">            <span class="keyword">if</span> (leaseMap != <span class="keyword">null</span>) &#123;</div><div class="line">                <span class="keyword">for</span> (Entry&lt;String, Lease&lt;InstanceInfo&gt;&gt; leaseEntry : leaseMap.entrySet()) &#123;</div><div class="line">                    Lease&lt;InstanceInfo&gt; lease = leaseEntry.getValue();</div><div class="line">                    <span class="keyword">if</span> (lease.isExpired(additionalLeaseMs) &amp;&amp; lease.getHolder() != <span class="keyword">null</span>) &#123;</div><div class="line">                        expiredLeases.add(lease);</div><div class="line">                    &#125;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="comment">// To compensate for GC pauses or drifting local time, we need to use current registry size as a base for</span></div><div class="line">        <span class="comment">// triggering self-preservation. Without that we would wipe out full registry.</span></div><div class="line">        <span class="keyword">int</span> registrySize = (<span class="keyword">int</span>) getLocalRegistrySize();</div><div class="line">        <span class="keyword">int</span> registrySizeThreshold = (<span class="keyword">int</span>) (registrySize * serverConfig.getRenewalPercentThreshold());</div><div class="line">        <span class="keyword">int</span> evictionLimit = registrySize - registrySizeThreshold;</div><div class="line"></div><div class="line">        <span class="keyword">int</span> toEvict = Math.min(expiredLeases.size(), evictionLimit);</div><div class="line">        <span class="keyword">if</span> (toEvict &gt; <span class="number">0</span>) &#123;</div><div class="line">            logger.info(<span class="string">"Evicting &#123;&#125; items (expired=&#123;&#125;, evictionLimit=&#123;&#125;)"</span>, toEvict, expiredLeases.size(), evictionLimit);</div><div class="line"></div><div class="line">            Random random = <span class="keyword">new</span> Random(System.currentTimeMillis());</div><div class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; toEvict; i++) &#123;</div><div class="line">                <span class="comment">// Pick a random item (Knuth shuffle algorithm)</span></div><div class="line">                <span class="keyword">int</span> next = i + random.nextInt(expiredLeases.size() - i);</div><div class="line">                Collections.swap(expiredLeases, i, next);</div><div class="line">                Lease&lt;InstanceInfo&gt; lease = expiredLeases.get(i);</div><div class="line"></div><div class="line">                String appName = lease.getHolder().getAppName();</div><div class="line">                String id = lease.getHolder().getId();</div><div class="line">                EXPIRED.increment();</div><div class="line">                logger.warn(<span class="string">"DS: Registry: expired lease for &#123;&#125;/&#123;&#125;"</span>, appName, id);</div><div class="line">                internalCancel(appName, id, <span class="keyword">false</span>);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<p>从上面的逻辑上看，配置的时间间隔有2个：</p>
+<ul>
+<li>eureka server端：<code>eviction-interval-timer-in-ms</code></li>
+<li>eureka client端：<code>lease-expiration-duration-in-seconds</code></li>
+</ul>
+<p>这2个参数同时作用着清理逻辑，配置时就要注意，<code>eviction-interval-timer-in-ms</code>要比<code>lease-expiration-duration-in-seconds</code>配置的要小，产生的结果就完全不一样。</p>
+<h2 id="ResponseCache"><a href="#ResponseCache" class="headerlink" title="ResponseCache"></a>ResponseCache</h2><p>通过readOnlyCache和readWriteCache实现：</p>
+<ul>
+<li>readOnlyCache: java.util.concurrent.ConcurrentMap</li>
+<li>readWriteCache: com.google.common.cache.LoadingCache</li>
+</ul>
+<p>readWriteCache会自动从registry中更新。</p>
+<p>这个缓存只作用于获取整个注册表和app的实例注册信息。</p>
+<h3 id="缓存更新CacheUpdateTask"><a href="#缓存更新CacheUpdateTask" class="headerlink" title="缓存更新CacheUpdateTask"></a>缓存更新CacheUpdateTask</h3><p>这个任务用来定期更新只读缓存,逻辑上比较简单，定期从读写缓存中取出K/V，比较是否一致，不一致更新。</p>
+<p>更新间隔通过参数<code>eureka.server.response-cache-update-interval-ms</code>来配置，默认是30s。</p>
+<h3 id="readWriteCache"><a href="#readWriteCache" class="headerlink" title="readWriteCache"></a>readWriteCache</h3><p>过期时间通过参数<code>eureka.server.response-cache-auto-expiration-in-seconds</code>来配置，默认是180s。</p>
+<h2 id="eureka-Server几个重要的配置"><a href="#eureka-Server几个重要的配置" class="headerlink" title="eureka Server几个重要的配置"></a>eureka Server几个重要的配置</h2><p>eureka.server.enable-self-preservation</p>
+<p>是否开启自我保护模式，默认为true。</p>
+<p>在开启状态下，Eureka Server会保持</p>
+<p>默认情况下，如果Eureka Server在一定时间内没有接收到某个微服务实例的心跳，Eureka Server将会注销该实例（默认90秒）。但是当网络分区故障发生时，微服务与Eureka Server之间无法正常通信，以上行为可能变得非常危险了——因为微服务本身其实是健康的，此时本不应该注销这个微服务。</p>
+<p>Eureka通过“自我保护模式”来解决这个问题——当Eureka Server节点在短时间内丢失过多客户端时（可能发生了网络分区故障），那么这个节点就会进入自我保护模式。一旦进入该模式，Eureka Server就会保护服务注册表中的信息，不再删除服务注册表中的数据（也就是不会注销任何微服务）。当网络故障恢复后，该Eureka Server节点会自动退出自我保护模式。</p>
+<p>综上，自我保护模式是一种应对网络异常的安全保护措施。它的架构哲学是宁可同时保留所有微服务（健康的微服务和不健康的微服务都会保留），也不盲目注销任何健康的微服务。使用自我保护模式，可以让Eureka集群更加的健壮、稳定。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">#是否开启自我保护模式，默认为true。</div><div class="line">enableSelfPreservation: true</div><div class="line">#默认是85%</div><div class="line">renewal-percent-threshold: 0.85</div><div class="line">#默认是15分钟</div><div class="line">renewal-threshold-update-interval-ms: 15</div><div class="line">#缓存更新时间，默认30s</div><div class="line">response-cache-update-interval-ms: 10</div><div class="line">#缓存过期时间，默认180s</div><div class="line">response-cache-auto-expiration-in-seconds: 30</div><div class="line"># 实例过期清理时间间隔，默认60秒</div><div class="line">eviction-interval-timer-in-ms: 10</div></pre></td></tr></table></figure>
+<h2 id="eureka-client几个重要的配置"><a href="#eureka-client几个重要的配置" class="headerlink" title="eureka client几个重要的配置"></a>eureka client几个重要的配置</h2><p>eureka.client.registry-fetch-interval-seconds</p>
+<p>表示eureka client间隔多久去拉取服务注册信息，默认为30秒，对于api-gateway，如果要迅速获取服务注册状态，可以缩小该值，比如5秒</p>
+<p>eureka.instance.lease-expiration-duration-in-seconds</p>
+<p>leaseExpirationDurationInSeconds，表示eureka server至上一次收到client的心跳之后，等待下一次心跳的超时时间，在这个时间内若没收到下一次心跳，则将移除该instance。</p>
+<p>默认为90秒<br>如果该值太大，则很可能将流量转发过去的时候，该instance已经不存活了。<br>如果该值设置太小了，则instance则很可能因为临时的网络抖动而被摘除掉。<br>该值至少应该大于leaseRenewalIntervalInSeconds<br>eureka.instance.lease-renewal-interval-in-seconds</p>
+<p>leaseRenewalIntervalInSeconds，表示eureka client发送心跳给server端的频率。如果在leaseExpirationDurationInSeconds后，server端没有收到client的心跳，则将摘除该instance。除此之外，如果该instance实现了HealthCheckCallback，并决定让自己unavailable的话，则该instance也不会接收到流量。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/微服务/" rel="tag"># 微服务</a>
+          
+            <a href="/tags/Spring-Cloud/" rel="tag"># Spring Cloud</a>
+          
+            <a href="/tags/Eureka/" rel="tag"># Eureka</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/11/27/nginx/安装Nginx&Lua模块/" rel="next" title="安装Nginx Lua环境">
+                <i class="fa fa-chevron-left"></i> 安装Nginx Lua环境
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/04/10/技术/JDBC如何开启事务/" rel="prev" title="JDBC如何开启事务">
+                JDBC如何开启事务 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2017/03/26/微服务/微服务之EurekaServer原理/"
+     data-title="微服务Eureka Server原理"
+     data-content=""
+     data-url="http://tietang.github.com/2017/03/26/微服务/微服务之EurekaServer原理/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/03/26/微服务/微服务之EurekaServer原理/"
+           data-title="微服务Eureka Server原理" data-url="http://tietang.github.com/2017/03/26/微服务/微服务之EurekaServer原理/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="铁汤" />
+          <p class="site-author-name" itemprop="name">铁汤</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">31</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">17</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">45</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/tietang/" target="_blank" title="Github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://my.fengniao.com/tietang" target="_blank" title="蜂鸟">
+                  
+                    <i class="fa fa-fw fa-camera"></i>
+                  
+                  蜂鸟
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://500px.com/tietang" target="_blank" title="500px">
+                  
+                    <i class="fa fa-fw fa-500px"></i>
+                  
+                  500px
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/users/ae2ad10f3a37/latest_articles" target="_blank" title="简书">
+                  
+                    <i class="fa fa-fw fa-book"></i>
+                  
+                  简书
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/collection/3f476518d832" target="_blank" title="微服务">
+                  
+                    <i class="fa fa-fw fa-cloud"></i>
+                  
+                  微服务
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/collection/6bac5f0a8c84" target="_blank" title="大数据">
+                  
+                    <i class="fa fa-fw fa-cubes"></i>
+                  
+                  大数据
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#REST-API"><span class="nav-number">1.</span> <span class="nav-text">REST API</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#InstanceRegistry"><span class="nav-number">2.</span> <span class="nav-text">InstanceRegistry</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#几个重要的定时任务"><span class="nav-number">3.</span> <span class="nav-text">几个重要的定时任务</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#心跳补偿任务EvictionTask"><span class="nav-number">3.1.</span> <span class="nav-text">心跳补偿任务EvictionTask</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ResponseCache"><span class="nav-number">4.</span> <span class="nav-text">ResponseCache</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#缓存更新CacheUpdateTask"><span class="nav-number">4.1.</span> <span class="nav-text">缓存更新CacheUpdateTask</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#readWriteCache"><span class="nav-number">4.2.</span> <span class="nav-text">readWriteCache</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#eureka-Server几个重要的配置"><span class="nav-number">5.</span> <span class="nav-text">eureka Server几个重要的配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#eureka-client几个重要的配置"><span class="nav-number">6.</span> <span class="nav-text">eureka client几个重要的配置</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">铁汤</span>
+</div>
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"tietang"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("hnptsbiP3Vo0p1mh9LOUp8Hm-gzGzoHsz", "EnEGfUaCAor7TTQXX1Gud6Fs");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+
+</body>
+</html>
