@@ -20,7 +20,7 @@ since: 2015
 authoricon: heart
 
 # Footer `powered-by` and `theme-info` copyright
-copyright: true
+copyright: false
 
 # Canonical, set a canonical link tag in your hexo, you could use it for your SEO of blog.
 # See: https://support.google.com/webmasters/answer/139066
@@ -292,8 +292,8 @@ highlight_theme: night eighties
 
 # MathJax Support
 mathjax:
-  enable: false
-  per_page: false
+  enable: true
+  per_page: true
   cdn: //cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML
 
 
@@ -307,7 +307,7 @@ han: false
 baidu_analytics: a671e5198b87c08c17ebf22563539dd1
 
 # Duoshuo ShortName
-duoshuo_shortname: tietang
+#duoshuo_shortname: tietang
 
 # Disqus
 disqus:
@@ -319,7 +319,7 @@ disqus:
 #hypercomments_id:
 
 # Gentie productKey
-#gentie_productKey:
+gentie_productKey: d4b4e1a3984547ffb7a39cf488de1404
 
 # changyan
 changyan:
@@ -340,15 +340,15 @@ changyan:
 #    button | slide
 # Warning: Baidu Share does not support https.
 #baidushare:
-##  type: button
+#  type: slide
 
 # Share
-#jiathis:
+jiathis: true
 # Warning: JiaThis does not support https.
 #add_this_id:
 
 # Share
-duoshuo_share: true
+duoshuo_share: false
 
 # Google Webmaster tools verification setting
 # See: https://www.google.com/webmasters/

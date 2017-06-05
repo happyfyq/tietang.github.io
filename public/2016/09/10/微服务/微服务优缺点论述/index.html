@@ -87,18 +87,41 @@
 
 
 
-<meta name="description" content="随着业务发展，业务功能的堆叠和复杂化，团队壮大，代码量也增加，各种问题开始凸显：  代码结构开始变得混乱，难以管理，提交冲突，改一处引多处。 沟通成本变高。 代码维护难：“修复越多，缺陷越多”。 引入和集成技术变得困难，依赖版本冲突，新特性无法使用。  最后开发效率也开始下降，代码维护的成本提高。 上线后稳定性不高，更大几率的影响可靠性和可用性，所有功能都运行在一个进程中，任何一个功能中出现bu">
-<meta name="keywords" content="微服务,Spring Cloud,Spring Boot">
+<meta name="description" content="随着业务发展，业务功能的堆叠和复杂化，团队壮大，代码量也增加，各种问题开始凸显：
+
+代码结构开始变得混乱，难以管理，提交冲突，改一处引多处。
+沟通成本变高。
+代码维护难：“修复越多，缺陷越多”。
+引入和集成技术变得困难，依赖版本冲突，新特性无法使用。
+
+最后开发效率也开始下降，代码维护的成本提高。
+上线后稳定性不高，更大几率的影响可靠性和可用性，所有功能都运行在一个进程中，任何一个功能中出现bu">
 <meta property="og:type" content="article">
 <meta property="og:title" content="微服务优缺点论述">
 <meta property="og:url" content="http://tietang.wang/2016/09/10/微服务/微服务优缺点论述/index.html">
 <meta property="og:site_name" content="多少光年">
-<meta property="og:description" content="随着业务发展，业务功能的堆叠和复杂化，团队壮大，代码量也增加，各种问题开始凸显：  代码结构开始变得混乱，难以管理，提交冲突，改一处引多处。 沟通成本变高。 代码维护难：“修复越多，缺陷越多”。 引入和集成技术变得困难，依赖版本冲突，新特性无法使用。  最后开发效率也开始下降，代码维护的成本提高。 上线后稳定性不高，更大几率的影响可靠性和可用性，所有功能都运行在一个进程中，任何一个功能中出现bu">
+<meta property="og:description" content="随着业务发展，业务功能的堆叠和复杂化，团队壮大，代码量也增加，各种问题开始凸显：
+
+代码结构开始变得混乱，难以管理，提交冲突，改一处引多处。
+沟通成本变高。
+代码维护难：“修复越多，缺陷越多”。
+引入和集成技术变得困难，依赖版本冲突，新特性无法使用。
+
+最后开发效率也开始下降，代码维护的成本提高。
+上线后稳定性不高，更大几率的影响可靠性和可用性，所有功能都运行在一个进程中，任何一个功能中出现bu">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2519252-a51def43c01ae44e.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/400">
 <meta property="og:updated_time" content="2017-05-21T04:43:31.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="微服务优缺点论述">
-<meta name="twitter:description" content="随着业务发展，业务功能的堆叠和复杂化，团队壮大，代码量也增加，各种问题开始凸显：  代码结构开始变得混乱，难以管理，提交冲突，改一处引多处。 沟通成本变高。 代码维护难：“修复越多，缺陷越多”。 引入和集成技术变得困难，依赖版本冲突，新特性无法使用。  最后开发效率也开始下降，代码维护的成本提高。 上线后稳定性不高，更大几率的影响可靠性和可用性，所有功能都运行在一个进程中，任何一个功能中出现bu">
+<meta name="twitter:description" content="随着业务发展，业务功能的堆叠和复杂化，团队壮大，代码量也增加，各种问题开始凸显：
+
+代码结构开始变得混乱，难以管理，提交冲突，改一处引多处。
+沟通成本变高。
+代码维护难：“修复越多，缺陷越多”。
+引入和集成技术变得困难，依赖版本冲突，新特性无法使用。
+
+最后开发效率也开始下降，代码维护的成本提高。
+上线后稳定性不高，更大几率的影响可靠性和可用性，所有功能都运行在一个进程中，任何一个功能中出现bu">
 <meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/2519252-a51def43c01ae44e.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/400">
 
 
@@ -354,8 +377,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2016/09/10/微服务/微服务优缺点论述/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/10/微服务/微服务优缺点论述/" itemprop="commentCount"></span>
+                <a class="cloud-tie-join-count" href="/2016/09/10/微服务/微服务优缺点论述/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count join-count" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -493,24 +516,28 @@
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2016/09/10/微服务/微服务优缺点论述/"
-     data-title="微服务优缺点论述"
-     data-content=""
-     data-url="http://tietang.wang/2016/09/10/微服务/微服务优缺点论述/">
-  <div class="ds-share-inline">
-    <ul  class="ds-share-icons-16">
-
-      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
-      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
-      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
-      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
-      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
-
-    </ul>
-    <div class="ds-share-icons-more">
-    </div>
-  </div>
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
 </div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
       
     </div>
   </div>
@@ -523,9 +550,7 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/09/10/微服务/微服务优缺点论述/"
-           data-title="微服务优缺点论述" data-url="http://tietang.wang/2016/09/10/微服务/微服务优缺点论述/">
-      </div>
+      <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
     
   </div>
 
@@ -743,17 +768,6 @@
 </div>
 
 
-<div class="powered-by">
-  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
-</div>
-
-<div class="theme-info">
-  主题 -
-  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Pisces
-  </a>
-</div>
-
 
         
 
@@ -841,35 +855,30 @@
 
   
 
-  
-    
+
   
 
-  <script type="text/javascript">
-    var duoshuoQuery = {short_name:"tietang"};
-    (function() {
-      var ds = document.createElement('script');
-      ds.type = 'text/javascript';ds.async = true;
-      ds.id = 'duoshuo-script';
-      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-      ds.charset = 'UTF-8';
-      (document.getElementsByTagName('head')[0]
-      || document.getElementsByTagName('body')[0]).appendChild(ds);
-    })();
-  </script>
+
+
+
+	
+
+
+
+
 
   
     
-    
-    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
-    <script src="/js/src/hook-duoshuo.js"></script>
+    <script>
+      var cloudTieConfig = {
+        url: document.location.href, 
+        sourceId: "",
+        productKey: "d4b4e1a3984547ffb7a39cf488de1404",
+        target: "cloud-tie-wrapper"
+      };
+    </script>
+    <script src="https://img1.ws.126.net/f2e/tie/yun/sdk/loader.js"></script>
   
-
-
-
-
-
-
 
 
 
@@ -998,6 +1007,8 @@
   
 
   
+  
+
 
   
 
