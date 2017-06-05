@@ -27,6 +27,9 @@
 
 
 
+
+
+
   
   
   <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
@@ -65,7 +68,7 @@
 
 <link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
   <meta name="keywords" content="领域模型,DDD," />
@@ -77,7 +80,7 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
 
 
 
@@ -95,7 +98,7 @@
 OO|面向对象表现点则是直接在对象本身上﹐在于对象之间真正的交互过程﹐结果也是保留在对象的属性和对象与对象的关系中逻辑直接存在于对象">
 <meta property="og:type" content="article">
 <meta property="og:title" content="领域模型的价值">
-<meta property="og:url" content="http://tietang.github.com/2016/02/21/技术/领域模型/领域模型的价值/index.html">
+<meta property="og:url" content="http://tietang.wang/2016/02/21/技术/领域模型/领域模型的价值/index.html">
 <meta property="og:site_name" content="多少光年">
 <meta property="og:description" content="价值
 提供什么服务：
@@ -106,7 +109,7 @@ OO|面向对象表现点则是直接在对象本身上﹐在于对象之间真�
 
 传统数据库为中心业务逻辑在数据库上，结合系统代码来保证业务逻辑的实现。以数据库为中心的开发如何的OO﹐如何多的设计模式﹐架构体系如何优美﹐它始终离不开数据库。
 OO|面向对象表现点则是直接在对象本身上﹐在于对象之间真正的交互过程﹐结果也是保留在对象的属性和对象与对象的关系中逻辑直接存在于对象">
-<meta property="og:updated_time" content="2016-11-30T07:08:57.000Z">
+<meta property="og:updated_time" content="2017-05-21T04:43:31.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="领域模型的价值">
 <meta name="twitter:description" content="价值
@@ -126,7 +129,7 @@ OO|面向对象表现点则是直接在对象本身上﹐在于对象之间真�
   var CONFIG = {
     root: '/',
     scheme: 'Pisces',
-    sidebar: {"position":"right","display":"post"},
+    sidebar: {"position":"right","display":"post","offset":12,"offset_float":0,"b2t":true,"scrollpercent":true},
     fancybox: true,
     motion: true,
     duoshuo: {
@@ -145,7 +148,7 @@ OO|面向对象表现点则是直接在对象本身上﹐在于对象之间真�
 
 
 
-  <link rel="canonical" href="http://tietang.github.com/2016/02/21/技术/领域模型/领域模型的价值/"/>
+  <link rel="canonical" href="http://tietang.wang/2016/02/21/技术/领域模型/领域模型的价值/"/>
 
 
 
@@ -159,11 +162,13 @@ OO|面向对象表现点则是直接在对象本身上﹐在于对象之间真�
   
 
 
+
+
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
             (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
           m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
   ga('create', 'UA-74077761-1', 'auto');
   ga('send', 'pageview');
 </script>
@@ -173,11 +178,13 @@ OO|面向对象表现点则是直接在对象本身上﹐在于对象之间真�
     var _hmt = _hmt || [];
     (function() {
       var hm = document.createElement("script");
-      hm.src = "//hm.baidu.com/hm.js?a671e5198b87c08c17ebf22563539dd1";
+      hm.src = "https://hm.baidu.com/hm.js?a671e5198b87c08c17ebf22563539dd1";
       var s = document.getElementsByTagName("script")[0];
       s.parentNode.insertBefore(hm, s);
     })();
   </script>
+
+
 
 
 
@@ -191,29 +198,33 @@ OO|面向对象表现点则是直接在对象本身上﹐在于对象之间真�
     
   
 
-  <div class="container one-collumn sidebar-position-right page-post-detail ">
+  <div class="container sidebar-position-right page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-meta ">
-  
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
 
-  <div class="custom-logo-site-title">
-    <a href="/"  class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <span class="site-title">多少光年</span>
-      <span class="logo-line-after"><i></i></span>
-    </a>
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">多少光年</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">风可以吹走尘土,但吹不走记忆</p>
+      
   </div>
-  <p class="site-subtitle">风可以吹走尘土,但吹不走记忆</p>
-</div>
 
-<div class="site-nav-toggle">
-  <button>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-  </button>
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
 </div>
 
 <nav class="site-nav">
@@ -291,20 +302,17 @@ OO|面向对象表现点则是直接在对象本身上﹐在于对象之间真�
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://tietang.github.com/2016/02/21/技术/领域模型/领域模型的价值/">
+    <link itemprop="mainEntityOfPage" href="http://tietang.wang/2016/02/21/技术/领域模型/领域模型的价值/">
 
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="铁汤">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.gif">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="多少光年">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="多少光年" src="">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="铁汤">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/weix.jpg">
     </span>
-  </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="多少光年">
+    </span>
 
     
       <header class="post-header">
@@ -327,8 +335,8 @@ OO|面向对象表现点则是直接在对象本身上﹐在于对象之间真�
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
               </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-02-21T20:20:42+08:00">
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-02-21T20:20:42+08:00">
                 2016-02-21
               </time>
             
@@ -340,11 +348,13 @@ OO|面向对象表现点则是直接在对象本身上﹐在于对象之间真�
 
           
             <span class="post-category" >
+            
               <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
+              
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/技术/" itemprop="url" rel="index">
@@ -373,13 +383,14 @@ OO|面向对象表现点则是直接在对象本身上﹐在于对象之间真�
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2016/02/21/技术/领域模型/领域模型的价值/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/02/21/技术/领域模型/领域模型的价值/" itemprop="commentCount"></span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a class="cloud-tie-join-count" href="/2016/02/21/技术/领域模型/领域模型的价值/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count join-count" itemprop="commentCount"></span>
                 </a>
               </span>
             
-          
-
           
 
           
@@ -389,9 +400,11 @@ OO|面向对象表现点则是直接在对象本身上﹐在于对象之间真�
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
                </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
           
 
           
@@ -441,6 +454,12 @@ OO|面向对象表现点则是直接在对象本身上﹐在于对象之间真�
       
     </div>
 
+    <div>
+      
+        
+
+      
+    </div>
 
     <footer class="post-footer">
       
@@ -454,11 +473,15 @@ OO|面向对象表现点则是直接在对象本身上﹐在于对象之间真�
       
 
       
+        
+      
+
+      
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/02/19/技术/FlatBuffers/FlatBuffers简介/" rel="next" title="FlatBuffers简介">
-                <i class="fa fa-chevron-left"></i> FlatBuffers简介
+              <a href="/2016/02/19/技术/FlatBuffers/FlatBuffers使用指南/" rel="next" title="FlatBuffers 使用指南">
+                <i class="fa fa-chevron-left"></i> FlatBuffers 使用指南
               </a>
             
           </div>
@@ -484,24 +507,28 @@ OO|面向对象表现点则是直接在对象本身上﹐在于对象之间真�
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2016/02/21/技术/领域模型/领域模型的价值/"
-     data-title="领域模型的价值"
-     data-content=""
-     data-url="http://tietang.github.com/2016/02/21/技术/领域模型/领域模型的价值/">
-  <div class="ds-share-inline">
-    <ul  class="ds-share-icons-16">
-
-      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
-      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
-      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
-      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
-      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
-
-    </ul>
-    <div class="ds-share-icons-more">
-    </div>
-  </div>
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
 </div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
       
     </div>
   </div>
@@ -514,9 +541,7 @@ OO|面向对象表现点则是直接在对象本身上﹐在于对象之间真�
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/02/21/技术/领域模型/领域模型的价值/"
-           data-title="领域模型的价值" data-url="http://tietang.github.com/2016/02/21/技术/领域模型/领域模型的价值/">
-      </div>
+      <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
     
   </div>
 
@@ -552,22 +577,29 @@ OO|面向对象表现点则是直接在对象本身上﹐在于对象之间真�
       <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
-               src="/images/avatar.gif"
+               src="/images/weix.jpg"
                alt="铁汤" />
           <p class="site-author-name" itemprop="name">铁汤</p>
-          <p class="site-description motion-element" itemprop="description"></p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
         </div>
         <nav class="site-state motion-element">
-          <div class="site-state-item site-state-posts">
-            <a href="/archives">
-              <span class="site-state-item-count">31</span>
-              <span class="site-state-item-name">日志</span>
-            </a>
-          </div>
 
           
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">31</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
             <div class="site-state-item site-state-categories">
-              <a href="/categories">
+              <a href="/categories/index.html">
                 <span class="site-state-item-count">17</span>
                 <span class="site-state-item-name">分类</span>
               </a>
@@ -575,8 +607,10 @@ OO|面向对象表现点则是直接在对象本身上﹐在于对象之间真�
           
 
           
+            
+            
             <div class="site-state-item site-state-tags">
-              <a href="/tags">
+              <a href="/tags/index.html">
                 <span class="site-state-item-count">45</span>
                 <span class="site-state-item-name">标签</span>
               </a>
@@ -652,8 +686,52 @@ OO|面向对象表现点则是直接在对象本身上﹐在于对象之间真�
 
         
         
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://xujin.org/" title="许进沉思录" target="_blank">许进沉思录</a>
+                </li>
+              
+            </ul>
+          </div>
+        
 
         
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+ <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+    <div class="links-of-blogroll-title">
+        <span id="busuanzi_container_site_uv">
+          本站访客数<span id="busuanzi_value_site_uv"></span>人次
+        </span>
+       </div>
+</div>
+
+ <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+    <div class="links-of-blogroll-title">
+       <span id="busuanzi_container_page_pv">
+          本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+       </span>
+       </div>
+</div>
+
+
+ <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+    <div class="links-of-blogroll-title">
+      <i class="fa  fa-fw fa-universal-access"></i>
+      最近访客
+    </div>
+    <div class="ds-recent-visitors" data-num-items="130"
+               data-avatar-size="23" id="ds-recent-visitors"/>
+</div>
+
 
 
       </section>
@@ -676,6 +754,15 @@ OO|面向对象表现点则是直接在对象本身上﹐在于对象之间真�
       <!--/noindex-->
       
 
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
     </div>
   </aside>
 
@@ -688,7 +775,7 @@ OO|面向对象表现点则是直接在对象本身上﹐在于对象之间真�
       <div class="footer-inner">
         <div class="copyright" >
   
-  &copy; 
+  &copy;  2015 - 
   <span itemprop="copyrightYear">2017</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
@@ -704,9 +791,8 @@ OO|面向对象表现点则是直接在对象本身上﹐在于对象之间真�
       </div>
     </footer>
 
-    <div class="back-to-top">
-      <i class="fa fa-arrow-up"></i>
-    </div>
+    
+
   </div>
 
   
@@ -726,6 +812,9 @@ OO|面向对象表现点则是直接在对象本身上﹐在于对象之间真�
 
 
   
+
+
+
 
 
 
@@ -751,72 +840,76 @@ OO|面向对象表现点则是直接在对象本身上﹐在于对象之间真�
   
 
 
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
 
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
-
-
-
-  
-  
-
-
-  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
-
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
 
 
 
   
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
 
 
 
   
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
 
 
 
   
 
-  
-    
-  
 
-  <script type="text/javascript">
-    var duoshuoQuery = {short_name:"tietang"};
-    (function() {
-      var ds = document.createElement('script');
-      ds.type = 'text/javascript';ds.async = true;
-      ds.id = 'duoshuo-script';
-      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-      ds.charset = 'UTF-8';
-      (document.getElementsByTagName('head')[0]
-      || document.getElementsByTagName('body')[0]).appendChild(ds);
-    })();
-  </script>
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
 
   
-    
-    
-    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
-    <script src="/js/src/hook-duoshuo.js"></script>
+
+
   
 
 
 
+
+	
 
 
 
 
 
   
+    
+    <script>
+      var cloudTieConfig = {
+        url: document.location.href, 
+        sourceId: "",
+        productKey: "d4b4e1a3984547ffb7a39cf488de1404",
+        target: "cloud-tie-wrapper"
+      };
+    </script>
+    <script src="https://img1.ws.126.net/f2e/tie/yun/sdk/loader.js"></script>
   
 
+
+
+
+
+
+
+
+
+
   
+
+
+
+
 
   
 
@@ -930,7 +1023,10 @@ OO|面向对象表现点则是直接在对象本身上﹐在于对象之间真�
   
 
   
+  
 
+
+  
 
 </body>
 </html>
