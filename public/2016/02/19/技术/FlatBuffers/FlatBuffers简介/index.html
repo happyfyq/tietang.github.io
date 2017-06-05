@@ -27,6 +27,9 @@
 
 
 
+
+
+
   
   
   <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
@@ -65,7 +68,7 @@
 
 <link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
   <meta name="keywords" content="FlatBuffers,序列化," />
@@ -77,29 +80,24 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
 
 
 
 
 
 
-<meta name="description" content="FlatBuffers简介代码：https://github.com/google/flatbuffers/
-文档：http://google.github.io/flatbuffers/
-FlatBuffers是一个开源的、跨平台的、高效的、提供了C++/Java接口的序列化工具库。它是Google专门为游戏开发或其他性能敏感的应用程序需求而创建。 允许在不解析和解包就可以直接访问序列化数据，而">
+<meta name="description" content="FlatBuffers简介代码：https://github.com/google/flatbuffers/ 文档：http://google.github.io/flatbuffers/ FlatBuffers是一个开源的、跨平台的、高效的、提供了C++/Java接口的序列化工具库。它是Google专门为游戏开发或其他性能敏感的应用程序需求而创建。 允许在不解析和解包就可以直接访问序列化数据，而">
+<meta name="keywords" content="FlatBuffers,序列化">
 <meta property="og:type" content="article">
 <meta property="og:title" content="FlatBuffers简介">
-<meta property="og:url" content="http://tietang.github.com/2016/02/19/技术/FlatBuffers/FlatBuffers简介/index.html">
+<meta property="og:url" content="http://tietang.wang/2016/02/19/技术/FlatBuffers/FlatBuffers简介/index.html">
 <meta property="og:site_name" content="多少光年">
-<meta property="og:description" content="FlatBuffers简介代码：https://github.com/google/flatbuffers/
-文档：http://google.github.io/flatbuffers/
-FlatBuffers是一个开源的、跨平台的、高效的、提供了C++/Java接口的序列化工具库。它是Google专门为游戏开发或其他性能敏感的应用程序需求而创建。 允许在不解析和解包就可以直接访问序列化数据，而">
-<meta property="og:updated_time" content="2016-11-30T07:08:57.000Z">
+<meta property="og:description" content="FlatBuffers简介代码：https://github.com/google/flatbuffers/ 文档：http://google.github.io/flatbuffers/ FlatBuffers是一个开源的、跨平台的、高效的、提供了C++/Java接口的序列化工具库。它是Google专门为游戏开发或其他性能敏感的应用程序需求而创建。 允许在不解析和解包就可以直接访问序列化数据，而">
+<meta property="og:updated_time" content="2017-05-21T04:43:31.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="FlatBuffers简介">
-<meta name="twitter:description" content="FlatBuffers简介代码：https://github.com/google/flatbuffers/
-文档：http://google.github.io/flatbuffers/
-FlatBuffers是一个开源的、跨平台的、高效的、提供了C++/Java接口的序列化工具库。它是Google专门为游戏开发或其他性能敏感的应用程序需求而创建。 允许在不解析和解包就可以直接访问序列化数据，而">
+<meta name="twitter:description" content="FlatBuffers简介代码：https://github.com/google/flatbuffers/ 文档：http://google.github.io/flatbuffers/ FlatBuffers是一个开源的、跨平台的、高效的、提供了C++/Java接口的序列化工具库。它是Google专门为游戏开发或其他性能敏感的应用程序需求而创建。 允许在不解析和解包就可以直接访问序列化数据，而">
 
 
 
@@ -108,7 +106,7 @@ FlatBuffers是一个开源的、跨平台的、高效的、提供了C++/Java接�
   var CONFIG = {
     root: '/',
     scheme: 'Pisces',
-    sidebar: {"position":"right","display":"post"},
+    sidebar: {"position":"right","display":"post","offset":12,"offset_float":0,"b2t":true,"scrollpercent":true},
     fancybox: true,
     motion: true,
     duoshuo: {
@@ -127,7 +125,7 @@ FlatBuffers是一个开源的、跨平台的、高效的、提供了C++/Java接�
 
 
 
-  <link rel="canonical" href="http://tietang.github.com/2016/02/19/技术/FlatBuffers/FlatBuffers简介/"/>
+  <link rel="canonical" href="http://tietang.wang/2016/02/19/技术/FlatBuffers/FlatBuffers简介/"/>
 
 
 
@@ -141,11 +139,13 @@ FlatBuffers是一个开源的、跨平台的、高效的、提供了C++/Java接�
   
 
 
+
+
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
             (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
           m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
   ga('create', 'UA-74077761-1', 'auto');
   ga('send', 'pageview');
 </script>
@@ -155,11 +155,13 @@ FlatBuffers是一个开源的、跨平台的、高效的、提供了C++/Java接�
     var _hmt = _hmt || [];
     (function() {
       var hm = document.createElement("script");
-      hm.src = "//hm.baidu.com/hm.js?a671e5198b87c08c17ebf22563539dd1";
+      hm.src = "https://hm.baidu.com/hm.js?a671e5198b87c08c17ebf22563539dd1";
       var s = document.getElementsByTagName("script")[0];
       s.parentNode.insertBefore(hm, s);
     })();
   </script>
+
+
 
 
 
@@ -173,29 +175,33 @@ FlatBuffers是一个开源的、跨平台的、高效的、提供了C++/Java接�
     
   
 
-  <div class="container one-collumn sidebar-position-right page-post-detail ">
+  <div class="container sidebar-position-right page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-meta ">
-  
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
 
-  <div class="custom-logo-site-title">
-    <a href="/"  class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <span class="site-title">多少光年</span>
-      <span class="logo-line-after"><i></i></span>
-    </a>
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">多少光年</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">风可以吹走尘土,但吹不走记忆</p>
+      
   </div>
-  <p class="site-subtitle">风可以吹走尘土,但吹不走记忆</p>
-</div>
 
-<div class="site-nav-toggle">
-  <button>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-  </button>
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
 </div>
 
 <nav class="site-nav">
@@ -273,20 +279,17 @@ FlatBuffers是一个开源的、跨平台的、高效的、提供了C++/Java接�
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://tietang.github.com/2016/02/19/技术/FlatBuffers/FlatBuffers简介/">
+    <link itemprop="mainEntityOfPage" href="http://tietang.wang/2016/02/19/技术/FlatBuffers/FlatBuffers简介/">
 
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="铁汤">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.gif">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="多少光年">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="多少光年" src="">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="铁汤">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/weix.jpg">
     </span>
-  </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="多少光年">
+    </span>
 
     
       <header class="post-header">
@@ -309,8 +312,8 @@ FlatBuffers是一个开源的、跨平台的、高效的、提供了C++/Java接�
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
               </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-02-19T20:20:42+08:00">
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-02-19T20:20:42+08:00">
                 2016-02-19
               </time>
             
@@ -322,11 +325,13 @@ FlatBuffers是一个开源的、跨平台的、高效的、提供了C++/Java接�
 
           
             <span class="post-category" >
+            
               <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
+              
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/技术/" itemprop="url" rel="index">
@@ -355,13 +360,14 @@ FlatBuffers是一个开源的、跨平台的、高效的、提供了C++/Java接�
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
                 <a href="/2016/02/19/技术/FlatBuffers/FlatBuffers简介/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count ds-thread-count" data-thread-key="2016/02/19/技术/FlatBuffers/FlatBuffers简介/" itemprop="commentCount"></span>
                 </a>
               </span>
             
-          
-
           
 
           
@@ -371,9 +377,11 @@ FlatBuffers是一个开源的、跨平台的、高效的、提供了C++/Java接�
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
                </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
           
 
           
@@ -440,6 +448,12 @@ FlatBuffers是一个开源的、跨平台的、高效的、提供了C++/Java接�
       
     </div>
 
+    <div>
+      
+        
+
+      
+    </div>
 
     <footer class="post-footer">
       
@@ -453,11 +467,15 @@ FlatBuffers是一个开源的、跨平台的、高效的、提供了C++/Java接�
       
 
       
+        
+      
+
+      
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/02/19/技术/FlatBuffers/FlatBuffers使用指南/" rel="next" title="FlatBuffers 使用指南">
-                <i class="fa fa-chevron-left"></i> FlatBuffers 使用指南
+              <a href="/2016/02/19/春天花会开/" rel="next" title="春天开篇">
+                <i class="fa fa-chevron-left"></i> 春天开篇
               </a>
             
           </div>
@@ -466,8 +484,8 @@ FlatBuffers是一个开源的、跨平台的、高效的、提供了C++/Java接�
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/02/21/技术/领域模型/领域模型的价值/" rel="prev" title="领域模型的价值">
-                领域模型的价值 <i class="fa fa-chevron-right"></i>
+              <a href="/2016/02/19/技术/FlatBuffers/FlatBuffers使用指南/" rel="prev" title="FlatBuffers 使用指南">
+                FlatBuffers 使用指南 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -486,7 +504,7 @@ FlatBuffers是一个开源的、跨平台的、高效的、提供了C++/Java接�
         <div class="ds-share flat" data-thread-key="2016/02/19/技术/FlatBuffers/FlatBuffers简介/"
      data-title="FlatBuffers简介"
      data-content=""
-     data-url="http://tietang.github.com/2016/02/19/技术/FlatBuffers/FlatBuffers简介/">
+     data-url="http://tietang.wang/2016/02/19/技术/FlatBuffers/FlatBuffers简介/">
   <div class="ds-share-inline">
     <ul  class="ds-share-icons-16">
 
@@ -514,7 +532,7 @@ FlatBuffers是一个开源的、跨平台的、高效的、提供了C++/Java接�
   <div class="comments" id="comments">
     
       <div class="ds-thread" data-thread-key="2016/02/19/技术/FlatBuffers/FlatBuffers简介/"
-           data-title="FlatBuffers简介" data-url="http://tietang.github.com/2016/02/19/技术/FlatBuffers/FlatBuffers简介/">
+           data-title="FlatBuffers简介" data-url="http://tietang.wang/2016/02/19/技术/FlatBuffers/FlatBuffers简介/">
       </div>
     
   </div>
@@ -551,22 +569,29 @@ FlatBuffers是一个开源的、跨平台的、高效的、提供了C++/Java接�
       <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
-               src="/images/avatar.gif"
+               src="/images/weix.jpg"
                alt="铁汤" />
           <p class="site-author-name" itemprop="name">铁汤</p>
-          <p class="site-description motion-element" itemprop="description"></p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
         </div>
         <nav class="site-state motion-element">
-          <div class="site-state-item site-state-posts">
-            <a href="/archives">
-              <span class="site-state-item-count">31</span>
-              <span class="site-state-item-name">日志</span>
-            </a>
-          </div>
 
           
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">31</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
             <div class="site-state-item site-state-categories">
-              <a href="/categories">
+              <a href="/categories/index.html">
                 <span class="site-state-item-count">17</span>
                 <span class="site-state-item-name">分类</span>
               </a>
@@ -574,8 +599,10 @@ FlatBuffers是一个开源的、跨平台的、高效的、提供了C++/Java接�
           
 
           
+            
+            
             <div class="site-state-item site-state-tags">
-              <a href="/tags">
+              <a href="/tags/index.html">
                 <span class="site-state-item-count">45</span>
                 <span class="site-state-item-name">标签</span>
               </a>
@@ -651,8 +678,52 @@ FlatBuffers是一个开源的、跨平台的、高效的、提供了C++/Java接�
 
         
         
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://xujin.org/" title="许进沉思录" target="_blank">许进沉思录</a>
+                </li>
+              
+            </ul>
+          </div>
+        
 
         
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+ <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+    <div class="links-of-blogroll-title">
+        <span id="busuanzi_container_site_uv">
+          本站访客数<span id="busuanzi_value_site_uv"></span>人次
+        </span>
+       </div>
+</div>
+
+ <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+    <div class="links-of-blogroll-title">
+       <span id="busuanzi_container_page_pv">
+          本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+       </span>
+       </div>
+</div>
+
+
+ <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+    <div class="links-of-blogroll-title">
+      <i class="fa  fa-fw fa-universal-access"></i>
+      最近访客
+    </div>
+    <div class="ds-recent-visitors" data-num-items="130"
+               data-avatar-size="23" id="ds-recent-visitors"/>
+</div>
+
 
 
       </section>
@@ -675,6 +746,15 @@ FlatBuffers是一个开源的、跨平台的、高效的、提供了C++/Java接�
       <!--/noindex-->
       
 
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
     </div>
   </aside>
 
@@ -687,7 +767,7 @@ FlatBuffers是一个开源的、跨平台的、高效的、提供了C++/Java接�
       <div class="footer-inner">
         <div class="copyright" >
   
-  &copy; 
+  &copy;  2015 - 
   <span itemprop="copyrightYear">2017</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
@@ -696,6 +776,17 @@ FlatBuffers是一个开源的、跨平台的、高效的、提供了C++/Java接�
 </div>
 
 
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
 
         
 
@@ -703,9 +794,8 @@ FlatBuffers是一个开源的、跨平台的、高效的、提供了C++/Java接�
       </div>
     </footer>
 
-    <div class="back-to-top">
-      <i class="fa fa-arrow-up"></i>
-    </div>
+    
+
   </div>
 
   
@@ -725,6 +815,9 @@ FlatBuffers是一个开源的、跨平台的、高效的、提供了C++/Java接�
 
 
   
+
+
+
 
 
 
@@ -750,32 +843,32 @@ FlatBuffers是一个开源的、跨平台的、高效的、提供了C++/Java接�
   
 
 
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
 
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
-
-
-
-  
-  
-
-
-  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
-
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
 
 
 
   
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
 
 
 
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
 
 
 
@@ -812,10 +905,19 @@ FlatBuffers是一个开源的、跨平台的、高效的、提供了C++/Java接�
 
 
 
-  
-  
+
+
+
+
+
+
+
 
   
+
+
+
+
 
   
 
@@ -930,6 +1032,7 @@ FlatBuffers是一个开源的、跨平台的、高效的、提供了C++/Java接�
 
   
 
+  
 
 </body>
 </html>
